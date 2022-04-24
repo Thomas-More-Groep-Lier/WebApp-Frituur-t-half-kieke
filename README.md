@@ -3,5 +3,8 @@ Web application made in java
 
 https://76s0ll.axshare.com
 
-![ClassDiagram1](https://user-images.githubusercontent.com/75521468/164973995-2aa67e35-c722-445d-a7f7-e02dfe360d0e.png)
+Class Diagram:
+![ClassDiagram1](https://user-images.githubusercontent.com/75521468/164975029-6151d1ff-6192-488c-9747-46f081415e42.png)
+
+ERD:
 
