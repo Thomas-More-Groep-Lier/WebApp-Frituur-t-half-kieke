@@ -1,8 +1,18 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class TimeSlot {
 
 //attributes
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String hour;
     private Boolean isActive;
@@ -10,7 +20,12 @@ public class TimeSlot {
     private int ordersPlaced;
     private Boolean spotAvailable;
     private String dayOfTheWeek;
-//getters
+
+    public TimeSlot() {
+
+    }
+
+    //getters
     public long getId(){
         return id;
     }

@@ -1,11 +1,21 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
+import be.thomasmore.graduaten.hellospring.entities.Product;
+import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 public class MainController {
+
+    private ProductRepository productRepository;
+
+    public MainController(ProductRepository productRepository){
+        this.productRepository = productRepository;
+    }
 
     @RequestMapping("/")
     public String navigateToIndex(){
@@ -22,6 +32,9 @@ public class MainController {
 
     @RequestMapping("/orderFries")
     public String navigateToFriesView(Model fries){
+        List<Product> friesList = (List<Product>) productRepository.findAll().stream()
+                .filter(s -> s.getDescription().equals("Frieten"));
+
         fries.addAttribute("category", "Frieten");
         fries.addAttribute("pageTitle", "Frieten bestellen");
         fries.addAttribute("names", new String[]{"Mini", "Klein", "Groot", "Maxi", "Familie"});

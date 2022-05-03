@@ -1,12 +1,27 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class OrderDetail {
 //attributes
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long productId;
     private long orderId;
     private long numberOfProducts;
-//getters
+
+    public OrderDetail() {
+
+    }
+
+    //getters
     public long getId(){
         return id;
     }

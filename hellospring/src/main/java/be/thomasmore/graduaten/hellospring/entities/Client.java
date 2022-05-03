@@ -1,13 +1,23 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
+import org.springframework.stereotype.Repository;
+import javax.persistence.*;
 
+@Entity
 public class Client {
-//attributes
+
+    //attributes
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String phoneNumber;
     private String emailAdress;
-//getters
+    public Client() {
+
+    }
+
+    //getters
     public long getId(){
         return id;
     }

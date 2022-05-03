@@ -1,7 +1,17 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Order {
 //Attributes
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long clientId;
     private long timeSlotId;
@@ -9,7 +19,12 @@ public class Order {
     private String orderDate;
     private String wantedRetrievalTime;
     private Boolean orderToBig;
-//getters
+
+    public Order() {
+
+    }
+
+    //getters
     public long getId(){
         return id;
     }
