@@ -7,7 +7,7 @@
 
 <div class="col-sm-12 col-md-4">
     <div class="m-5">
-        <a href="/cart" target="_self" class="text-decoration-none">
+        <a href="/Client/cart" target="_self" class="text-decoration-none">
         <img src="<%=shoppingCart%>" alt="shoppingcart from <%=name%>" class="float-start m-3" style="width: 30px;" />
         <p class="form-text"><%=quantity%> items in your shoppingcart. <br/>
             &euro; <%=totalPrice%>

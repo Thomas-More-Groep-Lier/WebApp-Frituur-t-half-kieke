@@ -63,7 +63,7 @@
       <div class="row">
         <div class="col-sm-12 mt-2">
           <div class="d-grid">
-            <a href="orderFries" class="btn btn-primary btn-block w-100">START NU MET BESTELLEN</a>
+            <a href="Client/orderFries" class="btn btn-primary btn-block w-100">START NU MET BESTELLEN</a>
           </div>
         </div>
       </div>
