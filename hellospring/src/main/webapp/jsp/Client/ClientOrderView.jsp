@@ -9,15 +9,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
-<jsp:include page="partails/head.jsp" />
+<jsp:include page="../partials/head.jsp" />
 <body>
 <div class="d-sm-block d-md-none container-fluid">
-  <jsp:include page="partails/MobileNav.jsp" />
+  <jsp:include page="../partials/MobileNav.jsp" />
 </div>
 <div class="d-none d-md-block container-fluid">
   <div class="row p-3">
-    <jsp:include page="partails/logo.jsp" />
-    <jsp:include page="partails/shoppingCart.jsp" />
+    <jsp:include page="../partials/logo.jsp" />
+    <jsp:include page="../partials/shoppingCart.jsp" />
   </div>
   <div class="row my-3">
     <nav class="nav nav-pills flex-column flex-sm-row">
@@ -53,6 +53,6 @@
     </div>
   </div>
 </div>
-<jsp:include page="partails/footer.jsp" />
+<jsp:include page="../partials/footer.jsp" />
 </body>
 </html>
