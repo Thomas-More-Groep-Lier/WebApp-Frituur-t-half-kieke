@@ -1,12 +1,25 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
-public class User {
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //attributes
     private long id;
     private String userName;
     //find out how to hash password
     private String password;
+
+    public User() {
+
+    }
 
     //getters
     public long getId(){
