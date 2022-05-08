@@ -24,11 +24,11 @@ insert into Product			(Id, Description, Price, Category)
 insert into Product			(Id, Description, Price, Category)
 	VALUES (11, 'Kipknots', '1.60', 'Snack');
 insert into Product			(Id, Description, Price, Category)
-	VALUES (12, 'Burger', '2.20', 'Vegitarische Snack');
+	VALUES (12, 'Burger', '2.20', 'Vegetarische Snack');
 insert into Product			(Id, Description, Price, Category)
-	VALUES (13, 'Mexicano', '1.80', 'Vegitarische Snack');
+	VALUES (13, 'Mexicano', '1.80', 'Vegetarische Snack');
 insert into Product			(Id, Description, Price, Category)
-	VALUES (14, 'Bamischijf', '1.80', 'Vegitarische Snack');
+	VALUES (14, 'Bamischijf', '1.80', 'Vegetarische Snack');
 insert into Product			(Id, Description, Price, Category)
 	VALUES (15, 'Mayonaise', '0.90', 'Koude Saus');
 insert into Product			(Id, Description, Price, Category)

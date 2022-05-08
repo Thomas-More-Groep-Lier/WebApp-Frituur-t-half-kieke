@@ -1,11 +1,25 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
+import be.thomasmore.graduaten.hellospring.entities.Product;
+import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 public class ClientController {
+
+    private ProductRepository productRepository;
+
+    public ClientController(ProductRepository productRepository){
+        this.productRepository = productRepository;
+    }
+
+
+
     @RequestMapping("Client/clientOrder")
     public String navigateToOrderView(Model order){
         order.addAttribute("pageTitle", "Bedankt voor je bestelling!");
@@ -16,6 +30,11 @@ public class ClientController {
 
     @RequestMapping("Client/orderFries")
     public String navigateToFriesView(Model fries){
+        List<Product> products = (List<Product>) productRepository.findAll()
+                .stream()
+                //.filter(p -> p.getCategory() != "Frieten")
+                .collect(Collectors.toList());
+        fries.addAttribute("products", products);
         fries.addAttribute("category", "Frieten");
         fries.addAttribute("pageTitle", "Frieten bestellen");
         fries.addAttribute("names", new String[]{"Mini", "Klein", "Groot", "Maxi", "Familie"});
