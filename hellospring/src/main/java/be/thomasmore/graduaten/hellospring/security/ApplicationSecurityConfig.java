@@ -23,7 +23,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
@@ -48,8 +47,5 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .httpBasic();
-
-
-
     }
 }
