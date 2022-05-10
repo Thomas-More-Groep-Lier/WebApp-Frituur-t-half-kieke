@@ -1,7 +1,5 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
-import org.springframework.stereotype.Repository;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,37 +19,38 @@ public class User {
 
     }
 
-    //getters
-    public long getId(){
-        return id;
-    }
-    public String getUserName(){
-        return userName;
+    //constructor
+    public User(long id, String password, String userName) {
+        this.id = id;
+        this.password = password;
+        this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    //getters
+    public long getId() {
+        return id;
     }
 
     //Setters
     //If setter for Id is never used in the application remove setter
-    public void setId(long newId){
+    public void setId(long newId) {
         this.id = newId;
     }
 
-    public void setPassword(String newPassword) {
-        this.password = newPassword;
+    public String getUserName() {
+        return userName;
     }
 
     public void setUserName(String newUserName) {
         this.userName = newUserName;
     }
 
-    //constructor
-    public User(long id, String password, String userName){
-        this.id = id;
-        this.password = password;
-        this.userName = userName;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String newPassword) {
+        this.password = newPassword;
     }
 
 

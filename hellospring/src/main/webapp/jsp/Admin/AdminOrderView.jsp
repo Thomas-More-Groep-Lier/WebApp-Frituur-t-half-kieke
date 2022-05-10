@@ -1,19 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: maart
-  Date: 23/03/2022
-  Time: 20:30
-  To change this template use File | Settings | File Templates.
---%>
+<%
+    // int nrOfOpenOrders = (int) request.getAttribute("nrOfOpenOrders");
+//  int nrOfOrdersReadyToPickUp = (int) request.getAttribute("nrOfOrdersReadyToPickUp");
+//  int totalNrOfOrdersReady = (int)  request.getAttribute("totalNrOfOrdersReady");
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
-<jsp:include page="../partials/head.jsp" />
+<jsp:include page="../partials/head.jsp"/>
 <body>
 <div class="container-fluid">
-  <jsp:include page="../partials/adminNav.jsp" />
-  <jsp:include page="../partials/dateAndTime.jsp" />
+    <jsp:include page="../partials/adminNav.jsp"/>
+    <jsp:include page="../partials/dateAndTime.jsp"/>
+    <%--<jsp:include page="../partials/orderButton.jsp" />--%>
+
 </div>
-<jsp:include page="../partials/footer.jsp" />
+<jsp:include page="../partials/footer.jsp"/>
 </body>
 </html>
