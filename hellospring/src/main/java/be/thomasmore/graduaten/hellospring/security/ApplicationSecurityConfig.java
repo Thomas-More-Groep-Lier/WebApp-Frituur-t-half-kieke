@@ -23,7 +23,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
@@ -32,14 +31,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder.encode("password123"))
                 .roles("ADMIN")
                 .build();
-
-
         return new InMemoryUserDetailsManager(adminUser);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-
         http
                 .authorizeRequests()
                 .antMatchers("/","index","/Client/*","/css/*", "/js/*", "../partials/*","/images/*").permitAll()
@@ -48,8 +44,5 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .httpBasic();
-
-
-
     }
 }

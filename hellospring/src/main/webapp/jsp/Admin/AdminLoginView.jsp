@@ -1,28 +1,29 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: maart
-  Date: 23/03/2022
-  Time: 20:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<jsp:include page="../partials/head.jsp" />
+<body>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-4 border border-2 p-3 rounded" style="position: absolute; top: 50%; margin-top: -15%">
+      <div class="row d-flex justify-content-center">
+        <img src="/images/u101.png" alt="logo frituur t'half kieke" class="img my-5" style="width: 100px; display: block; margin-left: auto; margin-right: auto;" />
+      </div>
+      <form action="/Login" method="post">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" aria-describedby="usernameHelp">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-danger">Submit</button>
+      </form>
+    </div>
+  </div>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Login</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-  </body>
+</div>
+<jsp:include page="../partials/footer.jsp" />
+</body>
 </html>

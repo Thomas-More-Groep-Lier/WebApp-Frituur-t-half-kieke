@@ -1,13 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: maart
-  Date: 23/03/2022
-  Time: 20:34
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.io.IOException" %>
 <%
   String[] names = (String[]) request.getAttribute("names");
   Double[] prices = (Double[]) request.getAttribute("prices");
+  List<Product> products = (List<Product>) request.getAttribute("products");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -47,6 +44,15 @@
               <h1 class="text-danger display-5 fw-bolder"><%=request.getAttribute("category")%></h1>
             </div>
           </div>
+          <%
+            /*  for (Product product : products) {
+                  out.print(
+                          product.getCategory()
+                  );
+              }
+
+             */
+          %>
           <div class="row d-flex justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-6">
               <% for(int i = 0; i < names.length ; i++) { %>
