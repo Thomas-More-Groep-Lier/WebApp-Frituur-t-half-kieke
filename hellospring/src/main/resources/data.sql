@@ -1,7 +1,7 @@
 
 -- Insert data
 -- Insert in table Product
-insert into Product			(Id, Description, Price, Category)
+insert into Product	(Id, Description, Price, Category)
 	VALUES (1, 'Mini', '1.60', 'Frieten');
 insert into Product			(Id, Description, Price, Category)
 	VALUES (2, 'Klein', '1.80', 'Frieten');
