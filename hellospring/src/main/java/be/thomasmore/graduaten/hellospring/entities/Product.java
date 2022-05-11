@@ -15,24 +15,27 @@ public class Product {
     private String description;
     private float price;
     private String category;
+    private Boolean status;
 
     public Product() {
 
     }
 
     //constructors
-    public Product(long id, String description, float price, String category) {
+    public Product(long id, String description, float price, String category, boolean status) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.category = category;
+        this.status = status;
     }
 
     //constructor without Id
-    public Product(String description, float price, String category) {
+    public Product(String description, float price, String category, boolean status) {
         this.description = description;
         this.price = price;
         this.category = category;
+        this.status = status;
     }
 
     //getters
@@ -62,6 +65,13 @@ public class Product {
         this.category = newCategory;
     }
 
+    public boolean getStatus(){
+        return status;
+    }
+
+    public void setStatus(boolean newStatus){
+        this.status = newStatus;
+    }
     public float getPrice() {
         return price;
     }

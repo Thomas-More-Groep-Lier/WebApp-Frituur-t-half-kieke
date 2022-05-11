@@ -5,8 +5,14 @@ import be.thomasmore.graduaten.hellospring.repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static java.lang.Long.parseLong;
 
 @Controller
 public class AdminController {
@@ -79,6 +85,15 @@ public class AdminController {
         settings.addAttribute("plannedVacation", "");
         return "Admin/AdminSettingsView";
     }
+
+  /*  @RequestMapping(value = "/Admin/Products/Pause", method = RequestMethod.GET)
+    public String getUserFeedback(@RequestParam Map<String,String> requestParams) throws Exception{
+        String id = requestParams.get("id");
+        Optional<Product> product = productRepository.findById(parseLong(id));
+        product.map(x -> x.setStatus(false));
+        // your code logic
+        return "Admin/AdminProductView";
+    }*/
 
     public long nrOfOpenOrders() {
         return orderRepository.findAll()

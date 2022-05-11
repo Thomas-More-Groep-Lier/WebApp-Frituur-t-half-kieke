@@ -10,8 +10,8 @@
         <a href="/Client/cart" target="_self" class="text-decoration-none">
             <img src="<%=shoppingCart%>" alt="shoppingcart from <%=name%>" class="float-start m-3"
                  style="width: 30px;"/>
-            <p class="form-text"><%=quantity%> items in your shoppingcart. <br/>
-                &euro; <%=String.format("%.2f", totalPrice) %>
+            <p class="form-text" id="cartDetails"><span id="cartQuantity"><%=quantity%></span> items in your shoppingcart. <br/>
+                <span id="cartTotalPrice">&euro; <%=String.format("%.2f", totalPrice) %></span>
             </p>
         </a>
     </div>
