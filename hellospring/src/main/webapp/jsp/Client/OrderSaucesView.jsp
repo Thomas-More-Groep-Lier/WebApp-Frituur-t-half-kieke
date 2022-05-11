@@ -6,7 +6,7 @@
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <jsp:include page="../partials/head.jsp"/>
 
 <body>
@@ -93,9 +93,8 @@
                                     }
                                 }
                             %>
-                            <button type="button" class="btn btn-primary btn-block w-100 my-5" onclick="submitForm()">
-                                BESTELLEN
-                            </button>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="submit" class="btn btn-Primary" value="Bestellen"/>
                         </div>
                     </div>
                 </form>
