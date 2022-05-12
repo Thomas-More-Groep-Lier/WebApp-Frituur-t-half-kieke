@@ -39,7 +39,6 @@
                 <div class="col-sm-12 col-lg-4">
                     <img src="/images/thanks.jpg" alt="bedankt" class="img-fluid"
                          style="opacity: 0.59;  box-sizing: border-box;"/>
-
                 </div>
             </div>
 

@@ -215,7 +215,6 @@
         }
 
     }
-
     function addNew(id) {
         if (id !== undefined && id !== null) {
             let price = document.getElementById(`productPrice_` + id).innerText.replace("€", "");
