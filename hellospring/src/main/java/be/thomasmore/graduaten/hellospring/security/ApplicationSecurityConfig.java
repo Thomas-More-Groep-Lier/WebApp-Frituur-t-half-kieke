@@ -39,7 +39,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
 
                 .authorizeRequests()
-                .antMatchers("/","index","/Client/*","/css/*", "/js/*", "../partials/*","/images/*").permitAll()
+                .antMatchers("/","index","/Client/*","/css/*", "/js/*", "../partials/*","/images/*","/h2/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -47,5 +47,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginPage("/Login")
                         .permitAll()
                 );
+                http.csrf().ignoringAntMatchers("/h2/**");
+                http.headers().frameOptions().sameOrigin();
     }
 }

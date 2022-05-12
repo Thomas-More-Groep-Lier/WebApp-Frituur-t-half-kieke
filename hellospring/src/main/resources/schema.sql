@@ -29,6 +29,7 @@ CREATE TABLE Product(
 	Description varchar (30) NOT NULL,
 	Price float(2) NOT NULL,
 	Category varchar (20) NOT NULL,
+	Status bit NOT NULL,
     PRIMARY KEY (Id)
 );
 --TimeSlot

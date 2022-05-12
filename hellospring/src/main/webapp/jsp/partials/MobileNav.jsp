@@ -9,19 +9,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/orderFries">Frieten</a>
+                <a class="nav-link" href="/Client/orderFries">Frieten</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/orderSnacks">Snacks</a>
+                <a class="nav-link" href="/Client/orderSnacks">Snacks</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/orderSauces">Sauzen</a>
+                <a class="nav-link" href="/Client/orderSauces">Sauzen</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/orderSoftDrinks">Frisdranken</a>
+                <a class="nav-link" href="/Client/orderSoftDrinks">Frisdranken</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/orderBeers">Bieren</a>
+                <a class="nav-link" href="/Client/orderBeers">Bieren</a>
             </li>
         </ul>
         <div class="mr-sm-2">

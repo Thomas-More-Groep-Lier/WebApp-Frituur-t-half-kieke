@@ -31,7 +31,7 @@ public class ClientController {
     @RequestMapping("Client/orderFries")
     public String navigateToFriesView(Model fries) {
         List<Product> products = productRepository.findAll()
-                .stream().filter(x -> x.getCategory().equalsIgnoreCase("frieten"))
+                .stream().filter(x -> x.getCategory().equalsIgnoreCase("frieten") && x.getStatus() == true)
                 .collect(Collectors.toList());
         fries.addAttribute("products", products);
         fries.addAttribute("category", "Frieten");
@@ -44,7 +44,7 @@ public class ClientController {
         beers.addAttribute("category", "Bier");
         beers.addAttribute("pageTitle", "Bier bestellen");
         List<Product> products = productRepository.findAll()
-                .stream().filter(x -> x.getCategory().equalsIgnoreCase("bier"))
+                .stream().filter(x -> x.getCategory().equalsIgnoreCase("bier") && x.getStatus() == true)
                 .collect(Collectors.toList());
         beers.addAttribute("products", products);
         return "Client/OrderBeersView";
@@ -56,10 +56,10 @@ public class ClientController {
         sauces.addAttribute("category", "Koude Sauzen");
         sauces.addAttribute("category2", "Warme Sauzen");
         List<Product> products = productRepository.findAll()
-                .stream().filter(x -> x.getCategory().equalsIgnoreCase("koude saus"))
+                .stream().filter(x -> x.getCategory().equalsIgnoreCase("koude saus") && x.getStatus() == true)
                 .collect(Collectors.toList());
         List<Product> productsCategory2 = productRepository.findAll()
-                .stream().filter(x -> x.getCategory().equalsIgnoreCase("warme saus"))
+                .stream().filter(x -> x.getCategory().equalsIgnoreCase("warme saus") && x.getStatus() == true)
                 .collect(Collectors.toList());
         sauces.addAttribute("products", products);
         sauces.addAttribute("productsCategory2", productsCategory2);
@@ -69,7 +69,7 @@ public class ClientController {
     @RequestMapping("Client/orderSnacks")
     public String navigateToSnacksView(Model snacks) {
         List<Product> products = productRepository.findAll()
-                .stream().filter(x -> x.getCategory().equalsIgnoreCase("snack"))
+                .stream().filter(x -> x.getCategory().equalsIgnoreCase("snack") && x.getStatus() == true)
                 .collect(Collectors.toList());
         List<Product> productsCategory2 = productRepository.findAll()
                 .stream().filter(x -> x.getCategory().equalsIgnoreCase("vegetarische snack"))
@@ -85,7 +85,7 @@ public class ClientController {
     @RequestMapping("Client/orderSoftDrinks")
     public String navigateToSoftDrinksView(Model soft) {
         List<Product> products = productRepository.findAll()
-                .stream().filter(x -> x.getCategory().equalsIgnoreCase("frisdrank"))
+                .stream().filter(x -> x.getCategory().equalsIgnoreCase("frisdrank") && x.getStatus() == true)
                 .collect(Collectors.toList());
         soft.addAttribute("category", "Frisdranken");
         soft.addAttribute("pageTitle", "Frisdranken bestellen");
@@ -94,7 +94,10 @@ public class ClientController {
     }
 
     @RequestMapping("Client/cart")
-    public String navigateToShoppingCartView() {
+    public String navigateToShoppingCartView(Model cart) {
+
+        cart.addAttribute("pageTitle", "Uw bestelling bij frituur t' half kieke!");
+
         return "Client/ShoppingCartView";
     }
 }
