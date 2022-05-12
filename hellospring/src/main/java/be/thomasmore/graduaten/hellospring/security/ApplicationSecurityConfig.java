@@ -38,11 +38,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .authorizeRequests()
-                .antMatchers("/","index","/Client/*","/css/*", "/js/*", "../partials/*","/images/*").permitAll()
+                .antMatchers("/","index","/Client/*","/css/*", "/js/*", "../partials/*","/images/*", "/h2/**").permitAll()
                 //.antMatchers("/Admin/*").hasRole(ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
+                http.csrf().ignoringAntMatchers("/h2/**");
+                http.headers().frameOptions().sameOrigin();
     }
 }
