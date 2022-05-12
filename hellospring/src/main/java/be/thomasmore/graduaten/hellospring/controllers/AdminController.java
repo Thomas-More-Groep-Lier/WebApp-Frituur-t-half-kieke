@@ -38,7 +38,7 @@ public class AdminController {
         return "Admin/AdminLoginView";
     }
 
-    @RequestMapping("/Admin/Dashboard")
+    @RequestMapping("Admin/Dashboard")
     public String navigateToIndex(Model dashboard) {
         dashboard.addAttribute("pageTitle", "Dashboard");
      /*   long nrOfOpenOrders = nrOfOpenOrders();
@@ -50,7 +50,7 @@ public class AdminController {
         return "Admin/AdminDashboardView";
     }
 
-    @RequestMapping("/Admin/Orders")
+    @RequestMapping("Admin/Orders")
     public String navigateToAdminOrderView(Model orders) {
         orders.addAttribute("pageTitle", "Orders");
        /* long nrOfOpenOrders = nrOfOpenOrders();
@@ -63,7 +63,7 @@ public class AdminController {
     }
 
 
-    @RequestMapping("/Admin/Products")
+    @RequestMapping("Admin/Products")
     public String navigateToAdminProductView(Model products) {
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("pageTitle", "Producten");
@@ -71,13 +71,13 @@ public class AdminController {
         return "Admin/AdminProductView";
     }
 
-    @RequestMapping("/Admin/TimeSlots")
+    @RequestMapping("Admin/TimeSlots")
     public String navigateToAdminTimeSlotsView(Model timeSlots) {
         timeSlots.addAttribute("pageTitle", "Time slots");
         return "Admin/AdminTimeSlotsView";
     }
 
-    @RequestMapping("/Admin/Settings")
+    @RequestMapping("Admin/Settings")
     public String navigateToAdminSettingsView(Model settings) {
         settings.addAttribute("pageTitle", "Orders");
         settings.addAttribute("shopStatus", false);
