@@ -1,7 +1,4 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <jsp:include page="../partials/head.jsp"/>
 
 <body>
@@ -14,7 +11,7 @@
                      style="width: 100px; display: block; margin-left: auto; margin-right: auto;"/>
             </div>
 
-            <form th:action="@{/login}" method="post">
+            <form th:action="@{/login}" method="post" id="loginForm">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp">
@@ -24,12 +21,12 @@
                     <input type="password" class="form-control" id="password" name="password">
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <input type="submit" class="btn btn-danger" value="Log In"/>
+                <input type="submit" class="btn btn-danger float-end" value="Log In"/>
             </form>
             <div th:if="${param.error}">
-                Invalid username and password.</div>
+                Ongeldige gebruikersnaam en/of wachtwoord.</div>
             <div th:if="${param.logout}">
-                You have been logged out.</div>
+                U bent uitgelogd.</div>
         </div>
     </div>
 

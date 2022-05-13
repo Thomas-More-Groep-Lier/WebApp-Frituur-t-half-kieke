@@ -3,9 +3,6 @@
 <%
     List<Product> products = (List<Product>) request.getAttribute("products");
 %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <jsp:include page="../partials/head.jsp"/>
 
 <body>
@@ -63,7 +60,7 @@
                                 }
                             %>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <input type="submit" class="btn btn-primary btn-block w-100 my-5" value="Bestellen"/>
+                            <input type="submit" class="btn btn-primary btn-block w-100 mt-3 p-2" value="Bestellen"/>
                         </div>
                     </div>
             </div>

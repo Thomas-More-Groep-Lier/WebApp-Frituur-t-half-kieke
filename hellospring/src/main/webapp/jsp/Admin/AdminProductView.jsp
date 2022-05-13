@@ -3,9 +3,7 @@
 <%
     List<Product> products = (List<Product>) request.getAttribute("allProducts");
 %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <jsp:include page="../partials/head.jsp"/>
 <body>
 <div class="container-fluid">
@@ -38,7 +36,7 @@
                         <div class="row mb-3">
                             <div class="col-5">
                                 <label for="productName" class="form-label">Product naam</label>
-                                <input type="text" id="productName" class="form-control"
+                                <input type="text" id="productName" name="productName" class="form-control"
                                        aria-describedby="productNameHelpBlock">
                                 <div id="productNameHelpBlock" class="form-text d-none">
                                     Een goede productnaam bevat alleen letters en cijfers, geen speciale karakters...
@@ -46,7 +44,7 @@
                             </div>
                             <div class="col-2">
                                 <label for="productCategory" class="form-label">Product categorie</label>
-                                <select class="form-select" id="productCategory">
+                                <select class="form-select" name="productCategory" id="productCategory">
                                     <option selected>Categorie selecteren ...</option>
                                     <option value="1">Frieten</option>
                                     <option value="2">Snack</option>
@@ -62,10 +60,11 @@
                             </div>
                             <div class="col-2">
                                 <label for="productPrice" class="form-label">Product prijs</label>
-                                <input type="number" id="productPrice" class="form-control" step="0.01" min="0"
+                                <input type="number" id="productPrice" name="productPrice" class="form-control" step="0.01" min="0"
                                        max="1000">
                             </div>
                             <div class="col-2 d-flex align-items-end justify-content-end">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <button type="submit" class="btn btn-success" id="btnAdd"><i class="bi bi-plus"></i>
                                     Nieuw toevoegen
                                 </button>
@@ -96,13 +95,24 @@
                                                 "<td id=\"productName_" + product.getId() + "\">" + product.getDescription() + "</td>" +
                                                 "<td id=\"productPrice_" + product.getId() + "\"> &euro;" + String.format("%.2f", product.getPrice()) + "</td>" +
                                                 "<td class=\"text-center\">" +
-                                                "<a title=\"edit\" onclick=\"addNew(" + product.getId() + ")\" class=\"text-dark\"><i class=\"bi bi-pencil-fill \"></i></a>" +
-                                                "<a title=\"pause\" href=\"/Admin/Product/Pause?id=" + product.getId() + "\" class=\"text-warning\"><i class=\"bi bi-pause-fill ms-4\"></i></a>" +
-                                                "<a title=\"restart\" href=\"/Admin/Product/Restart?id=" + product.getId() + "\" class=\"text-success\"><i class=\"bi bi-arrow-clockwise mx-4\"></i></a>" +
-                                                "<a title=\"delete\" href=\"/Admin/Product/Delete?id=" + product.getId() + "\" class=\"text-danger\"><i class=\"bi bi-trash3 \"></i></a>" +
-                                                "</td>" +
-                                                "</tr>"
+                                                "<a title=\"edit\" onclick=\"addNew(" + product.getId() + ")\" class=\"text-dark\"><i class=\"bi bi-pencil-fill \"></i></a>"
                                 );
+
+                                        if (product.getStatus() == true) {
+                                            out.print(
+                                            "<a title=\"pause\" href=\"/Admin/Product/Pause?id=" + product.getId() + "\" class=\"text-warning\"><i class=\"bi bi-pause-fill mx-4\"></i></a>"
+                                                    );
+                                        }
+                                        else {
+                                            out.print(
+                                                    "<a title=\"restart\" href=\"/Admin/Product/Restart?id=" + product.getId() + "\" class=\"text-success\"><i class=\"bi bi-arrow-clockwise mx-4\"></i></a>"
+                                            );
+                                        }
+                                        out.print(
+                                                "<a title=\"delete\" onclick=\"confirmDelete(" + product.getId() +")\" class=\"text-danger\"><i class=\"bi bi-trash3 \"></i></a>" +
+                                                        "</td>" +
+                                                        "</tr>"
+                                        );
                             }
                         %>
                     </table>
@@ -113,6 +123,12 @@
 </div>
 <jsp:include page="../partials/footer.jsp"/>
 <script>
+    function confirmDelete(id){
+        const ok = confirm("Weet je zeker dat je dit artikel wenst te verwijderen?")
+        if (ok) {
+            window.location.href = `/Admin/Product/Delete?id${id}`;
+        }
+    }
     function changeDisplay(x) {
         let select = document.getElementById('category');
         let value = select.options[select.selectedIndex].value;
