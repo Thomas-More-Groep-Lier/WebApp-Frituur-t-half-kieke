@@ -51,7 +51,6 @@ public class AdminController {
     public String navigateToIndex(Model dashboard) {
       //  long open = nrOfOpenOrders();
        // dashboard.addAttribute("pageTitle", "Dashboard");
-       // dashboard.addAttribute("nrOfOpenOrders", open);
       //  dashboard.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
        // dashboard.addAttribute("totalNrOfOrdersReady",picked());
         return "Admin/AdminDashboardView";
