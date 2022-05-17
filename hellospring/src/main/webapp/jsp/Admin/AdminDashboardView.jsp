@@ -21,7 +21,6 @@
                     <th scope="col">Aantal</th>
                     <th scope="col">Omzet</th>
                 </tr>
-
                 <tr>
                     <th scope="row">1</th>
                     <td>Item 1</td>

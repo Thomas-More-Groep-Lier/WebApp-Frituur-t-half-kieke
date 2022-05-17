@@ -1,11 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: maart
-  Date: 23/03/2022
-  Time: 20:30
-  To change this template use File | Settings | File Templates.
---%>
-
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.Vacation" %>
+<%@ page import="java.util.List" %>
+<%
+    List<Vacation> planned = (List<Vacation>) request.getAttribute("plannedVacation");        
+%>
 <jsp:include page="../partials/head.jsp"/>
 <body>
 <div class="container-fluid">
@@ -22,7 +19,7 @@
             </div>
             <div class="row border border-1 rounded p-3">
                 <%
-                    if ((boolean) request.getAttribute("shopStatus")) {
+                    if (!(boolean) request.getAttribute("shopStatus")) {
                         out.print(
                                 "<div class=\"d-flex\" id=\"open\">" +
                                         "<div class=\"col-3\">" +
@@ -67,15 +64,16 @@
                 </div>
             </div>
             <div class="row border border-1 rounded p-3">
-                <form id="vakantiePlanning">
+                <form id="vakantiePlanning" method="post" action="/Admin/Settings/AddVacation">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="row mb-5">
                         <div class="col-4">
                             <label for="from" class="form-label">Van</label>
-                            <input type="date" class="form-control" id="from"/>
+                            <input type="date" name="from" class="form-control" id="from"/>
                         </div>
                         <div class="col-4">
                             <label for="untill" class="form-label">Tot</label>
-                            <input type="date" class="form-control" id="untill"/>
+                            <input type="date" name="untill" class="form-control" id="untill"/>
                         </div>
                         <div class="col-4 d-flex align-items-end justify-content-start">
                             <button type="button" class="btn btn-primary fs-small" onclick="submitTimeOff()"><i
@@ -86,27 +84,27 @@
                     <div class="row">
                         <div class="col">
                             <h6>Uw geplande vankantie ...</h6>
-                            <table class="table">
+                             <table class="table">
                                 <tr>
                                     <th scope="col">Van</th>
                                     <th scope="col">Tot</th>
                                     <th scope="col">Delete</th>
                                 </tr>
-                                <tr>
-                                    <%
-                                        /*for (Vacation record : plannedVacation) {
-                                            out.print(
-                                                    "<td>"+ record.getFrom() +"</td>" +
-                                                    "<td>"+ record.getUntill() +"</td>"
-                                                    "<td>" +
-                                                            "<a title=\"delete\" href=\"/Admin/Product/Delete?id=" + record.getId() +"\" class=\"text-danger\">" +
-                                                            "<i class=\"bi bi-trash3 \"></i>" +
-                                                            "</a></td>"
-                                            );
-                                        }*/
-                                    %>
-                                </tr>
-                            </table>
+                                <%
+                                
+                                if (planned != null){
+                                    for (Vacation record : planned) {
+                                        out.print(
+                                                "<tr id=\"+ record.getId() +\"><td>"+ record.getFromDate() +"</td>" +
+                                                "<td>"+ record.getUntilDate() +"</td><td>" +
+                                                        "<a title=\"delete\" href=\"/Admin/Settings/Vacation/Delete?id=" + record.getId() +"\" class=\"text-danger\">" +
+                                                        "<i class=\"bi bi-trash3 \"></i>" +
+                                                        "</a></td></tr>"
+                                        );
+                                    }
+                                }
+                                %>
+                            </table> 
                         </div>
                     </div>
                 </form>
@@ -123,6 +121,7 @@
             <div class="row border border-1 rounded p-3">
                 <div class="col">
                     <form id="openingHours" method="post" action="">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <div class="row mb-3">
                             <div class="col-4"></div>
                             <div class="col-4"><h6>Van</h6></div>

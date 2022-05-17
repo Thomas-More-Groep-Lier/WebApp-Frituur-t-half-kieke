@@ -12,34 +12,39 @@ public class TimeSlot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String hour;
     private Boolean isActive;
     private int maxNumberOfOrders;
     private int ordersPlaced;
     private Boolean spotAvailable;
-    private String dayOfTheWeek;
+    private int dayOfTheWeek;
+    private String fromTime;
+    private String until;
 
     public TimeSlot() {
 
     }
 
     //constructors
-    public TimeSlot(long id, Boolean isActive, int maxNumberOfOrders, int ordersPlaced, String dayOfTheWeek, String Hour) {
+    public TimeSlot(long id, Boolean isActive, Boolean spotAvailable, int maxNumberOfOrders, int ordersPlaced, int dayOfTheWeek, String from, String until) {
         this.id = id;
         this.isActive = isActive;
+        this.spotAvailable = spotAvailable;
         this.maxNumberOfOrders = maxNumberOfOrders;
         this.ordersPlaced = ordersPlaced;
         this.dayOfTheWeek = dayOfTheWeek;
-        this.hour = hour;
+        this.fromTime = from;
+        this.until = until;
     }
 
     //constructor without id
-    public TimeSlot(Boolean isActive, int maxNumberOfOrders, int ordersPlaced, String dayOfTheWeek, String Hour) {
+    public TimeSlot(Boolean isActive, Boolean spotAvailable, int maxNumberOfOrders, int ordersPlaced, int dayOfTheWeek, String from, String until) {
         this.isActive = isActive;
+        this.spotAvailable = spotAvailable;
         this.maxNumberOfOrders = maxNumberOfOrders;
         this.ordersPlaced = ordersPlaced;
         this.dayOfTheWeek = dayOfTheWeek;
-        this.hour = hour;
+        this.fromTime = from;
+        this.until = until;
     }
 
     //getters
@@ -81,19 +86,26 @@ public class TimeSlot {
         this.ordersPlaced = newOrdersPlaced;
     }
 
-    public String getDayOfTheWeek() {
+    public int getDayOfTheWeek() {
         return dayOfTheWeek;
     }
 
-    public void setDayOfTheWeek(String NewDayOfTheWeek) {
-        this.dayOfTheWeek = null;
-    } //newDayOfTheWeek;
+    public void setDayOfTheWeek(int NewDayOfTheWeek) {
+        this.dayOfTheWeek = NewDayOfTheWeek;
+    } 
 
-    public String getHour() {
-        return hour;
+    public String getFrom() {
+        return fromTime;
     }
 
-    public void setHour(String newHour) {
-        this.hour = newHour;
+    public void setFrom(String newFrom) {
+        this.fromTime = newFrom;
+    }
+    public String getUntil() {
+        return until;
+    }
+
+    public void setUntil(String newUntil) {
+        this.until = newUntil;
     }
 }

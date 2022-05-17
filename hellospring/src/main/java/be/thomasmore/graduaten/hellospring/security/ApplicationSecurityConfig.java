@@ -46,6 +46,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin(form -> form
                         .loginPage("/Login")
                         .permitAll()
+                        .successForwardUrl("/Admin/Dashboard")
                 );
                 http.csrf().ignoringAntMatchers("/h2/**");
                 http.headers().frameOptions().sameOrigin();

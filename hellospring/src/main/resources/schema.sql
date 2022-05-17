@@ -6,8 +6,17 @@ drop table if exists Client;
 drop table if exists Product;
 drop table if exists TimeSlot;
 drop table if exists AppUser;
+drop table if exists Vacation;
+
 
 -- Create tables
+--Vacation 
+ CREATE TABLE Vacation(
+	Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	fromDate varchar (30) NOT NULL,
+	untilDate varchar (30) NOT NULL,
+    PRIMARY KEY (Id)
+);
 --User
 CREATE TABLE AppUser(
 	Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -18,7 +27,8 @@ CREATE TABLE AppUser(
 --Client
 CREATE TABLE Client(
 	Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	Name varchar (30) NOT NULL,
+	Firstname varchar(30) NOT NULL,
+ 	Lastname varchar (30) NOT NULL,
 	EmailAdress varchar (20) NOT NULL,
 	PhoneNumber varchar (20) NOT NULL,
     PRIMARY KEY (Id)
@@ -36,13 +46,12 @@ CREATE TABLE Product(
 CREATE TABLE TimeSlot(
 	Id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	IsActive boolean NULL,
-	SpotAvailable boolean NULL,
+	SpotAvailable boolean NOT NULL,
 	MaxNumberOfOrders int NOT NULL,
 	OrdersPlaced int NOT NULL,
-	SelectedHour varchar (10) NOT NULL,
-	Quarter varchar (10) NOT NULL,
-	DayOfTheWeek varchar (20) NOT NULL,
-	Date date NOT NULL,
+	FromTime varchar (8) NOT NULL,
+	Until varchar (8) NOT NULL,
+	DayOfTheWeek int NOT NULL,
     PRIMARY KEY (Id)
 );
 -- Associate tables
