@@ -39,13 +39,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
 
                 .authorizeRequests()
-                .antMatchers("/","index","/Client/*","/css/*", "/js/*", "../partials/*","/images/*").permitAll()
+                .antMatchers("/","index","/Client/*","/css/*", "/js/*", "../partials/*","/images/*","/h2/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin(form -> form
                         .loginPage("/Login")
                         .permitAll()
+                        .successForwardUrl("/Admin/Dashboard")
                 );
+                http.csrf().ignoringAntMatchers("/h2/**");
+                http.headers().frameOptions().sameOrigin();
     }
 }
