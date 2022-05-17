@@ -24,8 +24,8 @@
                 <a class="nav-link" href="/Client/orderBeers">Bieren</a>
             </li>
         </ul>
-        <div class="mr-sm-2">
+        <!-- <div class="mr-sm-2">
             <jsp:include page="shoppingCart.jsp"/>
-        </div>
+        </div> -->
     </div>
 </nav>

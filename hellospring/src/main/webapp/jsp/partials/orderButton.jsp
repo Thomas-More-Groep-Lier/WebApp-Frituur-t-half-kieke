@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Mitch VV
-  Date: 8/05/2022
-  Time: 19:45
-  To change this template use File | Settings | File Templates.
---%>
 <%
     long nrOfOpenOrders = (long) request.getAttribute("nrOfOpenOrders");
     long nrOfOrdersReadyToPickUp = (long) request.getAttribute("nrOfOrdersReadyToPickUp");

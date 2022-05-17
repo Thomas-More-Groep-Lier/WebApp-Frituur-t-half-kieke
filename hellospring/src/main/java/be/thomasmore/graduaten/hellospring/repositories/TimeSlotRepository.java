@@ -8,9 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TimeSlotRepository extends JpaRepository<TimeSlot, Long> {
-    TimeSlot findTimeSlotById(long id);
-    TimeSlot findTimeslotByHour(String hour);
-    List<TimeSlot> findTimeslotsByIsActive(boolean isActive);
-    List<TimeSlot> findTimeslotsByDayOfTheWeek(String dayOfTheWeek);
+
 }
 

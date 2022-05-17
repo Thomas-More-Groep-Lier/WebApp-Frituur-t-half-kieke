@@ -1,71 +1,823 @@
 
 -- Insert data
 -- Insert in table Product
-insert into Product	(Id, Description, Price, Category, Status)
-	VALUES (1, 'Mini', '1.60', 'Frieten', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (2, 'Klein', '1.80', 'Frieten', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (3, 'Groot', '2.20', 'Frieten', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (4, 'Maxi', '3.20', 'Frieten', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (5, 'Familie', '5.40', 'Frieten', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (6, 'Curryworst', '1.80', 'Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (7, 'Curryworst Speciaal', '2.70', 'Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (8, 'Cervela', '2.20', 'Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (9, 'Mexicano', '2.00', 'Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (10, 'Boulet', '2.40', 'Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (11, 'Kipknots', '1.60', 'Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (12, 'Burger', '2.20', 'Vegetarische Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (13, 'Mexicano', '1.80', 'Vegetarische Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (14, 'Bamischijf', '1.80', 'Vegetarische Snack', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (15, 'Mayonaise', '0.90', 'Koude Saus', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (16, 'Tomaten Ketchup', '0.90', 'Koude Saus', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (17, 'Curry Ketchup', '0.90', 'Koude Saus', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (18, 'Andalouse', '0.90', 'Koude Saus', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (19, 'Samourai', '0.90', 'Koude Saus', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (20, 'Huisgemaakt Stoofvleessaus', '2.20', 'Warme Saus', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (21, 'Warme Curry', '1.80', 'Warme Saus', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (22, 'Goulashsaus', '1.80', 'Warme Saus', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (23, 'Chaudfontaine Plat - 50cl', '1.80', 'Frisdrank', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (24, 'Chaudfontaine Bruis - 50cl', '1.80', 'Frisdrank', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (25, 'Coca Cola - 33cl', '1.80', 'Frisdrank', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (26, 'Coca Cola Zero - 33cl', '1.80', 'Frisdrank', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (27, 'Fanta Orange - 33cl', '1.80', 'Frisdrank', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (28, 'Lipton Ice Tea - 33cl', '2.20', 'Frisdrank', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (29, 'Jupiler - 33cl', '1.80', 'Bier', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (30, 'Jupiler 0.00% - 33cl', '1.80', 'Bier', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (31, 'Leffe Blond - 50cl', '3.50', 'Bier', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (32, 'Duvel - 33cl', '3.50', 'Bier', true);
-insert into Product			(Id, Description, Price, Category, Status)
-	VALUES (33, 'Vedett extra white - 33cl', '3.00', 'Bier', true);
-insert into Product	(Id, Description, Price, Category, Status)
-	VALUES (34, 'Gouden carolus - 33cl', '3.50', 'Bier', true);
+insert into Product	(`Description`, `Price`, `Category`, `Status`) VALUES ('Mini', 1.60, 'Frieten', true);
+insert into Product	(`Description`, `Price`, `Category`, `Status`) VALUES ('Klein', 1.80, 'Frieten', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Groot', 2.20, 'Frieten', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Maxi', 3.20, 'Frieten', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Familie', 5.40, 'Frieten', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Curryworst', 1.80, 'Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Curryworst Speciaal', 2.70, 'Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Cervela', 2.20, 'Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Mexicano', 2.00, 'Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Boulet', 2.40, 'Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Kipknots', 1.60, 'Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Burger', 2.20, 'Vegetarische Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Mexicano', 1.80, 'Vegetarische Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Bamischijf', 1.80, 'Vegetarische Snack', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Mayonaise', 0.90, 'Koude Saus', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Tomaten Ketchup', 0.90, 'Koude Saus', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Curry Ketchup', 0.90, 'Koude Saus', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Andalouse', 0.90, 'Koude Saus', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Samourai', 0.90, 'Koude Saus', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Huisgemaakt Stoofvleessaus', 2.20, 'Warme Saus', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Warme Curry', 1.80, 'Warme Saus', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Goulashsaus', 1.80, 'Warme Saus', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Chaudfontaine Plat - 50cl', 1.80, 'Frisdrank', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Chaudfontaine Bruis - 50cl', 1.80, 'Frisdrank', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Coca Cola - 33cl', 1.80, 'Frisdrank', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Coca Cola Zero - 33cl', 1.80, 'Frisdrank', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Fanta Orange - 33cl', 1.80, 'Frisdrank', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Lipton Ice Tea - 33cl', 2.20, 'Frisdrank', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Jupiler - 33cl', 1.80, 'Bier', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Jupiler 0.00% - 33cl', 1.80, 'Bier', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Leffe Blond - 50cl', 3.50, 'Bier', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Duvel - 33cl', 3.50, 'Bier', true);
+insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Vedett extra white - 33cl', 3.00, 'Bier', true);
+insert into Product	(`Description`, `Price`, `Category`, `Status`) VALUES ('Gouden carolus - 33cl', 3.50, 'Bier', true);
+insert into Vacation (`FROM_DATE`, `UNTIL_DATE`) VALUES ('2022-05-09', '2022-05-16');
+
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:00:00', '10:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:15:01', '10:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:30:01', '10:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:45:01', '11:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:00:01', '11:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:15:01', '11:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:30:01', '11:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:45:01', '12:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:00:01', '12:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:15:01', '12:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:30:01', '12:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:45:01', '13:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:00:01', '13:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:15:01', '13:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:30:01', '13:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:45:01', '14:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:00:01', '14:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:15:01', '14:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:30:01', '14:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:45:01', '15:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:00:01', '15:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:15:01', '15:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:30:01', '15:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:45:01', '16:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:00:01', '16:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:15:01', '16:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:30:01', '16:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:45:01', '17:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:00:01', '17:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:15:01', '17:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:30:01', '17:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:45:01', '18:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:00:01', '18:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:15:01', '18:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:30:01', '18:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:45:01', '19:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:00:01', '19:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:15:01', '19:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:30:01', '19:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:45:01', '20:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:00:01', '20:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:15:01', '20:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:30:01', '20:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:45:01', '21:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:00:01', '21:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:15:01', '21:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:30:01', '21:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:45:01', '22:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:00:01', '22:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:15:01', '22:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:30:01', '22:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:45:01', '23:00:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:00:01', '23:15:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:15:01', '23:30:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:30:01', '23:45:00', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:45:01', '23:59:59', 0);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:00:00', '10:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:15:01', '10:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:30:01', '10:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:45:01', '11:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:00:01', '11:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:15:01', '11:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:30:01', '11:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:45:01', '12:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:00:01', '12:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:15:01', '12:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:30:01', '12:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:45:01', '13:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:00:01', '13:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:15:01', '13:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:30:01', '13:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:45:01', '14:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:00:01', '14:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:15:01', '14:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:30:01', '14:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:45:01', '15:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:00:01', '15:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:15:01', '15:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:30:01', '15:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:45:01', '16:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:00:01', '16:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:15:01', '16:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:30:01', '16:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:45:01', '17:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:00:01', '17:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:15:01', '17:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:30:01', '17:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:45:01', '18:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:00:01', '18:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:15:01', '18:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:30:01', '18:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:45:01', '19:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:00:01', '19:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:15:01', '19:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:30:01', '19:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:45:01', '20:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:00:01', '20:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:15:01', '20:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:30:01', '20:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:45:01', '21:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:00:01', '21:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:15:01', '21:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:30:01', '21:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:45:01', '22:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:00:01', '22:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:15:01', '22:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:30:01', '22:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:45:01', '23:00:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:00:01', '23:15:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:15:01', '23:30:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:30:01', '23:45:00', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:45:01', '23:59:59', 1);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:00:00', '10:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:15:01', '10:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:30:01', '10:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:45:01', '11:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:00:01', '11:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:15:01', '11:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:30:01', '11:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:45:01', '12:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:00:01', '12:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:15:01', '12:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:30:01', '12:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:45:01', '13:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:00:01', '13:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:15:01', '13:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:30:01', '13:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:45:01', '14:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:00:01', '14:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:15:01', '14:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:30:01', '14:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:45:01', '15:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:00:01', '15:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:15:01', '15:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:30:01', '15:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:45:01', '16:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:00:01', '16:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:15:01', '16:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:30:01', '16:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:45:01', '17:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:00:01', '17:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:15:01', '17:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:30:01', '17:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:45:01', '18:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:00:01', '18:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:15:01', '18:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:30:01', '18:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:45:01', '19:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:00:01', '19:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:15:01', '19:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:30:01', '19:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:45:01', '20:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:00:01', '20:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:15:01', '20:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:30:01', '20:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:45:01', '21:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:00:01', '21:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:15:01', '21:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:30:01', '21:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:45:01', '22:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:00:01', '22:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:15:01', '22:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:30:01', '22:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:45:01', '23:00:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:00:01', '23:15:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:15:01', '23:30:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:30:01', '23:45:00', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:45:01', '23:59:59', 2);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:00:00', '10:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:15:01', '10:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:30:01', '10:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:45:01', '11:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:00:01', '11:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:15:01', '11:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:30:01', '11:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:45:01', '12:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:00:01', '12:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:15:01', '12:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:30:01', '12:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:45:01', '13:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:00:01', '13:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:15:01', '13:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:30:01', '13:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:45:01', '14:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:00:01', '14:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:15:01', '14:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:30:01', '14:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:45:01', '15:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:00:01', '15:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:15:01', '15:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:30:01', '15:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:45:01', '16:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:00:01', '16:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:15:01', '16:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:30:01', '16:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:45:01', '17:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:00:01', '17:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:15:01', '17:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:30:01', '17:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:45:01', '18:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:00:01', '18:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:15:01', '18:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:30:01', '18:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:45:01', '19:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:00:01', '19:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:15:01', '19:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:30:01', '19:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:45:01', '20:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:00:01', '20:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:15:01', '20:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:30:01', '20:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:45:01', '21:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:00:01', '21:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:15:01', '21:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:30:01', '21:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:45:01', '22:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:00:01', '22:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:15:01', '22:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:30:01', '22:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:45:01', '23:00:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:00:01', '23:15:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:15:01', '23:30:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:30:01', '23:45:00', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:45:01', '23:59:59', 3);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:00:00', '10:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:15:01', '10:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:30:01', '10:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:45:01', '11:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:00:01', '11:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:15:01', '11:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:30:01', '11:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:45:01', '12:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:00:01', '12:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:15:01', '12:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:30:01', '12:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:45:01', '13:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:00:01', '13:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:15:01', '13:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:30:01', '13:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:45:01', '14:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:00:01', '14:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:15:01', '14:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:30:01', '14:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:45:01', '15:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:00:01', '15:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:15:01', '15:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:30:01', '15:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:45:01', '16:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:00:01', '16:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:15:01', '16:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:30:01', '16:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:45:01', '17:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:00:01', '17:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:15:01', '17:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:30:01', '17:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:45:01', '18:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:00:01', '18:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:15:01', '18:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:30:01', '18:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:45:01', '19:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:00:01', '19:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:15:01', '19:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:30:01', '19:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:45:01', '20:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:00:01', '20:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:15:01', '20:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:30:01', '20:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:45:01', '21:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:00:01', '21:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:15:01', '21:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:30:01', '21:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:45:01', '22:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:00:01', '22:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:15:01', '22:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:30:01', '22:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:45:01', '23:00:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:00:01', '23:15:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:15:01', '23:30:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:30:01', '23:45:00', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:45:01', '23:59:59', 4);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:00:00', '10:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:15:01', '10:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:30:01', '10:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:45:01', '11:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:00:01', '11:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:15:01', '11:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:30:01', '11:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:45:01', '12:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:00:01', '12:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:15:01', '12:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:30:01', '12:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:45:01', '13:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:00:01', '13:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:15:01', '13:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:30:01', '13:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:45:01', '14:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:00:01', '14:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:15:01', '14:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:30:01', '14:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:45:01', '15:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:00:01', '15:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:15:01', '15:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:30:01', '15:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:45:01', '16:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:00:01', '16:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:15:01', '16:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:30:01', '16:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:45:01', '17:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:00:01', '17:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:15:01', '17:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:30:01', '17:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:45:01', '18:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:00:01', '18:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:15:01', '18:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:30:01', '18:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:45:01', '19:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:00:01', '19:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:15:01', '19:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:30:01', '19:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:45:01', '20:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:00:01', '20:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:15:01', '20:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:30:01', '20:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:45:01', '21:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:00:01', '21:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:15:01', '21:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:30:01', '21:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:45:01', '22:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:00:01', '22:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:15:01', '22:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:30:01', '22:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:45:01', '23:00:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:00:01', '23:15:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:15:01', '23:30:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:30:01', '23:45:00', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:45:01', '23:59:59', 5);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:00:00', '10:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:15:01', '10:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:30:01', '10:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '10:45:01', '11:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:00:01', '11:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:15:01', '11:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:30:01', '11:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '11:45:01', '12:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:00:01', '12:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:15:01', '12:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:30:01', '12:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '12:45:01', '13:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:00:01', '13:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:15:01', '13:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:30:01', '13:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '13:45:01', '14:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:00:01', '14:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:15:01', '14:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:30:01', '14:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '14:45:01', '15:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:00:01', '15:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:15:01', '15:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:30:01', '15:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '15:45:01', '16:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:00:01', '16:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:15:01', '16:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:30:01', '16:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '16:45:01', '17:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:00:01', '17:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:15:01', '17:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:30:01', '17:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '17:45:01', '18:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:00:01', '18:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:15:01', '18:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:30:01', '18:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '18:45:01', '19:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:00:01', '19:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:15:01', '19:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:30:01', '19:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '19:45:01', '20:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:00:01', '20:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:15:01', '20:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:30:01', '20:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '20:45:01', '21:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:00:01', '21:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:15:01', '21:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:30:01', '21:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '21:45:01', '22:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:00:01', '22:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:15:01', '22:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:30:01', '22:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '22:45:01', '23:00:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:00:01', '23:15:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:15:01', '23:30:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:30:01', '23:45:00', 6);
+insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
+VALUES (true, true, 10, 0, '23:45:01', '23:59:59', 6);

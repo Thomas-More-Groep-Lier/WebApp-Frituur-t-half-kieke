@@ -3,9 +3,7 @@
 //  int nrOfOrdersReadyToPickUp = (int) request.getAttribute("nrOfOrdersReadyToPickUp");
 //  int totalNrOfOrdersReady = (int)  request.getAttribute("totalNrOfOrdersReady");
 %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="en"xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <jsp:include page="../partials/head.jsp"/>
 <body>
 <div class="container-fluid">
@@ -23,7 +21,6 @@
                     <th scope="col">Aantal</th>
                     <th scope="col">Omzet</th>
                 </tr>
-
                 <tr>
                     <th scope="row">1</th>
                     <td>Item 1</td>

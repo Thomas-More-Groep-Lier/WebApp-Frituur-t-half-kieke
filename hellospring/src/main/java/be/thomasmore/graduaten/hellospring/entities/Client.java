@@ -12,7 +12,8 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String phoneNumber;
     private String emailAdress;
 
@@ -21,16 +22,18 @@ public class Client {
     }
 
     //constructors
-    public Client(long id, String name, String phoneNumber, String emailAdress) {
+    public Client(long id, String firstName, String lastName, String phoneNumber, String emailAdress) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailAdress = emailAdress;
     }
 
     //constructor without id
-    public Client(String name, String phoneNumber, String emailAdress) {
-        this.name = name;
+    public Client(String firstName, String lastName, String phoneNumber, String emailAdress) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailAdress = emailAdress;
     }
@@ -46,12 +49,21 @@ public class Client {
         this.id = newId;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String newName) {
-        this.name = newName;
+    public void setFirstName(String newName) {
+        this.firstName = newName;
+    }
+
+    
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String newName) {
+        this.lastName = newName;
     }
 
     public String getPhoneNumber() {

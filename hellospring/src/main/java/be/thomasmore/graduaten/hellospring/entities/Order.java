@@ -1,5 +1,4 @@
 package be.thomasmore.graduaten.hellospring.entities;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,6 @@ public class Order {
     private long id;
     private long clientId;
     private long timeSlotId;
-    //find out how to use date variables seems to be a bit more complicated then c#
     private String orderDate;
     private String wantedRetrievalTime;
     private Boolean orderToBig;

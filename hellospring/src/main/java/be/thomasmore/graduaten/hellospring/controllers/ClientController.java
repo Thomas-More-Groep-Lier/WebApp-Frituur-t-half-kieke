@@ -1,32 +1,88 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
+import be.thomasmore.graduaten.hellospring.entities.Client;
 import be.thomasmore.graduaten.hellospring.entities.Product;
+import be.thomasmore.graduaten.hellospring.entities.TimeSlot;
+import be.thomasmore.graduaten.hellospring.repositories.ClientRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
+import be.thomasmore.graduaten.hellospring.repositories.TimeSlotRepository;
+
+import org.eclipse.jdt.internal.compiler.ast.EqualExpression;
+import org.hibernate.annotations.Any;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.Console;
+import java.lang.reflect.Array;
+import java.util.ArrayDeque;
+import java.util.Date;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 @Controller
 public class ClientController {
 
     private final ProductRepository productRepository;
+    private final ClientRepository clientRepository;
+    private final TimeSlotRepository timeSlotRepository;
 
-    public ClientController(ProductRepository productRepository) {
+    public ClientController(ProductRepository productRepository, ClientRepository clientRepository, TimeSlotRepository timeSlotRepository) {
         this.productRepository = productRepository;
+        this.clientRepository = clientRepository;
+        this.timeSlotRepository = timeSlotRepository;
     }
 
+    Boolean inVacation;
 
-    @RequestMapping("Client/clientOrder")
-    public String navigateToOrderView(Model order) {
+    // @RequestMapping("/Client/clientOrder")
+    // public String navigateToOrderView(Model order) {
+
+    //     order.addAttribute("pageTitle", "Bedankt voor je bestelling!");
+    //     order.addAttribute("name", "Team Lier");
+    //     order.addAttribute("timeBlock", "17:45 - 18:00");
+    //     order.addAttribute("totalPrice", 0.00);
+    //     return "/Client/ClientOrderView";
+    // }
+
+
+    @PostMapping(path = "Client/clientOrder")
+    public String addVacationPeriod(Model order,
+            @RequestBody @RequestParam(value = "firstName") String first,
+            @RequestParam(value = "lastName") String last,
+            @RequestParam(value = "email") String mail,
+            @RequestParam(value = "tel") String phone,
+            @RequestParam(value = "quantity[]") String[] quantities,
+            @RequestParam(value = "products[]") String[] products,
+            @RequestParam(value = "_csrf") String token) {
+        Client user = new Client(first, last, phone, mail);
+        
+
+        // List<Client> client = clientRepository.findAll()
+        //         .stream().filter(x -> x.getEmailAdress().equalsIgnoreCase(mail))
+        //         .collect(Collectors.toList());
+        
+        // if (client.isEmpty()){
+        //     clientRepository.saveAndFlush(user);
+        // } 
+        // else {
+        //     long id = client.get(0).getId();
+        // }
+       
+
         order.addAttribute("pageTitle", "Bedankt voor je bestelling!");
         order.addAttribute("name", "Team Lier");
         order.addAttribute("timeBlock", "17:45 - 18:00");
         order.addAttribute("totalPrice", 0.00);
         return "Client/ClientOrderView";
     }
+
+
+
 
     @RequestMapping("Client/orderFries")
     public String navigateToFriesView(Model fries) {
@@ -95,9 +151,13 @@ public class ClientController {
 
     @RequestMapping("Client/cart")
     public String navigateToShoppingCartView(Model cart) {
-
+        Date today = new Date();
+        int dayOfTheWeek = today.getDay();
+        // List<TimeSlot> timeSlots = timeSlotRepository.findAll()
+        // .stream().filter(x -> x.getDayOfTheWeek() == 1)
+        // .collect(Collectors.toList());
+     //   cart.addAttribute("timeSlots", slots);
         cart.addAttribute("pageTitle", "Uw bestelling bij frituur t' half kieke!");
-
         return "Client/ShoppingCartView";
     }
 }
