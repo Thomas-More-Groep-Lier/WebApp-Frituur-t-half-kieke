@@ -8,7 +8,6 @@ drop table if exists TimeSlot;
 drop table if exists AppUser;
 drop table if exists Vacation;
 
-
 -- Create tables
 --Vacation 
  CREATE TABLE Vacation(

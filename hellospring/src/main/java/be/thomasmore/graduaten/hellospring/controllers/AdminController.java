@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.hellospring.controllers;
 import be.thomasmore.graduaten.hellospring.entities.Order;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.entities.TimeSlot;
+
 import be.thomasmore.graduaten.hellospring.entities.Vacation;
 import be.thomasmore.graduaten.hellospring.repositories.*;
 
@@ -53,6 +54,7 @@ public class AdminController {
        // dashboard.addAttribute("pageTitle", "Dashboard");
       //  dashboard.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
        // dashboard.addAttribute("totalNrOfOrdersReady",picked());
+        dashboard.addAttribute("pageTitle", "Dashboard");
         return "Admin/AdminDashboardView";
     }
 
@@ -112,6 +114,7 @@ public class AdminController {
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
         return navigateToAdminProductView(products);
+
     }
 
     @PostMapping(path = "/Admin/Products")
@@ -168,6 +171,7 @@ public class AdminController {
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
         return navigateToAdminProductView(products);
+
     }
 
     @RequestMapping("Admin/TimeSlots")
@@ -196,6 +200,7 @@ public class AdminController {
         List<Vacation> allVacation = vacationRepository.findAll();
         settings.addAttribute("pageTitle", "Orders");
         settings.addAttribute("shopStatus", isInVacation());
+        inVacation = isInVacation();
         settings.addAttribute("logo", "/images/u101.png");
         settings.addAttribute("plannedVacation", allVacation);
         return "Admin/AdminSettingsView";
@@ -248,6 +253,35 @@ public class AdminController {
     public int picked() {
         return orderRepository.findAll()
                 .stream().filter(x -> x.getStatus().equalsIgnoreCase("picked")).collect(Collectors.toList()).size();
+    }
+
+    public Boolean isInVacation() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<Vacation> planned = vacationRepository.findAll().stream().filter(vac -> {
+            try {
+                return between(new Date(), sdf.parse(vac.getFromDate()), sdf.parse(vac.getUntilDate()));
+            } catch (ParseException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            return false;
+        }).collect(Collectors.toList());
+        if (planned.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean between(Date today, Date fromDate, Date endDate) {
+        if (today != null && fromDate != null && endDate != null) {
+            if (today.after(fromDate) && today.before(endDate)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     public Boolean isInVacation() {
