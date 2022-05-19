@@ -8,11 +8,11 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-
-    Order findOrderById(long id);
-    List<Order> findOrdersByOrderDate(String orderDate);
-    List<Order> findOrdersByClientId(long clientId);
-    List<Order> findOrdersByTimeSlotId(long timeSlotId);
-    List<Order> findOrdersByStatus(String status);
+    // List<Order> findAll();
+    // Order findOrderById(long id);
+    // List<Order> findOrdersByOrderDate(String orderDate);
+    // List<Order> findOrdersByClientId(long clientId);
+    // List<Order> findOrdersByTimeSlotId(long timeSlotId);
+    // List<Order> findOrdersByStatus(String status);
 }
 

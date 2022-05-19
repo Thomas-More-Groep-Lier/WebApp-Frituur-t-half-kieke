@@ -8,12 +8,14 @@ drop table if exists TimeSlot;
 drop table if exists AppUser;
 drop table if exists Vacation;
 
+
 -- Create tables
 --Vacation 
  CREATE TABLE Vacation(
 	Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	FROM_DATE varchar (30) NOT NULL,
-	UNTIL_DATE varchar (30) NOT NULL,
+	fromDate varchar (30) NOT NULL,
+	untilDate varchar (30) NOT NULL,
+
     PRIMARY KEY (Id)
 );
 --User
