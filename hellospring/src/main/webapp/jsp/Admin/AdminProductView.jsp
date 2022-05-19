@@ -126,7 +126,7 @@
     function confirmDelete(id){
         const ok = confirm("Weet je zeker dat je dit artikel wenst te verwijderen?")
         if (ok) {
-            window.location.href = `/Admin/Product/Delete?id${id}`;
+            window.location.href = `/Admin/Product/Delete?id=${id}`;
         }
     }
     function changeDisplay(x) {
