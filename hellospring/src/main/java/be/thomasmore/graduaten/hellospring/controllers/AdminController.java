@@ -4,6 +4,7 @@ import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.entities.TimeSlot;
 import be.thomasmore.graduaten.hellospring.entities.Vacation;
 import be.thomasmore.graduaten.hellospring.repositories.*;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,7 @@ public class AdminController {
         // dashboard.addAttribute("nrOfOpenOrders", open);
         //  dashboard.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
         // dashboard.addAttribute("totalNrOfOrdersReady",picked());
+        dashboard.addAttribute("pageTitle", "Dashboard");
         return "Admin/AdminDashboardView";
     }
 
@@ -83,8 +85,9 @@ public class AdminController {
         product.setStatus(false);
         productRepository.save(product);
         List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("allProducts", allProducts);
-        return navigateToAdminProductView(products);
+        products.addAttribute("allProducts", allProducts);        
+      return navigateToAdminProductView(products);
+
     }
 
     @RequestMapping(value = "Admin/Product/Restart", method = RequestMethod.GET)
@@ -110,6 +113,7 @@ public class AdminController {
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
         return navigateToAdminProductView(products);
+
     }
 
     @PostMapping(path = "/Admin/Products")
@@ -442,7 +446,6 @@ public class AdminController {
         return "Admin/AdminSettingsView";
     }
 
-
     @PostMapping(path = "Admin/Settings/AddVacation")
     public String addVacationPeriod(Model settings,
                                     @RequestBody @RequestParam(value = "from") String from,
@@ -458,6 +461,7 @@ public class AdminController {
         settings.addAttribute("logo", "/images/u101.png");
         settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
+
     }
 
     @RequestMapping(value = "Admin/Settings/Vacation/Delete", method = RequestMethod.GET)
@@ -475,6 +479,7 @@ public class AdminController {
         settings.addAttribute("logo", "/images/u101.png");
         settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
+
     }
 
     public long nrOfOpenOrders() {
@@ -605,6 +610,35 @@ public class AdminController {
                 return timeSlotId + 336;
             default: return timeSlotId;
         }
+    }
+
+    public Boolean isInVacation() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<Vacation> planned = vacationRepository.findAll().stream().filter(vac -> {
+            try {
+                return between(new Date(), sdf.parse(vac.getFromDate()), sdf.parse(vac.getUntilDate()));
+            } catch (ParseException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            return false;
+        }).collect(Collectors.toList());
+        if (planned.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean between(Date today, Date fromDate, Date endDate) {
+        if (today != null && fromDate != null && endDate != null) {
+            if (today.after(fromDate) && today.before(endDate)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     public Boolean isInVacation() {

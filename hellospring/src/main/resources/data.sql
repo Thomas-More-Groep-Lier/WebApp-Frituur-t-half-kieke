@@ -35,6 +35,7 @@ insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Leff
 insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Duvel - 33cl', 3.50, 'Bier', true);
 insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Vedett extra white - 33cl', 3.00, 'Bier', true);
 insert into Product	(`Description`, `Price`, `Category`, `Status`) VALUES ('Gouden carolus - 33cl', 3.50, 'Bier', true);
+
 insert into Vacation (`fromDate`, `untilDate`) VALUES ('2022-05-09', '2022-05-16');
 
 insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
