@@ -640,33 +640,4 @@ public class AdminController {
         }
         return false;
     }
-
-    public Boolean isInVacation() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        List<Vacation> planned = vacationRepository.findAll().stream().filter(vac -> {
-            try {
-                return between(new Date(), sdf.parse(vac.getFromDate()), sdf.parse(vac.getUntilDate()));
-            } catch (ParseException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            return false;
-        }).collect(Collectors.toList());
-        if (planned.size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public Boolean between(Date today, Date fromDate, Date endDate) {
-        if (today != null && fromDate != null && endDate != null) {
-            if (today.after(fromDate) && today.before(endDate)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
-    }
 }
