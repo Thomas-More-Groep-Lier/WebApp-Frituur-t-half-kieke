@@ -73,9 +73,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${project.parent.version}</version>
-                <configuration>
-                    <mainClass>be.thomasmore.graduaten.hellospring.HellospringApplication</mainClass>
+                     <configuration>
+                    <skip>true</skip>
                 </configuration>
+              <!--  <configuration>
+                    <mainClass>be.thomasmore.graduaten.hellospring.HellospringApplication</mainClass>
+                </configuration> -->
             </plugin>
         </plugins>
     </build>
