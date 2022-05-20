@@ -9,6 +9,7 @@
     List<TimeSlot> timeSlotenZat = (List<TimeSlot>) request.getAttribute("timeSlotZat");
     List<TimeSlot> timeSlotenZon = (List<TimeSlot>) request.getAttribute("timeSlotZon");
 %>
+
 <jsp:include page="../partials/head.jsp"/>
 
 <body>
