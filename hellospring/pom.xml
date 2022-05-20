@@ -68,17 +68,17 @@
         </dependency>
     </dependencies>
           <build>
-    <pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                                     <version>${project.parent.version}</version>
-
+                <version>${project.parent.version}</version>
+                <configuration>
+                    <mainClass>be.thomasmore.graduaten.hellospring.HellospringApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
-    </pluginManagement>
-</build>
+    </build>
    <!-- <build>
         <plugins>
             <plugin>
