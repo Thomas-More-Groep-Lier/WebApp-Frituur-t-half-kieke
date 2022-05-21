@@ -9,7 +9,7 @@ updateCartPreview();
 
 
 function fillInput() {
-    parsedArr = parsedArr.filter(p => p.quantity != 0);
+    parsedArr = parsedArr.filter(p => p.quantity !== 0);
     if (parsedArr.length > 0) {
         for (let i = 0; i < parsedArr.length; i++) {
             let temp = parsedArr[i].price.replace(/\u20ac/g, "").trim();
@@ -130,4 +130,16 @@ function updateCartPreview() {
     }
     document.getElementById('cartQuantity').textContent = nrOfProducts.toString();
     document.getElementById('cartTotalPrice').innerText = Number(totalPrice).toFixed(2);
+}
+
+function selectedTimeSlot(id){
+    const slots = document.getElementsByClassName('timeslot');
+    for(let i = 0; i < slots.length; i++){
+        if(slots[i].classList.contains('bg-info'))
+        {
+            slots[i].classList.remove('bg-info');
+        }
+    }
+    document.getElementById(id).classList.add('bg-info');
+    document.getElementById('inTimeSlot').value = id;
 }

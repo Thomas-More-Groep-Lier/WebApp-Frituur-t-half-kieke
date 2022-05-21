@@ -1,4 +1,7 @@
-
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.TimeSlot" %>
+<%
+    TimeSlot slot = (TimeSlot) request.getAttribute("timeBlock");
+%>
 <jsp:include page="../partials/head.jsp"/>
 <body>
 <div class="d-sm-block d-md-none container-fluid">
@@ -27,8 +30,8 @@
                     <h1 class="fw-bold">Bedankt voor je bestelling, <%=request.getAttribute("name")%>
                     </h1>
                     <p class="fw-bold mt-5">
-                        Gekozen afhaaltijd: <%=request.getAttribute("timeBlock")%><br/>
-                        Totaal te betalen: &euro; <%=String.format("%.2f", request.getAttribute("totalPrice"))%>
+                        Gekozen afhaaltijd: <%out.print(slot.getUntil().substring(0,5));%><br/>
+                        Totaal te betalen: &euro; <span id="price"></span>
                     </p>
                     <p class="mt-3">
                         Vermijd koude frietjes, kom op tijd
@@ -45,6 +48,27 @@
 </div>
 <jsp:include page="../partials/footer.jsp"/>
 <script src="/js/scripts.js" type="text/JavaScript"></script>
+<script>
+    var str = localStorage.getItem("array");
+    var parsedArr = JSON.parse(str);
+    var totalprice = 0;
+    fillInput();
+    function fillInput() {
+        parsedArr = parsedArr.filter(p => p.quantity !== 0);
+        if (parsedArr.length > 0) {
 
+            for (let i = 0; i < parsedArr.length; i++) {
+                let temp = parsedArr[i].price.replace(/\u20ac/g, "").trim();
+                let price = Number(temp.replace(/,/g, '.'));
+                totalprice = totalprice + price;
+            }
+        }
+        document.getElementById('price').innerText = Number(totalprice).toFixed(2);
+        document.getElementById('cartQuantity').innerText = 0;
+        document.getElementById('cartTotalPrice').innerText = Number(0).toFixed(2);
+        localStorage.clear();
+    }
+
+</script>
 </body>
 </html>

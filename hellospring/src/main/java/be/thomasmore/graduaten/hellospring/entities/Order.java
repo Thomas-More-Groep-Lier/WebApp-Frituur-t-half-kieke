@@ -1,10 +1,8 @@
 package be.thomasmore.graduaten.hellospring.entities;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "ORDERTABLE")
 public class Order {
     //Attributes
     @Id
@@ -22,8 +20,9 @@ public class Order {
     }
 
     //constructors
-    public Order(long id, long clientId, String orderDate, String wantedRetrievalTime, Boolean orderToBig, String status) {
+    public Order(long id, long clientId, String orderDate, Boolean orderToBig, String status, long timeSlotId,  String wantedRetrievalTime ) {
         this.id = id;
+        this.timeSlotId = timeSlotId;
         this.clientId = clientId;
         this.orderDate = orderDate;
         this.wantedRetrievalTime = wantedRetrievalTime;
@@ -31,10 +30,10 @@ public class Order {
         this.status = status;
 
     }
-
     //constructor without id
-    public Order(long clientId, String orderDate, String wantedRetrievalTime, Boolean orderToBig, String status) {
+    public Order(long clientId, String orderDate, Boolean orderToBig, String status, long timeSlotId,  String wantedRetrievalTime  ) {
         this.clientId = clientId;
+        this.timeSlotId = timeSlotId;
         this.orderDate = orderDate;
         this.wantedRetrievalTime = wantedRetrievalTime;
         this.orderToBig = orderToBig;

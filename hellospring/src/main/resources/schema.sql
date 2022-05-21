@@ -7,6 +7,7 @@ drop table if exists Product;
 drop table if exists TimeSlot;
 drop table if exists AppUser;
 drop table if exists Vacation;
+drop table if exists `Order`;
 
 
 -- Create tables
@@ -29,7 +30,7 @@ CREATE TABLE Client(
 	Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	Firstname varchar(30) NOT NULL,
  	Lastname varchar (30) NOT NULL,
-	EmailAdress varchar (20) NOT NULL,
+	EmailAdress varchar (150) NOT NULL,
 	PhoneNumber varchar (20) NOT NULL,
     PRIMARY KEY (Id)
 );
@@ -54,6 +55,18 @@ CREATE TABLE TimeSlot(
 	DayOfTheWeek int NOT NULL,
     PRIMARY KEY (Id)
 );
+
+CREATE TABLE `ORDERTABLE`(
+    Id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ClientId int NOT NULL,
+    TimeSlotId int NOT NULL,
+    OrderDate varchar(10) NOT NULL,
+    WantedRetrievalTime varchar(10) NOT NULL,
+    OrderToBig bit NOT NULL,
+    Status varchar (10) NOT NULL,
+    PRIMARY KEY (Id)
+);
+
 -- Associate tables
 -- Client <-> TimeSlot => Order
 CREATE TABLE ClientOrder(
@@ -73,9 +86,13 @@ CREATE TABLE OrderDetail(
 
 -- Foreign keys
 -- Reference: ClientOrder <-> Client (table: ClientOrder)
-ALTER TABLE ClientOrder
+ALTER TABLE `ORDERTABLE`
+    ADD FOREIGN KEY (TimeSlotId)
+    REFERENCES TimeSlot (Id);
+
+ALTER TABLE `ORDERTABLE`
     ADD FOREIGN KEY (ClientId)
-    REFERENCES Client (Id);
+        REFERENCES Client (Id);
 
 -- Reference: ClientOrder <-> TimeSlot (table: ClientOrder)
 ALTER TABLE ClientOrder
@@ -85,7 +102,7 @@ ALTER TABLE ClientOrder
 -- Reference: OrderDetail <-> Order (table: OrderDetail)
 ALTER TABLE OrderDetail
     ADD FOREIGN KEY (OrderId)
-    REFERENCES ClientOrder (Id);
+    REFERENCES ORDERTABLE (Id);
 
 -- Reference: OrderDetail <-> Product (table: OrderDetail)
 ALTER TABLE OrderDetail
