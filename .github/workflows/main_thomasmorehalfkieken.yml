@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/hellospring/target/*.war'
+          path: '${{ github.workspace }}/hellospring/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,4 +52,4 @@ jobs:
           app-name: 'ThomasMoreHalfKieken'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4EE863FCB2F44623B65BA1E213E6CF2A }}
-          package: '*.war'
+          package: '*.jar'
