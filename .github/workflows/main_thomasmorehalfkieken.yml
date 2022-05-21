@@ -8,21 +8,24 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        maven: [ '3.5.4', '3.6.3', '3.8.2' ]
+        java: [ '8', '11', '16']
+        
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Java version
-        uses: actions/setup-java@v1
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@v1.2.1
         with:
-          java-version: '8'
-
+          java-version: ${{ matrix.java }}
+          maven-version: ${{ matrix.maven }}
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn verify 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
