@@ -24,7 +24,7 @@ jobs:
           java-version: '11'
 
       - name: Build with Maven
-        run: mvn clean install --file /hellospring/pom.xml
+        run: mvn clean install --file WebApp-Frituur-t-half-kieke/hellospring/pom.xml
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
