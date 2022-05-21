@@ -52,4 +52,4 @@ jobs:
           app-name: 'ThomasMoreHalfKieken'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4EE863FCB2F44623B65BA1E213E6CF2A }}
-          package: '*.jar'
+          package: '*.war'
