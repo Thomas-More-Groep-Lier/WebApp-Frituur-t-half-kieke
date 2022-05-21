@@ -25,7 +25,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.war'
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,4 +47,4 @@ jobs:
           app-name: 'frituurhalfkieke'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ABAA7097B7E8448FBCA3FDB217A2206E }}
-          package: '*.war'
+          package: '*.jar'
