@@ -1,4 +1,8 @@
-
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.TimeSlot" %>
+<%@ page import="java.util.List" %>
+<%
+    List<TimeSlot> slots = (List<TimeSlot>) request.getAttribute("timeSlots");
+%>
 <jsp:include page="../partials/head.jsp"/>
 
 <body>
@@ -24,6 +28,7 @@
 <div class="container">
     <form action="/Client/clientOrder" method="post" id="final">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="hidden" name="timeSlot" id="inTimeSlot" value="">
         <div class="row gx-5">
             <div class="col-sm-12 col-md-6 col-lg-7 " id="orderView">
                 <div class="row border border-1 rounded">
@@ -42,7 +47,36 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-5" id="customerDetails">
-                <div class="row border border-1 rounded">
+
+                <div class="row border border-1 rounded mb-4">
+                    <div class="row mb-3">
+                        <div class="col bg-danger text-light p-2">
+                            <h6>Wanneer wenst u de bestelling op te halen?</h6>
+                        </div>
+                    </div>
+                    <div class="row mb-3 d-flex justify-content-center text-center" id="timeSlots">
+                        <%
+                            for (TimeSlot slot : slots) {
+                               if (slot.getSpotAvailable()) {
+                                   out.print(
+                                           "<div class=\"timeslot border border-dark border-1 p-2 w-25 m-1\" id=\""+ slot.getId()  +"\" onclick=\"selectedTimeSlot("+ slot.getId()  +")\">" +
+                                                   "<span>" + slot.getFrom().substring(0,5) + " - " + slot.getUntil().substring(0,5) + "</span>" +
+                                           "</div>"
+                                   );
+                               } else {
+                                   out.print(
+                                           "<div class=\"timeslot border border-dark border-1 p-2 w-25 m-1 bg-light\" disabled>" +
+                                                   "<span class=\"text-muted\">" + slot.getFrom().substring(0,5) + " - " + slot.getUntil().substring(0,5) + "</span>" +
+                                                   "</div>"
+                                   );
+                               }
+                            }
+                        %>
+                    </div>
+                </div>
+
+
+                <div class="row border border-1 rounded mb-4">
                     <div class="row mb-3">
                         <div class="col bg-danger text-light p-2">
                             <h6>Uw gegegevens</h6>
@@ -89,9 +123,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-5" id="timeSlots">
-                
             </div>
         </div>
     </form>
