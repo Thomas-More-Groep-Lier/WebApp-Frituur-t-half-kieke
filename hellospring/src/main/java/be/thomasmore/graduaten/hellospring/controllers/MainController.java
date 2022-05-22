@@ -107,19 +107,11 @@ public class MainController {
             }
             return false;
         }).collect(Collectors.toList());
-        if (planned.size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return planned.size() > 0;
     }
     public Boolean between(Date today, Date fromDate, Date endDate) {
         if (today != null && fromDate != null && endDate != null) {
-            if (today.after(fromDate) && today.before(endDate)) {
-                return true;
-            } else {
-                return false;
-            }
+            return today.after(fromDate) && today.before(endDate);
         }
         return false;
     }

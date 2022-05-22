@@ -1,8 +1,6 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
-import be.thomasmore.graduaten.hellospring.entities.Product;
-import be.thomasmore.graduaten.hellospring.entities.TimeSlot;
-import be.thomasmore.graduaten.hellospring.entities.Vacation;
+import be.thomasmore.graduaten.hellospring.entities.*;
 import be.thomasmore.graduaten.hellospring.repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,27 +44,24 @@ public class AdminController {
 
     @RequestMapping("Admin/Dashboard")
     public String navigateToIndex(Model dashboard) {
-        //  long open = nrOfOpenOrders();
-        // dashboard.addAttribute("pageTitle", "Dashboard");
-        // dashboard.addAttribute("nrOfOpenOrders", open);
-        //  dashboard.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
-        // dashboard.addAttribute("totalNrOfOrdersReady",picked());
+        dashboard.addAttribute("pageTitle", "Dashboard");
+        dashboard.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
+        dashboard.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
+        dashboard.addAttribute("totalNrOfOrdersReady",picked());
         return "Admin/AdminDashboardView";
     }
 
     @RequestMapping("Admin/Orders")
     public String navigateToAdminOrderView(Model orders) {
+        // List<OrderDetail> orderList = orderDetailRepository.findAll();
+     //   orders.addAttribute("orderList", orderList);
         orders.addAttribute("pageTitle", "Orders");
-        /*
-         * long nrOfOpenOrders = nrOfOpenOrders();
-         * long nrOfOrdersReadyToPickUp = nrOfOrdersReadyToPickUp();
-         * long picked = picked();
-         * orders.addAttribute("nrOfOpenOrders", nrOfOpenOrders);
-         * orders.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp);
-         * orders.addAttribute("totalNrOfOrdersReady", picked);
-         */
+        orders.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
+        orders.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
+        orders.addAttribute("totalNrOfOrdersReady",picked());
         return "Admin/AdminOrderView";
     }
+
 
     @RequestMapping("Admin/Products")
     public String navigateToAdminProductView(Model products) {
@@ -157,9 +152,6 @@ public class AdminController {
             }
         } else {
             product = new Product(name, price, productCategory, true);
-            // List<Product> sorted = productRepository.findAll(Sort.by(Sort.Direction.DESC,
-            // "id"));
-            // product.setId(sorted.get(0).getId() + 1);
             productRepository.saveAndFlush(product);
         }
 
@@ -482,12 +474,12 @@ public class AdminController {
                 .stream().filter(x -> x.getStatus().equalsIgnoreCase("open")).count();
     }
 
-    public int nrOfOrdersReadyToPickUp() {
+    public long nrOfOrdersReadyToPickUp() {
         return orderRepository.findAll()
                 .stream().filter(x -> x.getStatus().equalsIgnoreCase("ready")).collect(Collectors.toList()).size();
     }
 
-    public int picked() {
+    public long picked() {
         return orderRepository.findAll()
                 .stream().filter(x -> x.getStatus().equalsIgnoreCase("picked")).collect(Collectors.toList()).size();
     }
@@ -618,20 +610,12 @@ public class AdminController {
             }
             return false;
         }).collect(Collectors.toList());
-        if (planned.size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return planned.size() > 0;
     }
 
     public Boolean between(Date today, Date fromDate, Date endDate) {
         if (today != null && fromDate != null && endDate != null) {
-            if (today.after(fromDate) && today.before(endDate)) {
-                return true;
-            } else {
-                return false;
-            }
+            return today.after(fromDate) && today.before(endDate);
         }
         return false;
     }
