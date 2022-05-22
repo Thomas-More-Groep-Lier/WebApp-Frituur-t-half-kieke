@@ -47,7 +47,6 @@
     </div>
 </div>
 <jsp:include page="../partials/footer.jsp"/>
-<script src="/js/scripts.js" type="text/JavaScript"></script>
 <script>
     var str = localStorage.getItem("array");
     var parsedArr = JSON.parse(str);
@@ -68,7 +67,6 @@
         document.getElementById('cartTotalPrice').innerText = Number(0).toFixed(2);
         localStorage.clear();
     }
-
 </script>
 </body>
 </html>

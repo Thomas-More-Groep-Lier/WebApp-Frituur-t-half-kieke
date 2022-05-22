@@ -1,15 +1,9 @@
-<%
-    // int nrOfOpenOrders = (int) request.getAttribute("nrOfOpenOrders");
-//  int nrOfOrdersReadyToPickUp = (int) request.getAttribute("nrOfOrdersReadyToPickUp");
-//  int totalNrOfOrdersReady = (int)  request.getAttribute("totalNrOfOrdersReady");
-%>
-
 <jsp:include page="../partials/head.jsp"/>
 <body>
 <div class="container-fluid">
     <jsp:include page="../partials/adminNav.jsp"/>
     <jsp:include page="../partials/dateAndTime.jsp"/>
-    <%--    <jsp:include page="../partials/orderButton.jsp" />--%>
+    <jsp:include page="../partials/orderButton.jsp" />
 
     <div class="row d-flex justify-content-center mt-4">
         <div class="col-8 p-3 border border-1">
@@ -34,7 +28,6 @@
                     <td>247</td>
                 </tr>
             </table>
-
         </div>
     </div>
 </div>
