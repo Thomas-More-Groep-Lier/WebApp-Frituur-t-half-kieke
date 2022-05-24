@@ -9,7 +9,7 @@
             <img src="<%=shoppingCart%>" alt="shoppingcart from <%=name%>" class="float-start m-3"
                  style="width: 30px;"/>
                  <p class="form-text" id="cartDetails"><span id="cartQuantity">0</span> items in je winkelmandje. <br/>
-                    &euro; <span id="cartTotalPrice"> 0.00</span>
+                    &euro; <span id="cartTotalPrice">0.00</span>
                 </p>
         </a>
     </div>

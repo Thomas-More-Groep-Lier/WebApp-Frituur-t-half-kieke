@@ -68,29 +68,27 @@ public class ClientController {
         timeSlotRepository.saveAndFlush(slot);
 
         // add client if not exists --> werkt !!
-        long clientId;
         Client user = new Client(first, last, phone, mail);
         List<Client> client = clientRepository.findAll()
                  .stream().filter(x -> x.getEmailAdress().equalsIgnoreCase(mail))
                  .collect(Collectors.toList());
          if (client.isEmpty()){
              clientRepository.saveAndFlush(user);
-             clientId = user.getId();
          }
          else {
-             clientId = client.get(0).getId();
+             user = client.get(0);
          }
 
          // prepare order
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
-        Order x = new Order(clientId, date, false, "open", timeSlot, slot.getUntil());
+        Order x = new Order(user, date, false, "open", slot, slot.getUntil());
         orderRepository.save(x);
-        long orderId = x.getId();
 
         for (int i = 0 ; i < products.length; i++){
-            OrderDetail od = new OrderDetail(Long.parseLong(products[i]), orderId, Long.parseLong(quantities[i]));
+            Product p = productRepository.getById(Long.parseLong(products[i]));
+            OrderDetail od = new OrderDetail(p, x, Long.parseLong(quantities[i]));
             orderDetailRepository.saveAndFlush(od);
         }
 

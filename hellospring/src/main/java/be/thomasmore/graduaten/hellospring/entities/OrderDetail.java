@@ -1,9 +1,7 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class OrderDetail {
@@ -11,26 +9,48 @@ public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long productId;
-    private long orderId;
     private long numberOfProducts;
+
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    private Order order;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public OrderDetail() {
 
     }
 
     //constructors
-    public OrderDetail(long id, long productId, long orderId, long numberOfProducts) {
+    public OrderDetail(long id, Product product, Order order, long numberOfProducts) {
         this.id = id;
-        this.orderId = orderId;
-        this.productId = productId;
+        this.order = order;
+        this.product = product;
         this.numberOfProducts = numberOfProducts;
     }
 
     //constructor without id
-    public OrderDetail(long productId, long orderId, long numberOfProducts) {
-        this.orderId = orderId;
-        this.productId = productId;
+    public OrderDetail(Product product, Order order, long numberOfProducts) {
+        this.order = order;
+        this.product = product;
         this.numberOfProducts = numberOfProducts;
     }
 
@@ -45,22 +65,6 @@ public class OrderDetail {
         this.id = newId;
     }
 
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long newOrderId) {
-        this.orderId = newOrderId;
-    }
-
-    public long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(long newProductId) {
-        this.productId = newProductId;
-    }
-
     public long getNumberOfProducts() {
         return numberOfProducts;
     }
@@ -68,4 +72,5 @@ public class OrderDetail {
     public void setNumberOfProducts(long newNumberOfProducts) {
         this.numberOfProducts = newNumberOfProducts;
     }
+
 }

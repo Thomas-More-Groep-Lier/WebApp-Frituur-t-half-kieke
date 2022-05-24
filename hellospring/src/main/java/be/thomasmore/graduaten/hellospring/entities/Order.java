@@ -8,22 +8,46 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long clientId;
-    private long timeSlotId;
+ //   private long clientId;
+ //   private long timeSlotId;
     private String orderDate;
     private String wantedRetrievalTime;
     private Boolean orderToBig;
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "timeSlotId")
+    private TimeSlot timeSlot;
+
+    @ManyToOne
+    @JoinColumn(name = "clientId")
+    private Client client;
+
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public Order() {
 
     }
 
     //constructors
-    public Order(long id, long clientId, String orderDate, Boolean orderToBig, String status, long timeSlotId,  String wantedRetrievalTime ) {
+    public Order(long id, Client client, String orderDate, Boolean orderToBig, String status, TimeSlot timeSlot,  String wantedRetrievalTime ) {
         this.id = id;
-        this.timeSlotId = timeSlotId;
-        this.clientId = clientId;
+        this.timeSlot = timeSlot;
+        this.client = client;
         this.orderDate = orderDate;
         this.wantedRetrievalTime = wantedRetrievalTime;
         this.orderToBig = orderToBig;
@@ -31,9 +55,9 @@ public class Order {
 
     }
     //constructor without id
-    public Order(long clientId, String orderDate, Boolean orderToBig, String status, long timeSlotId,  String wantedRetrievalTime  ) {
-        this.clientId = clientId;
-        this.timeSlotId = timeSlotId;
+    public Order(Client client, String orderDate, Boolean orderToBig, String status, TimeSlot timeSlot,  String wantedRetrievalTime  ) {
+        this.client = client;
+        this.timeSlot = timeSlot;
         this.orderDate = orderDate;
         this.wantedRetrievalTime = wantedRetrievalTime;
         this.orderToBig = orderToBig;
@@ -50,22 +74,6 @@ public class Order {
     //If setter for Id is never used in the application remove setter
     public void setId(long newId) {
         this.id = newId;
-    }
-
-    public long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(long newClientId) {
-        this.clientId = newClientId;
-    }
-
-    public long getTimeSlotId() {
-        return timeSlotId;
-    }
-
-    public void setTimeSlotId(long newTimeSlotId) {
-        this.timeSlotId = newTimeSlotId;
     }
 
     public String getOrderDate() {
