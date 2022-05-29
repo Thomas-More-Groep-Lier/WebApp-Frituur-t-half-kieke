@@ -57,7 +57,6 @@ public class Client {
         this.firstName = newName;
     }
 
-    
     public String getLastName() {
         return lastName;
     }

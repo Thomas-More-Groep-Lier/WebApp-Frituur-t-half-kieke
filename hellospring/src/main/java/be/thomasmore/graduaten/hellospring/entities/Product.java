@@ -43,6 +43,7 @@ public class Product {
         return id;
     }
 
+
     //Setters
     //If setter for Id is never used in the application remove setter
     public void setId(long newId) {
@@ -79,4 +80,10 @@ public class Product {
     public void setPrice(float newPrice) {
         this.price = newPrice;
     }
+
+    public long getSold(long numberOfProducts){return numberOfProducts;}
+    public long getRevenue(long numberOfProducts){return (long) (price * numberOfProducts);}
+
+
+
 }

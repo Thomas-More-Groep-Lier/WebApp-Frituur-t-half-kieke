@@ -1,27 +1,16 @@
 package be.thomasmore.graduaten.hellospring.controllers;
-
 import be.thomasmore.graduaten.hellospring.entities.*;
 import be.thomasmore.graduaten.hellospring.repositories.*;
-
-import org.eclipse.jdt.internal.compiler.ast.EqualExpression;
-import org.hibernate.annotations.Any;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.io.Console;
-import java.lang.reflect.Array;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayDeque;
-import java.util.Date;
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 @Controller
@@ -40,20 +29,8 @@ public class ClientController {
         this.orderDetailRepository = orderDetailRepository;
     }
 
-
-    // @RequestMapping("/Client/clientOrder")
-    // public String navigateToOrderView(Model order) {
-
-    //     order.addAttribute("pageTitle", "Bedankt voor je bestelling!");
-    //     order.addAttribute("name", "Team Lier");
-    //     order.addAttribute("timeBlock", "17:45 - 18:00");
-    //     order.addAttribute("totalPrice", 0.00);
-    //     return "/Client/ClientOrderView";
-    // }
-
-
     @PostMapping(path = "Client/clientOrder")
-    public String addVacationPeriod(Model order,
+    public String clientEndpoint(Model order,
             @RequestBody @RequestParam(value = "firstName") String first,
             @RequestParam(value = "lastName") String last,
             @RequestParam(value = "email") String mail,
@@ -62,12 +39,10 @@ public class ClientController {
             @RequestParam(value = "products[]") String[] products,
             @RequestParam(value = "timeSlot") long timeSlot,
             @RequestParam(value = "_csrf") String token) {
-        // get timeSlot --> werkt!
         TimeSlot slot = timeSlotRepository.getById(timeSlot);
         slot.setOrdersPlaced(slot.getOrdersPlaced()+1);
         timeSlotRepository.saveAndFlush(slot);
 
-        // add client if not exists --> werkt !!
         Client user = new Client(first, last, phone, mail);
         List<Client> client = clientRepository.findAll()
                  .stream().filter(x -> x.getEmailAdress().equalsIgnoreCase(mail))
@@ -194,23 +169,46 @@ public class ClientController {
         } else if (minutes == 45) {
             timeSlotId = timeSlotId + 3;
         }
-        switch (weekday) {
-            case MONDAY:
-                return timeSlotId;
-            case TUESDAY:
-                return timeSlotId + 57;
-            case WEDNESDAY:
-                return timeSlotId + 113;
-            case THURSDAY:
-                return timeSlotId + 169;
-            case FRIDAY:
-                return timeSlotId + 225;
-            case SATURDAY:
-                return timeSlotId + 281;
-            case SUNDAY:
-                return      timeSlotId + 337;
-            default: return timeSlotId;
+        if (timeSlotId < 0){
+            // return first from current weekday...
+            switch (weekday) {
+                case MONDAY:
+                    return 1;
+                case TUESDAY:
+                    return 57;
+                case WEDNESDAY:
+                    return 113;
+                case THURSDAY:
+                    return 169;
+                case FRIDAY:
+                    return 225;
+                case SATURDAY:
+                    return 281;
+                case SUNDAY:
+                    return  337;
+                default: return timeSlotId;
+            }
+        }else {
+            switch (weekday) {
+                case MONDAY:
+                    return timeSlotId;
+                case TUESDAY:
+                    return timeSlotId + 57;
+                case WEDNESDAY:
+                    return timeSlotId + 113;
+                case THURSDAY:
+                    return timeSlotId + 169;
+                case FRIDAY:
+                    return timeSlotId + 225;
+                case SATURDAY:
+                    return timeSlotId + 281;
+                case SUNDAY:
+                    return      timeSlotId + 337;
+                default: return timeSlotId;
+            }
         }
+
+
     }
     public int roundMinutes(int minutes){
         if (minutes >= 0 && minutes <= 7 )

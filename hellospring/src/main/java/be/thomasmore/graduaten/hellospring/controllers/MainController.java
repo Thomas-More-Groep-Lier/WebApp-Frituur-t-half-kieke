@@ -37,6 +37,14 @@ public class MainController {
             return "index";
         }
     }
+    // keep timeSlots available... reset the number of placed orders on all previous slots.
+    public void refreshTimeSlots(Long timeSlotId){
+        for (long x = timeSlotId-5; x > 0; x--  ) {
+            TimeSlot slot = timeSlotRepository.getById(x);
+            slot.setOrdersPlaced(0);
+            timeSlotRepository.saveAndFlush(slot);
+        }
+    }
     public Boolean isOpen(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime now = LocalDateTime.now();
@@ -45,6 +53,7 @@ public class MainController {
         int minutes = roundMinutes(Integer.parseInt(current.substring(3)));
         DayOfWeek weekday = now.getDayOfWeek();
         long timeSlotId = getTimeSlotId(weekday, hours, minutes);
+        refreshTimeSlots(timeSlotId);
         TimeSlot timeSlot = timeSlotRepository.getById(timeSlotId);
         return timeSlot.getIsActive();
     }
@@ -57,23 +66,46 @@ public class MainController {
         } else if (minutes == 45) {
             timeSlotId = timeSlotId + 3;
         }
-        switch (weekday) {
-            case MONDAY:
-                return timeSlotId;
-            case TUESDAY:
-                return timeSlotId + 57;
-            case WEDNESDAY:
-                return timeSlotId + 113;
-            case THURSDAY:
-                return timeSlotId + 169;
-            case FRIDAY:
-                return timeSlotId + 225;
-            case SATURDAY:
-                return timeSlotId + 281;
-            case SUNDAY:
-            return      timeSlotId + 337;
-            default: return timeSlotId;
+        if (timeSlotId < 0){
+            // return first from current weekday...
+            switch (weekday) {
+                case MONDAY:
+                    return 1;
+                case TUESDAY:
+                    return 57;
+                case WEDNESDAY:
+                    return 113;
+                case THURSDAY:
+                    return 169;
+                case FRIDAY:
+                    return 225;
+                case SATURDAY:
+                    return 281;
+                case SUNDAY:
+                    return  337;
+                default: return timeSlotId;
+            }
+        }else {
+            switch (weekday) {
+                case MONDAY:
+                    return timeSlotId;
+                case TUESDAY:
+                    return timeSlotId + 57;
+                case WEDNESDAY:
+                    return timeSlotId + 113;
+                case THURSDAY:
+                    return timeSlotId + 169;
+                case FRIDAY:
+                    return timeSlotId + 225;
+                case SATURDAY:
+                    return timeSlotId + 281;
+                case SUNDAY:
+                    return      timeSlotId + 337;
+                default: return timeSlotId;
+            }
         }
+
+
     }
     public int roundMinutes(int minutes){
          if (minutes >= 0 && minutes <= 7 )

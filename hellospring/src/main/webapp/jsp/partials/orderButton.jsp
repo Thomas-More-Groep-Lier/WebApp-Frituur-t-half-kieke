@@ -9,7 +9,8 @@
         <div class="card w-100 bg-danger">
             <div class="card-body text-center text-light">
                 <a href="/Admin/Orders?category=open" class="stretched-link text-decoration-none text-light" id="open">
-                    <h2 class="fw-bold card-title display-3"><%out.print(nrOfOpenOrders);%>
+                    <h2 class="fw-bold card-title display-3">
+                        <span id="nrOpen"><%out.print(nrOfOpenOrders);%></span>
                     </h2>
                 </a>
                 <p>open bestellingen</p>

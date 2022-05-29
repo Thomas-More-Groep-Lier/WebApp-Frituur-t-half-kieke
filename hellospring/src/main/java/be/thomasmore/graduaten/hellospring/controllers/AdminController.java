@@ -2,6 +2,7 @@ package be.thomasmore.graduaten.hellospring.controllers;
 
 import be.thomasmore.graduaten.hellospring.entities.*;
 import be.thomasmore.graduaten.hellospring.repositories.*;
+import org.hibernate.engine.internal.Collections;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.websocket.server.PathParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -45,8 +45,20 @@ public class AdminController {
         return "Admin/AdminLoginView";
     }
 
+    @RequestMapping("/Admin/Check")
+    public String navigateToCheck(Model check) {
+        check.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
+        return "Admin/CheckForNewOpenOrdersNoContent";
+    }
+
     @RequestMapping("Admin/Dashboard")
     public String navigateToIndex(Model dashboard) {
+        Map<Product, Long> bestsellers = orderDetailRepository.findAll().stream().collect(Collectors.groupingBy(e -> e.getProduct(), Collectors.summingLong(s -> s.getNumberOfProducts())));
+        bestsellers.forEach((k,v)->System.out.println(k+"="+v));
+        System.out.println("After Sorting by value");
+        List<Map.Entry<Product, Long>> list = new ArrayList<Map.Entry<Product, Long>>(bestsellers.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+        dashboard.addAttribute("list", list);
         dashboard.addAttribute("pageTitle", "Dashboard");
         dashboard.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
         dashboard.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
@@ -457,7 +469,6 @@ public class AdminController {
 
     @RequestMapping("Admin/Settings")
     public String navigateToAdminSettingsView(Model settings) {
-
         List<Vacation> allVacation = vacationRepository.findAll();
         settings.addAttribute("pageTitle", "Orders");
         settings.addAttribute("shopStatus", isInVacation());
