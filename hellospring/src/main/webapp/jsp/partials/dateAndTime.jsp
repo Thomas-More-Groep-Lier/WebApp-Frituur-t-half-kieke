@@ -3,7 +3,7 @@
 <%
     Date date = new Date();
     SimpleDateFormat format = new SimpleDateFormat("EEEE, dd MMMM YYYY");
-    SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
+    SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
 %>
 <div class="row">
     <div class="col text-end p-3" id="currentDate">

@@ -2,7 +2,7 @@ package be.thomasmore.graduaten.hellospring.controllers;
 
 import be.thomasmore.graduaten.hellospring.entities.*;
 import be.thomasmore.graduaten.hellospring.repositories.*;
-
+import org.hibernate.engine.internal.Collections;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.websocket.server.PathParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -36,6 +35,9 @@ public class AdminController {
     }
 
     Boolean inVacation;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Date x = new Date();
+    String today = sdf.format(x);
 
     @RequestMapping("/Login")
     public String navigateToLoginOrderView(Model login) {
@@ -43,26 +45,73 @@ public class AdminController {
         return "Admin/AdminLoginView";
     }
 
+    @RequestMapping("/Admin/Check")
+    public String navigateToCheck(Model check) {
+        check.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
+        return "Admin/CheckForNewOpenOrdersNoContent";
+    }
+
     @RequestMapping("Admin/Dashboard")
     public String navigateToIndex(Model dashboard) {
+        Map<Product, Long> bestsellers = orderDetailRepository.findAll().stream().collect(Collectors.groupingBy(e -> e.getProduct(), Collectors.summingLong(s -> s.getNumberOfProducts())));
+        bestsellers.forEach((k,v)->System.out.println(k+"="+v));
+        System.out.println("After Sorting by value");
+        List<Map.Entry<Product, Long>> list = new ArrayList<Map.Entry<Product, Long>>(bestsellers.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+        dashboard.addAttribute("list", list);
         dashboard.addAttribute("pageTitle", "Dashboard");
         dashboard.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
         dashboard.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
-        dashboard.addAttribute("totalNrOfOrdersReady",picked());
+        dashboard.addAttribute("totalNrOfOrdersReady", picked());
         return "Admin/AdminDashboardView";
     }
 
     @RequestMapping("Admin/Orders")
     public String navigateToAdminOrderView(Model orders) {
-        // List<OrderDetail> orderList = orderDetailRepository.findAll();
-     //   orders.addAttribute("orderList", orderList);
+        List<OrderDetail> orderDetailList = getOrderDetailList("");
+        List<Order> orderList = getOrderList("");
         orders.addAttribute("pageTitle", "Orders");
         orders.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
         orders.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
-        orders.addAttribute("totalNrOfOrdersReady",picked());
+        orders.addAttribute("totalNrOfOrdersReady", picked());
+        orders.addAttribute("orderDetailList", orderDetailList);
+        orders.addAttribute("orderList", orderList);
         return "Admin/AdminOrderView";
     }
 
+
+    @RequestMapping(value = "Admin/Orders", method = RequestMethod.GET)
+    public String navigateToAdminOrderView(Model orders, @PathParam("category") String category) {
+        List<OrderDetail> orderDetailList = getOrderDetailList(category);
+        List<Order> orderList = getOrderList(category);
+        orders.addAttribute("pageTitle", "Orders");
+        orders.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
+        orders.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
+        orders.addAttribute("totalNrOfOrdersReady", picked());
+        orders.addAttribute("orderList", orderList);
+        orders.addAttribute("orderDetailList", orderDetailList);
+        return "Admin/AdminOrderView";
+    }
+
+    @PostMapping(path = "/Admin/Orders")
+    public String updateProduct(Model orders,
+                                @RequestBody @RequestParam(value = "orderId") long orderId,
+                                @RequestParam(value = "orderStatus") String orderStatus,
+                                @RequestParam(value = "category") String category,
+                                @RequestParam(value = "_csrf") String token) {
+        Order order = orderRepository.getById(orderId);
+        order.setStatus(orderStatus);
+        orderRepository.saveAndFlush(order);
+        List<OrderDetail> orderDetailList = getOrderDetailList(category);
+        List<Order> orderList = getOrderList(category);
+        orders.addAttribute("pageTitle", "Orders");
+        orders.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
+        orders.addAttribute("nrOfOrdersReadyToPickUp", nrOfOrdersReadyToPickUp());
+        orders.addAttribute("totalNrOfOrdersReady", picked());
+        orders.addAttribute("orderList", orderList);
+        orders.addAttribute("orderDetailList", orderDetailList);
+        return "Admin/AdminOrderView";
+    }
 
     @RequestMapping("Admin/Products")
     public String navigateToAdminProductView(Model products) {
@@ -88,10 +137,8 @@ public class AdminController {
     public String restartProduct(Model products, @PathParam("id") String id) {
         products.addAttribute("pageTitle", "Producten");
         Product product = productRepository.getById(Long.parseLong(id));
-        if (product != null) {
-            product.setStatus(true);
-            productRepository.save(product);
-        }
+        product.setStatus(true);
+        productRepository.save(product);
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
         return navigateToAdminProductView(products);
@@ -101,9 +148,7 @@ public class AdminController {
     public String deleteProduct(Model products, @PathParam("id") String id) {
         products.addAttribute("pageTitle", "Producten");
         Product product = productRepository.getById(Long.parseLong(id));
-        if (product != null) {
-            productRepository.delete(product);
-        }
+        productRepository.delete(product);
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
         return navigateToAdminProductView(products);
@@ -145,14 +190,13 @@ public class AdminController {
                 break;
         }
         Product product;
-        if (id != "") {
+        if (!id.equals("")) {
             product = productRepository.getById(Long.parseLong(id));
-            if (product != null) {
-                product.setDescription(name);
-                product.setPrice(price);
-                product.setCategory(productCategory);
-                productRepository.save(product);
-            }
+            product.setDescription(name);
+            product.setPrice(price);
+            product.setCategory(productCategory);
+            productRepository.save(product);
+
         } else {
             product = new Product(name, price, productCategory, true);
             productRepository.saveAndFlush(product);
@@ -250,7 +294,7 @@ public class AdminController {
                                       @RequestParam(value = "_csrf") String token) {
 
         // timeslots monday: 1 - 56
-        if (!mondayFrom.isBlank() && !mondayUntil.isBlank() && mondayFrom != mondayUntil) {
+        if (!mondayFrom.isBlank() && !mondayUntil.isBlank() && !mondayFrom.equalsIgnoreCase(mondayUntil)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(mondayFrom.substring(0, 2));
@@ -261,7 +305,7 @@ public class AdminController {
             long untilTimeSlot = timeSlotId(0, hours, minutes);
             timeSlotUpdater(0, 1, fromTimeSlot, untilTimeSlot);
         }
-        if ((!mondayFrom2.isBlank() && !mondayUntil2.isBlank()) && (mondayFrom2 != mondayUntil2)) {
+        if ((!mondayFrom2.isBlank() && !mondayUntil2.isBlank()) && !mondayFrom2.equalsIgnoreCase(mondayUntil2)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(mondayFrom2.substring(0, 2));
@@ -274,7 +318,7 @@ public class AdminController {
 
         }
         // timeslots tuesday: 57 - 112
-        if (!tuesdayFrom.isBlank() && !tuesdayUntil.isBlank() && tuesdayFrom != tuesdayUntil) {
+        if (!tuesdayFrom.isBlank() && !tuesdayUntil.isBlank() && !tuesdayFrom.equalsIgnoreCase(tuesdayUntil)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(tuesdayFrom.substring(0, 2));
@@ -286,7 +330,7 @@ public class AdminController {
             timeSlotUpdater(1, 1, fromTimeSlot, untilTimeSlot);
 
         }
-        if (!tuesdayFrom2.isBlank() && !tuesdayUntil2.isBlank() && tuesdayFrom2 != tuesdayUntil2) {
+        if (!tuesdayFrom2.isBlank() && !tuesdayUntil2.isBlank() && !tuesdayFrom2.equalsIgnoreCase(tuesdayUntil2)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(tuesdayFrom2.substring(0, 2));
@@ -299,7 +343,7 @@ public class AdminController {
 
         }
         // timeslots wednesday: 113 - 168
-        if (!wednesdayFrom.isBlank() && !wednesdayUntil.isBlank() && wednesdayFrom != wednesdayUntil) {
+        if (!wednesdayFrom.isBlank() && !wednesdayUntil.isBlank() && !wednesdayFrom.equalsIgnoreCase(wednesdayUntil)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(wednesdayFrom.substring(0, 2));
@@ -311,7 +355,7 @@ public class AdminController {
             timeSlotUpdater(2, 1, fromTimeSlot, untilTimeSlot);
 
         }
-        if (!wednesdayFrom2.isBlank() && !wednesdayUntil2.isBlank() && wednesdayFrom2 != wednesdayUntil2) {
+        if (!wednesdayFrom2.isBlank() && !wednesdayUntil2.isBlank() && !wednesdayFrom2.equalsIgnoreCase(wednesdayUntil2)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(wednesdayFrom2.substring(0, 2));
@@ -321,10 +365,9 @@ public class AdminController {
             minutes = Integer.parseInt(wednesdayUntil2.substring(3));
             long untilTimeSlot = timeSlotId(2, hours, minutes);
             timeSlotUpdater(2, 2, fromTimeSlot, untilTimeSlot);
-
         }
         // timeslots thursday: 169 - 224
-        if (!thursdayFrom.isBlank() && !thursdayUntil.isBlank() && thursdayFrom != thursdayUntil) {
+        if (!thursdayFrom.isBlank() && !thursdayUntil.isBlank() && !thursdayFrom.equalsIgnoreCase(thursdayUntil)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(thursdayFrom.substring(0, 2));
@@ -336,7 +379,7 @@ public class AdminController {
             timeSlotUpdater(3, 1, fromTimeSlot, untilTimeSlot);
 
         }
-        if (!thursdayFrom2.isBlank() && !thursdayUntil2.isBlank() && thursdayFrom2 != thursdayUntil2) {
+        if (!thursdayFrom2.isBlank() && !thursdayUntil2.isBlank() && !thursdayFrom2.equalsIgnoreCase(thursdayUntil2)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(thursdayFrom2.substring(0, 2));
@@ -349,7 +392,7 @@ public class AdminController {
 
         }
         // timeslots friday: 225 - 280
-        if (!fridayFrom.isBlank() && !fridayUntil.isBlank() && fridayFrom != fridayUntil) {
+        if (!fridayFrom.isBlank() && !fridayUntil.isBlank() && !fridayFrom.equalsIgnoreCase(fridayUntil)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(fridayFrom.substring(0, 2));
@@ -361,7 +404,7 @@ public class AdminController {
             timeSlotUpdater(4, 1, fromTimeSlot, untilTimeSlot);
 
         }
-        if (!fridayFrom2.isBlank() && !fridayUntil2.isBlank() && fridayFrom2 != fridayUntil2) {
+        if (!fridayFrom2.isBlank() && !fridayUntil2.isBlank() && !fridayFrom2.equalsIgnoreCase(fridayUntil2)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(fridayFrom2.substring(0, 2));
@@ -374,7 +417,7 @@ public class AdminController {
 
         }
         // timeslots saturday: 281 - 336
-        if (!saturdayFrom.isBlank() && !saturdayUntil.isBlank() && saturdayFrom != saturdayUntil) {
+        if (!saturdayFrom.isBlank() && !saturdayUntil.isBlank() && !saturdayFrom.equalsIgnoreCase(saturdayUntil)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(saturdayFrom.substring(0, 2));
@@ -386,7 +429,7 @@ public class AdminController {
             timeSlotUpdater(5, 1, fromTimeSlot, untilTimeSlot);
 
         }
-        if (!saturdayFrom2.isBlank() && !saturdayUntil2.isBlank() && saturdayFrom2 != saturdayUntil2) {
+        if (!saturdayFrom2.isBlank() && !saturdayUntil2.isBlank() && !saturdayFrom2.equalsIgnoreCase(saturdayUntil2)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(saturdayFrom2.substring(0, 2));
@@ -399,7 +442,7 @@ public class AdminController {
 
         }
         // timeslots sunday: 337 - 392
-        if (!sundayFrom.isBlank() && !sundayUntil.isBlank() && sundayFrom != sundayUntil) {
+        if (!sundayFrom.isBlank() && !sundayUntil.isBlank() && !sundayFrom.equalsIgnoreCase(sundayUntil)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(sundayFrom.substring(0, 2));
@@ -411,7 +454,7 @@ public class AdminController {
             timeSlotUpdater(6, 1, fromTimeSlot, untilTimeSlot);
 
         }
-        if (!sundayFrom2.isBlank() && !sundayUntil2.isBlank() && sundayFrom2 != sundayUntil2) {
+        if (!sundayFrom2.isBlank() && !sundayUntil2.isBlank() && !sundayFrom2.equalsIgnoreCase(sundayUntil2)) {
             int hours;
             int minutes;
             hours = Integer.parseInt(sundayFrom2.substring(0, 2));
@@ -428,7 +471,6 @@ public class AdminController {
 
     @RequestMapping("Admin/Settings")
     public String navigateToAdminSettingsView(Model settings) {
-
         List<Vacation> allVacation = vacationRepository.findAll();
         settings.addAttribute("pageTitle", "Orders");
         settings.addAttribute("shopStatus", isInVacation());
@@ -459,9 +501,7 @@ public class AdminController {
     public String deleteVacation(Model settings, @PathParam("id") String id) {
         settings.addAttribute("pageTitle", "Producten");
         Vacation vac = vacationRepository.getById(Long.parseLong(id));
-        if (vac != null) {
-            vacationRepository.delete(vac);
-        }
+        vacationRepository.delete(vac);
         List<Vacation> allVacation = vacationRepository.findAll();
         inVacation = isInVacation();
 
@@ -475,25 +515,26 @@ public class AdminController {
 
     public long nrOfOpenOrders() {
         return orderRepository.findAll()
-                .stream().filter(x -> x.getStatus().equalsIgnoreCase("open")).count();
+                .stream().filter(x -> x.getStatus().equalsIgnoreCase("open") && x.getOrderDate().equalsIgnoreCase(today)).count();
     }
 
     public long nrOfOrdersReadyToPickUp() {
         return orderRepository.findAll()
-                .stream().filter(x -> x.getStatus().equalsIgnoreCase("ready")).collect(Collectors.toList()).size();
+                .stream().filter(x -> x.getStatus().equalsIgnoreCase("ready") && x.getOrderDate().equalsIgnoreCase(today)).count();
     }
 
     public long picked() {
-        return orderRepository.findAll()
-                .stream().filter(x -> x.getStatus().equalsIgnoreCase("picked")).collect(Collectors.toList()).size();
+
+         return orderRepository.findAll()
+                .stream().filter(x -> x.getStatus().equalsIgnoreCase("picked") && x.getOrderDate().equalsIgnoreCase(today)).count();
     }
 
-    public void timeSlotUpdater(int day, int option, long start, long end){
-        if (start != end ){
+    public void timeSlotUpdater(int day, int option, long start, long end) {
+        if (start != end) {
             switch (day) {
                 case 0:
-                    if (option == 1){
-                        for (long x = 56; x > 0; x--){
+                    if (option == 1) {
+                        for (long x = 56; x > 0; x--) {
                             TimeSlot slot = timeSlotRepository.getById(x);
                             slot.setIsActive(false);
                             timeSlotRepository.saveAndFlush(slot);
@@ -563,14 +604,14 @@ public class AdminController {
                     }
                     activateTimeSlots(start, end);
                     break;
-                default: return;
+                default:
             }
         }
 
     }
 
-    public void activateTimeSlots(long start, long end){
-        for (long x = start; x < end; x++){
+    public void activateTimeSlots(long start, long end) {
+        for (long x = start; x < end; x++) {
             TimeSlot slot = timeSlotRepository.getById(x);
             slot.setIsActive(true);
             timeSlotRepository.saveAndFlush(slot);
@@ -599,7 +640,8 @@ public class AdminController {
                 return timeSlotId + 280;
             case 6:
                 return timeSlotId + 336;
-            default: return timeSlotId;
+            default:
+                return timeSlotId;
         }
     }
 
@@ -622,5 +664,18 @@ public class AdminController {
             return today.after(fromDate) && today.before(endDate);
         }
         return false;
+    }
+
+    public List<OrderDetail> getOrderDetailList(String category) {
+        if (category == null){
+            return orderDetailRepository.findAll();
+        }
+       return orderDetailRepository.findAll().stream().filter(od -> od.getOrder().getStatus().equalsIgnoreCase(category)).collect(Collectors.toList());
+    }
+    public List<Order> getOrderList(String category) {
+        if (category == null){
+            return orderRepository.findAll().stream().filter(x -> x.getOrderDate().equalsIgnoreCase(today)).collect(Collectors.toList());
+        }
+        return orderRepository.findAll().stream().filter(o -> o.getStatus().equalsIgnoreCase(category) && o.getOrderDate().equalsIgnoreCase(today)).collect(Collectors.toList());
     }
 }

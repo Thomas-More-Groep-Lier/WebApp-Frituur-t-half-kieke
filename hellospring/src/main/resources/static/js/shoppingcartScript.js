@@ -109,7 +109,10 @@ function submitForm() {
     let voorwaarden = document.getElementById('voorwaarden').checked;
     var fouten = "";
 
-    if (firstname === "" || lastname === "" || email === "" || !voorwaarden || timeslot === "" || tel === "") {
+    if (firstname === "" || lastname === "" || email === "" || !voorwaarden || timeslot === "" || tel === "" || parsedArr === null) {
+        if (parsedArr === null){
+            fouten += "Wil je niets eten? Dan kan je ook niets bestellen ... \n";
+        }
         if (firstname === "") {
             fouten += "Voornaam is een verplicht veld ... \n";
         }
@@ -132,9 +135,9 @@ function submitForm() {
         if (firstname.length < 2 && containsSpecialChars(firstname)) {
             fouten += "Een voornaam bestaat uit minimaal 2 (alfanumerieke) karakters.\n";
         }
-        if (lastname.length < 5 && containsSpecialChars(lastname)) {
+        if (lastname.length < 5 && containsSpecialChars(lastname))
             fouten += "Een achternaam bestaat uit minimaal 5 (alfanumerieke) karakters.\n";
-        }
+
         if (email.length < 8 && !validateEmail(email)) {
             fouten += "Een email adres bestaat uit minimaal 8 (alfanumerieke) karakters.\n";
         }

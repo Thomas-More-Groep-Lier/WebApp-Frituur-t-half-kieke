@@ -67,7 +67,7 @@ public class TimeSlot {
     }
 
     public Boolean getSpotAvailable() {
-        return ordersPlaced != maxNumberOfOrders;
+        return ordersPlaced <= maxNumberOfOrders;
     }
 
     public int getMaxNumberOfOrders() {
