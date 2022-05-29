@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%
     List<Vacation> planned = (List<Vacation>) request.getAttribute("plannedVacation");
+
 %>
 <jsp:include page="../partials/head.jsp"/>
 <body>
@@ -84,7 +85,7 @@
                     <div class="row">
                         <div class="col">
                             <h6>Uw geplande vankantie ...</h6>
-                            <table class="table">
+                             <table class="table">
                                 <tr>
                                     <th scope="col">Van</th>
                                     <th scope="col">Tot</th>

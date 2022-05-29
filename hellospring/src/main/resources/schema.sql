@@ -16,6 +16,7 @@ drop table if exists `Order`;
 	Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	fromDate varchar (30) NOT NULL,
 	untilDate varchar (30) NOT NULL,
+
     PRIMARY KEY (Id)
 );
 --User

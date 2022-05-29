@@ -3,11 +3,17 @@ package be.thomasmore.graduaten.hellospring.controllers;
 import be.thomasmore.graduaten.hellospring.entities.TimeSlot;
 import be.thomasmore.graduaten.hellospring.entities.Vacation;
 import be.thomasmore.graduaten.hellospring.repositories.TimeSlotRepository;
+
 import be.thomasmore.graduaten.hellospring.repositories.VacationRepository;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -25,11 +31,13 @@ public class MainController {
     public MainController(VacationRepository vacationRepository, TimeSlotRepository timeSlotRepository) {
         this.vacationRepository = vacationRepository;
         this.timeSlotRepository = timeSlotRepository;
+
     }
     @RequestMapping("/")
     public String navigateToIndex(Model index) {
         Boolean open = isOpen();
         if (isInVacation() || !open) {
+
             index.addAttribute("pageTitle", "Sorry, we zijn momenteel gesloten ... ");
             return "Client/Closed";
         } else {
@@ -147,4 +155,5 @@ public class MainController {
         }
         return false;
     }
+
 }

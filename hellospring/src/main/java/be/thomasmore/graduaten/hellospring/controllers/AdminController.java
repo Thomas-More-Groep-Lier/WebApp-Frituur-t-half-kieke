@@ -128,8 +128,9 @@ public class AdminController {
         product.setStatus(false);
         productRepository.save(product);
         List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("allProducts", allProducts);
-        return navigateToAdminProductView(products);
+        products.addAttribute("allProducts", allProducts);        
+      return navigateToAdminProductView(products);
+
     }
 
     @RequestMapping(value = "Admin/Product/Restart", method = RequestMethod.GET)
@@ -151,6 +152,7 @@ public class AdminController {
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
         return navigateToAdminProductView(products);
+
     }
 
     @PostMapping(path = "/Admin/Products")
@@ -477,7 +479,6 @@ public class AdminController {
         return "Admin/AdminSettingsView";
     }
 
-
     @PostMapping(path = "Admin/Settings/AddVacation")
     public String addVacationPeriod(Model settings,
                                     @RequestBody @RequestParam(value = "from") String from,
@@ -493,6 +494,7 @@ public class AdminController {
         settings.addAttribute("logo", "/images/u101.png");
         settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
+
     }
 
     @RequestMapping(value = "Admin/Settings/Vacation/Delete", method = RequestMethod.GET)
@@ -508,6 +510,7 @@ public class AdminController {
         settings.addAttribute("logo", "/images/u101.png");
         settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
+
     }
 
     public long nrOfOpenOrders() {
