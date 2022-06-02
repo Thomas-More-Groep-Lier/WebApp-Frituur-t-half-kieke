@@ -142,6 +142,7 @@ public class AdminController {
         List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
         products.addAttribute("allProductCondiments", allProductCondiments);
         return navigateToAdminProductView(products);
+
     }
 
     @RequestMapping(value = "Admin/Product/Restart", method = RequestMethod.GET)
@@ -185,6 +186,7 @@ public class AdminController {
         List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
         products.addAttribute("allProductCondiments", allProductCondiments);
         return navigateToAdminProductView(products);
+
     }
 
 
@@ -571,7 +573,6 @@ public class AdminController {
         return "Admin/AdminSettingsView";
     }
 
-
     @PostMapping(path = "Admin/Settings/AddVacation")
     public String addVacationPeriod(Model settings,
                                     @RequestBody @RequestParam(value = "from") String from,
@@ -587,6 +588,7 @@ public class AdminController {
         settings.addAttribute("logo", "/images/u101.png");
         settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
+
     }
 
     @RequestMapping(value = "Admin/Settings/Vacation/Delete", method = RequestMethod.GET)
@@ -602,6 +604,7 @@ public class AdminController {
         settings.addAttribute("logo", "/images/u101.png");
         settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
+
     }
 
     public long nrOfOpenOrders() {
