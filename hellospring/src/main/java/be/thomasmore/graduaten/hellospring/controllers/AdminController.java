@@ -2,7 +2,6 @@ package be.thomasmore.graduaten.hellospring.controllers;
 
 import be.thomasmore.graduaten.hellospring.entities.*;
 import be.thomasmore.graduaten.hellospring.repositories.*;
-import org.hibernate.engine.internal.Collections;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,16 +21,20 @@ public class AdminController {
     private final TimeSlotRepository timeSlotRepository;
     private final ClientRepository clientRepository;
     private final VacationRepository vacationRepository;
+    private final CondimentRepository condimentRepository;
+    private final ProductCondimentRepository productCondimentRepository;
 
     public AdminController(VacationRepository vacationRepository, ProductRepository productRepository,
                            OrderDetailRepository orderDetailRepository, OrderRepository orderRepository,
-                           TimeSlotRepository timeSlotRepository, ClientRepository clientRepository) {
+                           TimeSlotRepository timeSlotRepository, ClientRepository clientRepository, CondimentRepository condimentRepository, ProductCondimentRepository productCondimentRepository) {
         this.productRepository = productRepository;
         this.orderDetailRepository = orderDetailRepository;
         this.clientRepository = clientRepository;
         this.orderRepository = orderRepository;
         this.timeSlotRepository = timeSlotRepository;
         this.vacationRepository = vacationRepository;
+        this.condimentRepository = condimentRepository;
+        this.productCondimentRepository = productCondimentRepository;
     }
 
     Boolean inVacation;
@@ -54,10 +57,11 @@ public class AdminController {
     @RequestMapping("Admin/Dashboard")
     public String navigateToIndex(Model dashboard) {
         Map<Product, Long> bestsellers = orderDetailRepository.findAll().stream().collect(Collectors.groupingBy(e -> e.getProduct(), Collectors.summingLong(s -> s.getNumberOfProducts())));
-        bestsellers.forEach((k,v)->System.out.println(k+"="+v));
+        bestsellers.forEach((k, v) -> System.out.println(k + "=" + v));
         System.out.println("After Sorting by value");
         List<Map.Entry<Product, Long>> list = new ArrayList<Map.Entry<Product, Long>>(bestsellers.entrySet());
         list.sort(Map.Entry.comparingByValue());
+        Collections.reverse(list);
         dashboard.addAttribute("list", list);
         dashboard.addAttribute("pageTitle", "Dashboard");
         dashboard.addAttribute("nrOfOpenOrders", nrOfOpenOrders());
@@ -94,11 +98,11 @@ public class AdminController {
     }
 
     @PostMapping(path = "/Admin/Orders")
-    public String updateProduct(Model orders,
-                                @RequestBody @RequestParam(value = "orderId") long orderId,
-                                @RequestParam(value = "orderStatus") String orderStatus,
-                                @RequestParam(value = "category") String category,
-                                @RequestParam(value = "_csrf") String token) {
+    public String updateOrder(Model orders,
+                              @RequestBody @RequestParam(value = "orderId") long orderId,
+                              @RequestParam(value = "orderStatus") String orderStatus,
+                              @RequestParam(value = "category") String category,
+                              @RequestParam(value = "_csrf") String token) {
         Order order = orderRepository.getById(orderId);
         order.setStatus(orderStatus);
         orderRepository.saveAndFlush(order);
@@ -118,6 +122,10 @@ public class AdminController {
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("pageTitle", "Producten");
         products.addAttribute("allProducts", allProducts);
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        products.addAttribute("allCondiments", allcondiments);
+        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
+        products.addAttribute("allProductCondiments", allProductCondiments);
         return "Admin/AdminProductView";
     }
 
@@ -128,8 +136,12 @@ public class AdminController {
         product.setStatus(false);
         productRepository.save(product);
         List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("allProducts", allProducts);        
-      return navigateToAdminProductView(products);
+        products.addAttribute("allProducts", allProducts);
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        products.addAttribute("allCondiments", allcondiments);
+        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
+        products.addAttribute("allProductCondiments", allProductCondiments);
+        return navigateToAdminProductView(products);
 
     }
 
@@ -141,6 +153,10 @@ public class AdminController {
         productRepository.save(product);
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        products.addAttribute("allCondiments", allcondiments);
+        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
+        products.addAttribute("allProductCondiments", allProductCondiments);
         return navigateToAdminProductView(products);
     }
 
@@ -151,9 +167,28 @@ public class AdminController {
         productRepository.delete(product);
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        products.addAttribute("allCondiments", allcondiments);
+        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
+        products.addAttribute("allProductCondiments", allProductCondiments);
+        return navigateToAdminProductView(products);
+    }
+
+    @RequestMapping(value = "Admin/Product/DeleteCondiment", method = RequestMethod.GET)
+    public String deleteProductCondiment(Model products, @PathParam("id") String id) {
+        products.addAttribute("pageTitle", "Producten");
+        ProductCondiment productCondiment = productCondimentRepository.getById(Long.parseLong(id));
+        productCondimentRepository.delete(productCondiment);
+        List<Product> allProducts = productRepository.findAll();
+        products.addAttribute("allProducts", allProducts);
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        products.addAttribute("allCondiments", allcondiments);
+        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
+        products.addAttribute("allProductCondiments", allProductCondiments);
         return navigateToAdminProductView(products);
 
     }
+
 
     @PostMapping(path = "/Admin/Products")
     public String updateProduct(Model products,
@@ -161,9 +196,9 @@ public class AdminController {
                                 @RequestParam(value = "productName") String name,
                                 @RequestParam(value = "productCategory") String productCategory,
                                 @RequestParam(value = "productPrice") float price,
+                                @RequestParam(value = "condimenten") Long[] condimenten,
                                 @RequestParam(value = "_csrf") String token) {
         products.addAttribute("pageTitle", "Producten");
-
         switch (productCategory) {
             case "1":
                 productCategory = "Frieten";
@@ -192,9 +227,11 @@ public class AdminController {
         Product product;
         if (!id.equals("")) {
             product = productRepository.getById(Long.parseLong(id));
-            product.setDescription(name);
             product.setPrice(price);
-            product.setCategory(productCategory);
+            if (!name.equals(""))
+                product.setDescription(name);
+            if (!productCategory.equals(""))
+                product.setCategory(productCategory);
             productRepository.save(product);
 
         } else {
@@ -202,10 +239,67 @@ public class AdminController {
             productRepository.saveAndFlush(product);
         }
 
+        if (condimenten != null && condimenten.length > 0) {
+            for (Long x : condimenten) {
+                ProductCondiment productCondiment = new ProductCondiment();
+                productCondiment.setProduct(product);
+                Condiment condiment = condimentRepository.getById(x);
+                productCondiment.setCondiment(condiment);
+                productCondimentRepository.saveAndFlush(productCondiment);
+            }
+        }
+
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
+        products.addAttribute("allProductCondiments", allProductCondiments);
+        products.addAttribute("allCondiments", allcondiments);
         List<Product> allProducts = productRepository.findAll();
         products.addAttribute("allProducts", allProducts);
         return navigateToAdminProductView(products);
     }
+
+    @RequestMapping("Admin/Products/Condiments")
+    public String navigateToAdminCondimentsView(Model condiments) {
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        condiments.addAttribute("pageTitle", "Condimenten");
+        condiments.addAttribute("allcondiments", allcondiments);
+        return "Admin/AdminCondimentView";
+    }
+
+    @RequestMapping(value = "Admin/Products/Condiments/Delete", method = RequestMethod.GET)
+    public String deleteCondiment(Model condiment, @PathParam("id") String id) {
+        condiment.addAttribute("pageTitle", "Condimenten");
+        Condiment condi = condimentRepository.getById(Long.parseLong(id));
+        condimentRepository.delete(condi);
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        condiment.addAttribute("allcondiments", allcondiments);
+        return navigateToAdminCondimentsView(condiment);
+    }
+
+    @PostMapping(path = "/Admin/Products/Condiments")
+    public String updateCondiment(Model condiment,
+                                  @RequestBody @RequestParam(value = "condimentId", required = false) String id,
+                                  @RequestParam(value = "condimentName") String name,
+                                  @RequestParam(value = "condimentPrice") float price,
+                                  @RequestParam(value = "_csrf") String token) {
+        condiment.addAttribute("pageTitle", "Condimenten");
+
+        Condiment condi;
+        if (!id.equals("")) {
+            condi = condimentRepository.getById(Long.parseLong(id));
+            condi.setDescription(name);
+            condi.setPrice(price);
+            condimentRepository.save(condi);
+        } else {
+            condi = new Condiment(name, price);
+            condimentRepository.saveAndFlush(condi);
+        }
+
+        List<Condiment> allcondiments = condimentRepository.findAll();
+        condiment.addAttribute("allcondiments", allcondiments);
+        return navigateToAdminCondimentsView(condiment);
+    }
+
 
     @RequestMapping("Admin/TimeSlots")
     public String navigateToAdminTimeSlotsView(Model timeSlots) {
@@ -525,7 +619,7 @@ public class AdminController {
 
     public long picked() {
 
-         return orderRepository.findAll()
+        return orderRepository.findAll()
                 .stream().filter(x -> x.getStatus().equalsIgnoreCase("picked") && x.getOrderDate().equalsIgnoreCase(today)).count();
     }
 
@@ -629,19 +723,19 @@ public class AdminController {
         }
         switch (day) {
             case 1:
-                return timeSlotId + 56;
+                return timeSlotId + 57;
             case 2:
-                return timeSlotId + 112;
+                return timeSlotId + 113;
             case 3:
-                return timeSlotId + 168;
+                return timeSlotId + 169;
             case 4:
-                return timeSlotId + 224;
+                return timeSlotId + 225;
             case 5:
-                return timeSlotId + 280;
+                return timeSlotId + 281;
             case 6:
-                return timeSlotId + 336;
+                return timeSlotId + 337;
             default:
-                return timeSlotId;
+                return timeSlotId + 1;
         }
     }
 
@@ -667,13 +761,14 @@ public class AdminController {
     }
 
     public List<OrderDetail> getOrderDetailList(String category) {
-        if (category == null){
+        if (category == null) {
             return orderDetailRepository.findAll();
         }
-       return orderDetailRepository.findAll().stream().filter(od -> od.getOrder().getStatus().equalsIgnoreCase(category)).collect(Collectors.toList());
+        return orderDetailRepository.findAll().stream().filter(od -> od.getOrder().getStatus().equalsIgnoreCase(category)).collect(Collectors.toList());
     }
+
     public List<Order> getOrderList(String category) {
-        if (category == null){
+        if (category == null) {
             return orderRepository.findAll().stream().filter(x -> x.getOrderDate().equalsIgnoreCase(today)).collect(Collectors.toList());
         }
         return orderRepository.findAll().stream().filter(o -> o.getStatus().equalsIgnoreCase(category) && o.getOrderDate().equalsIgnoreCase(today)).collect(Collectors.toList());

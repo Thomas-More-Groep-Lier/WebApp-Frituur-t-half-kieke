@@ -1,4 +1,3 @@
-
 -- Insert data
 -- Insert in table Product
 insert into Product	(`Description`, `Price`, `Category`, `Status`) VALUES ('Mini', 1.60, 'Frieten', true);
@@ -37,6 +36,30 @@ insert into Product (`Description`, `Price`, `Category`, `Status`) VALUES ('Vede
 insert into Product	(`Description`, `Price`, `Category`, `Status`) VALUES ('Gouden carolus - 33cl', 3.50, 'Bier', true);
 
 insert into Vacation (`fromDate`, `untilDate`) VALUES ('2022-05-09', '2022-05-16');
+
+insert into Condiment (`Description`, `Price`) VALUES ('Zout', 0);
+insert into Condiment (`Description`, `Price`) VALUES ('Geen zout', 0);
+insert into Condiment (`Description`, `Price`) VALUES ('Tomaten ketchup', 0);
+insert into Condiment (`Description`, `Price`) VALUES ('Curry ketchup', 0);
+insert into Condiment (`Description`, `Price`) VALUES ('Koud', 0);
+insert into Condiment (`Description`, `Price`) VALUES ('Gebakken', 0);
+
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (1,1);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (1,2);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (2,1);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (2,2);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (3,1);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (3,2);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (4,1);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (4,2);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (5,1);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (5,2);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (7,3);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (7,4);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (8,5);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (8,6);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (10,5);
+insert into ProductCondiment (`ProductId`, `CondimentId`) VALUES (10,6);
 
 insert into Timeslot (`ISACTIVE`, `SPOTAVAILABLE`, `MAXNUMBEROFORDERS`,	`ORDERSPLACED`, `FROMTIME`, `UNTIL` , `DAYOFTHEWEEK`)
 VALUES (true, true, 10, 0, '10:00:00', '10:15:00', 0);

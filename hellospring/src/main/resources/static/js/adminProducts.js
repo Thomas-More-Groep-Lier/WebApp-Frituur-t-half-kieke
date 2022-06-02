@@ -4,6 +4,10 @@
     window.location.href = `/Admin/Product/Delete?id=${id}`;
 }
 }
+
+function deleteCondiment(id){
+        window.location.href = `/Admin/Product/DeleteCondiment?id=${id}`;
+}
     function changeDisplay() {
     let select = document.getElementById('category');
     let value = select.options[select.selectedIndex].value;
@@ -116,7 +120,29 @@
     document.getElementById('btnClear').classList.remove('d-none');
     document.getElementById('productPrice').value = Number(price.replace(/,/g, '.'));
     document.getElementById('productName').value = document.getElementById(`productName_` + id).innerText;
-    document.getElementById('productCategory').value = select.options[select.selectedIndex].value;
+    let classList = document.getElementById(id).classList;
+    let category = "";
+    for (let x = 0; x < classList.length; x++){
+        category = classList[x];
+    }
+    switch (category){
+        case "Frieten":document.getElementById('productCategory').value = 1;
+            break
+        case "Snack": document.getElementById('productCategory').value = 2;
+            break;
+        case "VegetarischeSnack": document.getElementById('productCategory').value = 3;
+            break;
+        case "KoudeSaus": document.getElementById('productCategory').value = 4;
+            break;
+        case "WarmeSaus": document.getElementById('productCategory').value = 5;
+            break;
+        case "Frisdrank": document.getElementById('productCategory').value = 6
+            break;
+        case "Bier": document.getElementById('productCategory').value = 7;
+            break;
+        default: document.getElementById('productCategory').value = select.options[select.selectedIndex].value;
+            break;
+    }
 } else {
     document.getElementById('productId').value = id;
     document.getElementById('btnAdd').classList.remove('d-none');

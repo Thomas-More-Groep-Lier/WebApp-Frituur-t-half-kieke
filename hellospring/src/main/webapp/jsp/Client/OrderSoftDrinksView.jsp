@@ -1,7 +1,10 @@
 <%@ page import="be.thomasmore.graduaten.hellospring.entities.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.ProductCondiment" %>
 <%
     List<Product> products = (List<Product>) request.getAttribute("products");
+    List<ProductCondiment> condiments = (List<ProductCondiment>) request.getAttribute("condiments");
+
 %>
 <jsp:include page="../partials/head.jsp"/>
 
@@ -47,20 +50,32 @@
                                     for (Product product : products) {
                                         out.print(
                                                 "<div class=\"row mt-3\">" +
-                                                        "<div class=\"col-6\" id=\"name_" +  product.getId() + "\">" + product.getDescription() + "</div>" +
-                                                        "<div class=\"col-3\" id=\"price_" +  product.getId() + "\">&euro; " + String.format("%.2f", product.getPrice()) + "</div>" +
-                                                        "<div class=\"col-3\">" +
-                                                        "<button type=\"button\" class=\"btnMinus\" onclick=\"return min(" + product.getId() + ")\" style=\"color: red; background-color: pink; border: 2px solid red;\"><i class=\"bi bi-dash-lg\"></i></button>" +
-                                                        "<input type=\"text\" id=\"" + product.getId() + "\" min=\"0\" max=\"25\" value=\"0\" class=\"quantityInput\" style=\"width: 40px; text-align: center;\"/>" +
-                                                        "<button type=\"button\" class=\"btnPlus\" onclick=\"return plus(" + product.getId() + ")\" style=\"color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;\"><i class=\"bi bi-plus-lg\"></i></button>" +
-                                                        "</div>" +
+                                                        "<div class=\"col-6\" id=\"name_" + product.getId() + "\">" + product.getDescription() + "</div>" +
+                                                        "<div class=\"col-3\" id=\"price_" + product.getId() + "\">&euro; " + String.format("%.2f", product.getPrice()) + "</div>" +
+                                                        "<div class=\"col-3\">");
+
+                                        if (condiments.stream().anyMatch(x -> x.getProduct() == product)) {
+                                            out.print(
+                                                    "<button onclick=\"prepareModal('" + product.getId() + "','" + product.getDescription() + "','" + product.getPrice() + "')\" type=\"button\" class=\"btnMinus\" role=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" aria-pressed=\"true\" style=\"color: red; background-color: pink; border: 2px solid red;\"><i class=\"bi bi-dash-lg\"></i></button>" +
+                                                            "<input type=\"text\" id=\"" + product.getId() + "\" min=\"0\" max=\"25\" value=\"0\" class=\"quantityInput\" style=\"width: 40px; text-align: center;\" disabled/>" +
+                                                            "<button onclick=\"prepareModal('" + product.getId() + "','" + product.getDescription() + "','" + product.getPrice() + "')\" type=\"button\" class=\"btnPlus\" role=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" aria-pressed=\"true\" style=\"color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;\"><i class=\"bi bi-plus-lg\"></i></button>"
+                                                    //   "<div class=\"d-none\" id=\"info_"+ product.getId() +"\"></div>"
+                                            );
+                                        } else {
+                                            out.print(
+                                                    "<button type=\"button\" class=\"btnMinus\" onclick=\"return min(" + product.getId() + "," + product.getPrice() + ")\" style=\"color: red; background-color: pink; border: 2px solid red;\"><i class=\"bi bi-dash-lg\"></i></button>" +
+                                                            "<input type=\"text\" id=\"" + product.getId() + "\" min=\"0\" max=\"25\" value=\"0\" class=\"quantityInput\" style=\"width: 40px; text-align: center;\" disabled/>" +
+                                                            "<button type=\"button\" class=\"btnPlus\" onclick=\"return plus(" + product.getId() + "," + product.getPrice() + ")\" style=\"color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;\"><i class=\"bi bi-plus-lg\"></i></button>"
+                                            );
+                                        }
+                                        out.print(
+                                                "</div>" +
                                                         "</div>"
                                         );
                                     }
                                 }
                             %>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <input type="submit" class="btn btn-primary btn-block w-100 mt-3 p-2" value="Bestellen"/>
+                            <a href="/Client/orderBeers" class="btn btn-primary btn-block w-100 mt-3 p-2">Volgende</a>
                         </div>
                     </div>
             </div>
@@ -69,7 +84,69 @@
         </div>
     </div>
 </div>
+
+<%
+    if (condiments != null) {
+%>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row w-100">
+                    <div class="col"><h5 class="modal-title" id="productTitle">Product toevoegen</h5></div>
+                    <div class="col text-end"><span class="text-end">&euro; </span><span class="text-end"
+                                                                                         id="productPrice"></span>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col px-5 py-2">
+                        <input type="hidden" value="" id="productId"/>
+                        <div class="row mb-3" id="condimenten">
+                        </div>
+                        <div class="row mb-3" id="quantity">
+                            <label for="nrOfProducts" class="col-sm-4 col-form-label">Hoeveelheid: </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="nrOfProducts">
+                                    <%
+                                        for (int x = 0; x <= 20; x++) {
+                                            out.print(
+                                                    "<option value=\"" + x + "\">" + x + "</option>"
+                                            );
+                                        }
+
+                                    %>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mt-4 float-end" onclick="saveProduct()"
+                                data-bs-dismiss="modal">
+                            Save changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%
+    }
+%>
+
+<script>
+    const condimenten = [<%
+    if (condiments != null){
+        for(ProductCondiment productCondiment: condiments) { out.print(
+            "{ \"productId\" : \"" + productCondiment.getProduct().getId() + "\", \"condimentId\" : \"" + productCondiment.getCondiment().getId() + "\", \"condiment\" : \"" + productCondiment.getCondiment().getDescription()  +"\", \"condimentPrice\" : \""+ productCondiment.getCondiment().getPrice() +"\", \"productPrice\": \""+ productCondiment.getProduct().getPrice() + "\" },"
+            );
+        }
+    }
+    %>];
+</script>
 <jsp:include page="../partials/footer.jsp"/>
-<script src="/js/clientPages.js" type="text/JavaScript"></script>
+<script src="/js/clientPagesWithCondiments.js" type="text/JavaScript"></script>
 </body>
 </html>

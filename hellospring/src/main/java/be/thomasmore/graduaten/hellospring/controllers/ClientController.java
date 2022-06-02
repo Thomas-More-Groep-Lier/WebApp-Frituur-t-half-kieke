@@ -20,13 +20,17 @@ public class ClientController {
     private final OrderDetailRepository orderDetailRepository;
     private final ClientRepository clientRepository;
     private final TimeSlotRepository timeSlotRepository;
+    private final ProductCondimentRepository productCondimentRepository;
 
-    public ClientController(OrderDetailRepository orderDetailRepository, OrderRepository orderRepository, ProductRepository productRepository, ClientRepository clientRepository, TimeSlotRepository timeSlotRepository) {
+    public ClientController(OrderDetailRepository orderDetailRepository, OrderRepository orderRepository,
+                            ProductRepository productRepository, ClientRepository clientRepository,
+                            TimeSlotRepository timeSlotRepository, ProductCondimentRepository productCondimentRepository) {
         this.productRepository = productRepository;
         this.clientRepository = clientRepository;
         this.timeSlotRepository = timeSlotRepository;
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
+        this.productCondimentRepository = productCondimentRepository;
     }
 
     @PostMapping(path = "Client/clientOrder")
@@ -77,10 +81,12 @@ public class ClientController {
 
     @RequestMapping("Client/orderFries")
     public String navigateToFriesView(Model fries) {
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("frieten") && x.getProduct().getStatus()).collect(Collectors.toList());
         List<Product> products = productRepository.findAll()
                 .stream().filter(x -> x.getCategory().equalsIgnoreCase("frieten") && x.getStatus())
                 .collect(Collectors.toList());
         fries.addAttribute("products", products);
+        fries.addAttribute("condiments", condiments);
         fries.addAttribute("category", "Frieten");
         fries.addAttribute("pageTitle", "Frieten bestellen");
         return "Client/OrderFriesView";
@@ -88,6 +94,8 @@ public class ClientController {
 
     @RequestMapping("Client/orderBeers")
     public String navigateToBeersView(Model beers) {
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("bier") && x.getProduct().getStatus()).collect(Collectors.toList());
+        beers.addAttribute("condiments", condiments);
         beers.addAttribute("category", "Bier");
         beers.addAttribute("pageTitle", "Bier bestellen");
         List<Product> products = productRepository.findAll()
@@ -99,6 +107,8 @@ public class ClientController {
 
     @RequestMapping("Client/orderSauces")
     public String navigateToSaucesView(Model sauces) {
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("koude saus") || x.getProduct().getCategory().equalsIgnoreCase("warme saus") && x.getProduct().getStatus()).collect(Collectors.toList());
+        sauces.addAttribute("condiments", condiments);
         sauces.addAttribute("pageTitle", "Sauzen bestellen");
         sauces.addAttribute("category", "Koude Sauzen");
         sauces.addAttribute("category2", "Warme Sauzen");
@@ -115,6 +125,8 @@ public class ClientController {
 
     @RequestMapping("Client/orderSnacks")
     public String navigateToSnacksView(Model snacks) {
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("snack") || x.getProduct().getCategory().equalsIgnoreCase("vegetarische snack") && x.getProduct().getStatus()).collect(Collectors.toList());
+        snacks.addAttribute("condiments", condiments);
         List<Product> products = productRepository.findAll()
                 .stream().filter(x -> x.getCategory().equalsIgnoreCase("snack") && x.getStatus())
                 .collect(Collectors.toList());
@@ -131,6 +143,8 @@ public class ClientController {
 
     @RequestMapping("Client/orderSoftDrinks")
     public String navigateToSoftDrinksView(Model soft) {
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("frisdrank") && x.getProduct().getStatus()).collect(Collectors.toList());
+        soft.addAttribute("condiments", condiments);
         List<Product> products = productRepository.findAll()
                 .stream().filter(x -> x.getCategory().equalsIgnoreCase("frisdrank") && x.getStatus())
                 .collect(Collectors.toList());
