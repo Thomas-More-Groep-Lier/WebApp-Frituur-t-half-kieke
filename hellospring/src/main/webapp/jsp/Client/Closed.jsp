@@ -13,7 +13,6 @@
     </div>
 </div>
 <jsp:include page="../partials/footer.jsp"/>
-<script src="/js/clientPages.js" type="text/JavaScript"></script>
 
 </body>
 </html>

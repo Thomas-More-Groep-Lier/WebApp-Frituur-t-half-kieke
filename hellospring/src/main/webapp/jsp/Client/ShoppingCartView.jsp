@@ -1,7 +1,9 @@
 <%@ page import="be.thomasmore.graduaten.hellospring.entities.TimeSlot" %>
 <%@ page import="java.util.List" %>
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.ProductCondiment" %>
 <%
     List<TimeSlot> slots = (List<TimeSlot>) request.getAttribute("timeSlots");
+    List<ProductCondiment> condiments = (List<ProductCondiment>) request.getAttribute("condiments");
 %>
 <jsp:include page="../partials/head.jsp"/>
 
@@ -57,19 +59,19 @@
                     <div class="row mb-3 d-flex justify-content-center text-center" id="timeSlots">
                         <%
                             for (TimeSlot slot : slots) {
-                               if (slot.getSpotAvailable()) {
-                                   out.print(
-                                           "<div class=\"timeslot border border-dark border-1 p-2 w-25 m-1\" id=\""+ slot.getId()  +"\" onclick=\"selectedTimeSlot("+ slot.getId()  +")\">" +
-                                                   "<span>" + slot.getFrom().substring(0,5) + " - " + slot.getUntil().substring(0,5) + "</span>" +
-                                           "</div>"
-                                   );
-                               } else {
-                                   out.print(
-                                           "<div class=\"timeslot border border-dark border-1 p-2 w-25 m-1 bg-light\" disabled>" +
-                                                   "<span class=\"text-muted\">" + slot.getFrom().substring(0,5) + " - " + slot.getUntil().substring(0,5) + "</span>" +
-                                                   "</div>"
-                                   );
-                               }
+                                if (slot.getSpotAvailable()) {
+                                    out.print(
+                                            "<div class=\"timeslot border border-dark border-1 p-2 w-25 m-1\" id=\"" + slot.getId() + "\" onclick=\"selectedTimeSlot(" + slot.getId() + ")\">" +
+                                                    "<span>" + slot.getFrom().substring(0, 5) + " - " + slot.getUntil().substring(0, 5) + "</span>" +
+                                                    "</div>"
+                                    );
+                                } else {
+                                    out.print(
+                                            "<div class=\"timeslot border border-dark border-1 p-2 w-25 m-1 bg-light\" disabled>" +
+                                                    "<span class=\"text-muted\">" + slot.getFrom().substring(0, 5) + " - " + slot.getUntil().substring(0, 5) + "</span>" +
+                                                    "</div>"
+                                    );
+                                }
                             }
                         %>
                     </div>
@@ -128,6 +130,18 @@
     </form>
 </div>
 <jsp:include page="../partials/footer.jsp"/>
+
+<script>
+    const condimenten = [<%
+    if (condiments != null){
+        for(ProductCondiment productCondiment: condiments) { out.print(
+            "{ \"productId\" : \"" + productCondiment.getProduct().getId() + "\", \"condimentId\" : \"" + productCondiment.getCondiment().getId() + "\", \"condiment\" : \"" + productCondiment.getCondiment().getDescription()  +"\", \"condimentPrice\" : \""+ productCondiment.getCondiment().getPrice() +"\", \"productPrice\": \""+ productCondiment.getProduct().getPrice() + "\" },"
+            );
+        }
+    }
+    %>];
+
+</script>
 <script src="/js/shoppingcartScript.js" type="text/JavaScript"></script>
 </body>
 </html>

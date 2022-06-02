@@ -1,103 +1,101 @@
 var selectedProducts = [];
 var product = {};
 var newQuantity = 0;
+var newPrice = 0;
 var str = localStorage.getItem("array");
 var parsedArr = JSON.parse(str);
 
 fillInput();
 updateCartPreview();
 
-
 function fillInput() {
-    if (parsedArr !== null){
+    if (parsedArr !== null) {
         parsedArr = parsedArr.filter(p => p.quantity !== 0);
         if (parsedArr.length > 0) {
             for (let i = 0; i < parsedArr.length; i++) {
-                let temp = parsedArr[i].price.replace(/\u20ac/g, "").trim();
-                let price = Number(temp.replace(/,/g, '.'));
-                document.getElementById('orderSummary').innerHTML +=
-                    '<input type="hidden" name="products[]" value="' + parsedArr[i].id + '" >' +
-                    '<div class="row mb-3" id="product_' + parsedArr[i].id + '">' +
-                    '<div class="col-6 text-start" id="name_' + parsedArr[i].id + '">' + parsedArr[i].name + '</div>' +
+                var product = parsedArr[i];
+                if (parsedArr[i].condimentName == null) {
+                    condimentName = '';
+                } else {
+                    condimentName = "(" + parsedArr[i].condimentName + ")";
+                }
+                document.getElementById('orderSummary').innerHTML += (
+                    '<input type="hidden" name="products[]" value="' + parsedArr[i].id + '">' +
+                    '<div class="row mb-3 product" id="product_' + parsedArr[i].guid + '">' +
+                    '<div class="col-6 text-start" id="name_' + parsedArr[i].id + '"><b>' + parsedArr[i].name +
+                    ' </b>' + condimentName + '</div>' +
                     '<div class="col-4">' +
-                    '<button type="button" class="btnMinus" onclick="return min(' + parsedArr[i].id + ')" style="color: red; background-color: pink; border: 2px solid red;"><i class="bi bi-dash-lg"></i></button>' +
-                    '<input type="text" id="' + parsedArr[i].id + '" name="quantity[]" min="0" max="100" value="' + parsedArr[i].quantity + '" class="quantityInput" style="width: 40px; text-align: center;"/>' +
-                    '<button type="button" class="btnPlus" onclick="return plus(' + parsedArr[i].id + ')" style="color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;"><i class="bi bi-plus-lg"></i></button>' +
+                    '<button type="button" class="btnMinus" onclick="return x(\'' + parsedArr[i].guid + '\', \'min\')" style="color: red; background-color: pink; border: 2px solid red;"><i class="bi bi-dash-lg"></i></button>' +
+                    '<input type="text" id="' + parsedArr[i].guid + '" name="quantity[]" min="0" max="100" value="' + parsedArr[i].quantity + '" class="quantityInput" style="width: 40px; text-align: center;" disabled/>' +
+                    '<button type="button" class="btnPlus" onclick="return x(\'' + parsedArr[i].guid + '\', \'plus\')" style="color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;"><i class="bi bi-plus-lg"></i></button>' +
                     '</div>' +
                     '<div class="d-none" id="price_' + parsedArr[i].id + '">' + parsedArr[i].price + '</div>' +
-                    '<div class="col-2 text-end" id="totalprice_' + parsedArr[i].id + '"> &euro; ' + (price * Number(parsedArr[i].quantity)).toFixed(2) + '</div>' +
-                    '</div>'
+                    '<div class="col-2 text-end" id="totalprice_' + parsedArr[i].id + '"> &euro; ' + Number(parsedArr[i].price).toFixed(2) + '</div>' +
+                    '</div>');
             }
         }
         selectedProducts = parsedArr;
     }
 }
 
-function plus(id) {
-    let current = document.getElementById(id).value;
-    if (Number(current) < 100) {
-        document.getElementById(id).value = Number(current) + 1;
-        newQuantity = Number(current) + 1;
-        buildProduct(id, newQuantity);
-        newPrice(newQuantity, id);
+function x(g, type) {
+    console.log(g, type);
+    let t = parsedArr.filter(x => x.guid === g);
+    let product = t[0];
+    let guid = product.guid;
+    let price = Number(product.price) / Number(product.quantity);
+    let input = document.getElementById(guid);
 
+    switch (type) {
+        case "plus":
+            if (Number(input.value) < 100) {
+                newQuantity = Number(input.value) + 1;
+                newPrice = price * newQuantity;
+                saveProduct(product, newQuantity, newPrice);
+            }
+            break;
+        case "min":
+            if (Number(input.value) > 0) {
+                newQuantity = Number(input.value) - 1;
+                newPrice = price * newQuantity;
+                saveProduct(product, newQuantity, newPrice);
+            } else {
+                document.getElementById(guid).style.cssText = "display: none;";
+                localStorage.setItem("array", JSON.stringify(selectedProducts.filter(p => p.guid !== guid)));
+            }
+            break;
+        default:
+            break;
     }
 }
 
-function min(id) {
-    let current = document.getElementById(id).value;
-    if (Number(current) > 1) {
-        document.getElementById(id).value = Number(current) - 1;
-        newQuantity = Number(current) - 1;
-        buildProduct(id, newQuantity);
-        newPrice(newQuantity, id);
+function saveProduct(product, newQuantity, newPrice) {
+    product.quantity = newQuantity;
+    product.price = newPrice;
+
+    let index = keepProductListUpdate(product);
+    if (index === -1 || index === undefined) {
+        selectedProducts.push(product);
+        console.log("product added!");
     } else {
-        document.getElementById('product_' + id).style.cssText = "display: none;"
-        selectedProducts = selectedProducts.filter(p => p.id !== id)
-        const jsonArrOfProducts = JSON.stringify(selectedProducts);
-        localStorage.setItem("array", jsonArrOfProducts);
-        updateCartPreview();
-
+        selectedProducts[index].price = product.price;
+        selectedProducts[index].quantity = product.quantity;
+        console.log("product updated!");
     }
-}
-
-function newPrice(newQuantity, id) {
-    let priceText = document.getElementById('price_' + id).innerText;
-    let temp = priceText.replace(/\u20ac/g, "").trim();
-    let price = Number(temp.replace(/,/g, '.'));
-    document.getElementById('totalprice_' + id).innerHTML = '&euro; ' + (newQuantity * price).toFixed(2)
-}
-
-function buildProduct(id, x) {
-    product = {
-        "id": id,
-        "name": document.getElementById('name_' + id).innerText,
-        "price": document.getElementById('price_' + id).innerText,
-        "quantity": x,
-    }
-    keepProductListUpdate(product);
-    updateCartPreview();
+    saveInLocaleStorage(selectedProducts);
 }
 
 function keepProductListUpdate(product) {
-
     if (selectedProducts.length > 0) {
         const indexOfTheProduct = selectedProducts.findIndex((obj) => {
-            // if the current object name key matches the string
-            // return boolean value true
-            if (obj.id === product.id) {
-                obj.quantity = product.quantity
+            if (obj.id === product.id && product.condiment === obj.condiment) {
+                obj.quantity = product.quantity;
                 return true;
-
             }
-            selectedProducts.push(product);
             return false;
         });
-    } else {
-        selectedProducts.push(product);
+        return indexOfTheProduct;
     }
-    const jsonArrOfProducts = JSON.stringify(selectedProducts);
-    localStorage.setItem("array", jsonArrOfProducts);
 }
 
 function submitForm() {
@@ -110,31 +108,31 @@ function submitForm() {
     var fouten = "";
 
     if (firstname === "" || lastname === "" || email === "" || !voorwaarden || timeslot === "" || tel === "" || parsedArr === null) {
-        if (parsedArr === null){
+        if (parsedArr === null)
             fouten += "Wil je niets eten? Dan kan je ook niets bestellen ... \n";
-        }
-        if (firstname === "") {
+
+        if (firstname === "")
             fouten += "Voornaam is een verplicht veld ... \n";
-        }
-        if (lastname === "") {
+
+        if (lastname === "")
             fouten += "Achternaam is een verplicht veld ... \n";
-        }
-        if (email === "") {
+
+        if (email === "")
             fouten += "Email is een verplicht veld ... \n";
-        }
-        if (tel === "") {
+
+        if (tel === "")
             fouten += "Telefoonnummer is een verplicht veld ... \n";
-        }
-        if (timeslot === "") {
+
+        if (timeslot === "")
             fouten += "Het is verplicht een tijdslot te selecteren ... \n";
-        }
-        if (!voorwaarden) {
+
+        if (!voorwaarden)
             fouten += "Gelieve akkoord te gaan met de algemene voorwaarden ... \n";
-        }
+
     } else {
-        if (firstname.length < 2 && containsSpecialChars(firstname)) {
+        if (firstname.length < 2 && containsSpecialChars(firstname))
             fouten += "Een voornaam bestaat uit minimaal 2 (alfanumerieke) karakters.\n";
-        }
+
         if (lastname.length < 5 && containsSpecialChars(lastname))
             fouten += "Een achternaam bestaat uit minimaal 5 (alfanumerieke) karakters.\n";
 
@@ -157,13 +155,11 @@ function updateCartPreview() {
     let totalPrice = 0;
     if (selectedProducts !== null && selectedProducts.length > 0) {
         for (let x = 0; x < selectedProducts.length; x++) {
-            let temp = selectedProducts[x].price.replace(/\u20ac/g, "").trim();
-            let price = Number(temp.replace(/,/g, '.'));
-            nrOfProducts = nrOfProducts + selectedProducts[x].quantity;
-            totalPrice = totalPrice + (selectedProducts[x].quantity * price);
+            nrOfProducts = Number(nrOfProducts) + Number(selectedProducts[x].quantity);
+            totalPrice = Number(totalPrice) + Number(selectedProducts[x].price);
         }
     }
-    document.getElementById('cartQuantity').textContent = nrOfProducts.toString();
+    document.getElementById('cartQuantity').innerText = nrOfProducts.toString();
     document.getElementById('cartTotalPrice').innerText = Number(totalPrice).toFixed(2);
 }
 
@@ -184,19 +180,20 @@ function containsSpecialChars(str) {
 }
 
 function validateEmail(inputText) {
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (inputText.value.match(mailformat)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-function validatePhone(inputText) {
-    var phoneformat = /^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})$/;
-    if (inputText.value.match(phoneformat)) {
-        return true;
-    } else {
-        return false;
-    }
+    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return !!inputText.value.match(mailformat);
 }
 
+function validatePhone(inputText) {
+    const phoneformat = /^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})$/;
+    return !!inputText.value.match(phoneformat);
+}
+
+function saveInLocaleStorage(value) {
+    // Timeout en reload nodig om het dom manipulatie niet te blokkeren ...
+    // Zonder gebruik, bestaat de kans dat de locale storage niet up-to-date is ten opzichte van de verwachting.
+    setTimeout(() => {
+        localStorage.setItem("array", JSON.stringify(value));
+        location.reload();
+    }, 150);
+}

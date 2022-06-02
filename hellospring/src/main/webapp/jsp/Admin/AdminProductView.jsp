@@ -1,7 +1,11 @@
 <%@ page import="be.thomasmore.graduaten.hellospring.entities.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.Condiment" %>
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.ProductCondiment" %>
 <%
     List<Product> products = (List<Product>) request.getAttribute("allProducts");
+    List<Condiment> condiments = (List<Condiment>) request.getAttribute("allCondiments");
+    List<ProductCondiment> productCondiments = (List<ProductCondiment>) request.getAttribute("allProductCondiments");
 %>
 
 <jsp:include page="../partials/head.jsp"/>
@@ -13,12 +17,13 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h2 class="display-2 text-center"><%=request.getAttribute("pageTitle")%>
-            </h2>
+            <h2 class="display-2 text-center"><%=request.getAttribute("pageTitle")%></h2>
+            <a href="/Admin/Products/Condiments">Condimenten beheer <i class="bi bi-box-arrow-up-right"></i></a>
+
             <div class="row mt-5">
                 <div class="col">
                     <select class="form-select" onchange="changeDisplay(this)" id="category">
-                        <option selected>Categorie selecteren ...</option>
+                        <option selected value="">Categorie selecteren ...</option>
                         <option value="1">Frieten</option>
                         <option value="2">Snack</option>
                         <option value="3">Vegetarische Snack</option>
@@ -60,7 +65,8 @@
                             </div>
                             <div class="col-2">
                                 <label for="productPrice" class="form-label">Product prijs</label>
-                                <input type="number" id="productPrice" name="productPrice" class="form-control" step="0.01" min="0"
+                                <input type="number" id="productPrice" name="productPrice" class="form-control"
+                                       step="0.01" min="0"
                                        max="1000">
                             </div>
                             <div class="col-2 d-flex align-items-end justify-content-end">
@@ -75,6 +81,19 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <select class="form-select" name="condimenten" size="5" multiple aria-label="multiple select example">
+                                    <option selected value="">Select condiments</option>
+                                    <% for (Condiment condiment : condiments) {
+                                                out.print(
+                                                        "<option value=\"" + condiment.getId() + "\">" + condiment.getDescription() + "</option>"
+                                                );
+                                    }
+                                    %>
+                                </select>
+                            </div>
+                        </div>
                     </form>
                     <table class="table mt-5">
                         <tr>
@@ -85,34 +104,48 @@
                                 Prijs
                             </th>
                             <th scope="col" class="text-center">
+                                Condimenten <a href="/Admin/Products/Condiments" class=""><i class="bi bi-box-arrow-up-right"></i></a>
+
+                            </th>
+                            <th scope="col" class="text-center">
                                 Acties
                             </th>
                         </tr>
                         <%
                             for (Product product : products) {
                                 out.print(
-                                        "<tr class=" + product.getCategory().replace(" ", "") + ">" +
+                                        "<tr class=" + product.getCategory().replace(" ", "") + " id=\"" + product.getId() + "\">" +
                                                 "<td id=\"productName_" + product.getId() + "\">" + product.getDescription() + "</td>" +
-                                                "<td id=\"productPrice_" + product.getId() + "\"> &euro;" + String.format("%.2f", product.getPrice()) + "</td>" +
-                                                "<td class=\"text-center\">" +
+                                                "<td id=\"productPrice_" + product.getId() + "\"> &euro; " + String.format("%.2f", product.getPrice()) + "</td>" +
+                                                "<td id=\"productCondimenten_" + product.getId() + "\" class=\" text-center\">" );
+
+                                for (ProductCondiment productCondiment : productCondiments){
+                                    if (productCondiment.getProduct().getId() == product.getId()){
+                                        out.print(
+                                                productCondiment.getCondiment().getDescription() + "<a title=\"delete\" onclick=\"deleteCondiment(" + productCondiment.getId() + ")\" class=\"text-dark\"><i class=\"bi bi-eraser mx-3\"></i></a><br />"
+                                        );
+                                    }
+                                }
+
+                                out.print (
+                                                "</td><td class=\"text-center\">" +
                                                 "<a title=\"edit\" onclick=\"addNew(" + product.getId() + ")\" class=\"text-dark\"><i class=\"bi bi-pencil-fill \"></i></a>"
                                 );
 
-                                        if (product.getStatus() == true) {
-                                            out.print(
+                                if (product.getStatus() == true) {
+                                    out.print(
                                             "<a title=\"pause\" href=\"/Admin/Product/Pause?id=" + product.getId() + "\" class=\"text-warning\"><i class=\"bi bi-pause-fill mx-4\"></i></a>"
-                                                    );
-                                        }
-                                        else {
-                                            out.print(
-                                                    "<a title=\"restart\" href=\"/Admin/Product/Restart?id=" + product.getId() + "\" class=\"text-success\"><i class=\"bi bi-arrow-clockwise mx-4\"></i></a>"
-                                            );
-                                        }
-                                        out.print(
-                                                "<a title=\"delete\" onclick=\"confirmDelete(" + product.getId() +")\" class=\"text-danger\"><i class=\"bi bi-trash3 \"></i></a>" +
-                                                        "</td>" +
-                                                        "</tr>"
-                                        );
+                                    );
+                                } else {
+                                    out.print(
+                                            "<a title=\"restart\" href=\"/Admin/Product/Restart?id=" + product.getId() + "\" class=\"text-success\"><i class=\"bi bi-arrow-clockwise mx-4\"></i></a>"
+                                    );
+                                }
+                                out.print(
+                                        "<a title=\"delete\" onclick=\"confirmDelete(" + product.getId() + ")\" class=\"text-danger\"><i class=\"bi bi-trash3 \"></i></a>" +
+                                                "</td>" +
+                                                "</tr>"
+                                );
                             }
                         %>
                     </table>
