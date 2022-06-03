@@ -21,12 +21,13 @@ function fillInput() {
                 }
                 document.getElementById('orderSummary').innerHTML += (
                     '<input type="hidden" name="products[]" value="' + parsedArr[i].id + '">' +
+                    '<input type="hidden" name="condiments[]" value="' + parsedArr[i].condiment + '">' +
                     '<div class="row mb-3 product" id="product_' + parsedArr[i].guid + '">' +
                     '<div class="col-6 text-start" id="name_' + parsedArr[i].id + '"><b>' + parsedArr[i].name +
                     ' </b>' + condimentName + '</div>' +
                     '<div class="col-4">' +
                     '<button type="button" class="btnMinus" onclick="return x(\'' + parsedArr[i].guid + '\', \'min\')" style="color: red; background-color: pink; border: 2px solid red;"><i class="bi bi-dash-lg"></i></button>' +
-                    '<input type="text" id="' + parsedArr[i].guid + '" name="quantity[]" min="0" max="100" value="' + parsedArr[i].quantity + '" class="quantityInput" style="width: 40px; text-align: center;" disabled/>' +
+                    '<input type="number" id="' + parsedArr[i].guid + '" name="quantity[]" min="0" max="100" value="' + parsedArr[i].quantity + '" class="quantityInput" style="width: 40px; text-align: center;"/>' +
                     '<button type="button" class="btnPlus" onclick="return x(\'' + parsedArr[i].guid + '\', \'plus\')" style="color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;"><i class="bi bi-plus-lg"></i></button>' +
                     '</div>' +
                     '<div class="d-none" id="price_' + parsedArr[i].id + '">' + parsedArr[i].price + '</div>' +

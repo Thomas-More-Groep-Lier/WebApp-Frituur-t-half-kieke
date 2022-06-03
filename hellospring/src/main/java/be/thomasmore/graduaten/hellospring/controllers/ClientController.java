@@ -1,4 +1,5 @@
 package be.thomasmore.graduaten.hellospring.controllers;
+
 import be.thomasmore.graduaten.hellospring.entities.*;
 import be.thomasmore.graduaten.hellospring.repositories.*;
 import org.springframework.stereotype.Controller;
@@ -21,16 +22,19 @@ public class ClientController {
     private final ClientRepository clientRepository;
     private final TimeSlotRepository timeSlotRepository;
     private final ProductCondimentRepository productCondimentRepository;
+    private final CondimentRepository condimentRepository;
 
     public ClientController(OrderDetailRepository orderDetailRepository, OrderRepository orderRepository,
-                            ProductRepository productRepository, ClientRepository clientRepository,
-                            TimeSlotRepository timeSlotRepository, ProductCondimentRepository productCondimentRepository) {
+            ProductRepository productRepository, ClientRepository clientRepository,
+            TimeSlotRepository timeSlotRepository, ProductCondimentRepository productCondimentRepository,
+            CondimentRepository condimentRepository) {
         this.productRepository = productRepository;
         this.clientRepository = clientRepository;
         this.timeSlotRepository = timeSlotRepository;
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
         this.productCondimentRepository = productCondimentRepository;
+        this.condimentRepository = condimentRepository;
     }
 
     @PostMapping(path = "Client/clientOrder")
@@ -39,35 +43,42 @@ public class ClientController {
             @RequestParam(value = "lastName") String last,
             @RequestParam(value = "email") String mail,
             @RequestParam(value = "tel") String phone,
-            @RequestParam(value = "quantity[]") String[] quantities,
             @RequestParam(value = "products[]") String[] products,
+            @RequestParam(value = "quantity[]") String[] quantities,
+            @RequestParam(value = "condiments[]") String[] condiments,
             @RequestParam(value = "timeSlot") long timeSlot,
             @RequestParam(value = "_csrf") String token) {
         TimeSlot slot = timeSlotRepository.getById(timeSlot);
-        slot.setOrdersPlaced(slot.getOrdersPlaced()+1);
+        slot.setOrdersPlaced(slot.getOrdersPlaced() + 1);
         timeSlotRepository.saveAndFlush(slot);
-
         Client user = new Client(first, last, phone, mail);
         List<Client> client = clientRepository.findAll()
-                 .stream().filter(x -> x.getEmailAdress().equalsIgnoreCase(mail))
-                 .collect(Collectors.toList());
-         if (client.isEmpty()){
-             clientRepository.saveAndFlush(user);
-         }
-         else {
-             user = client.get(0);
-         }
+                .stream().filter(x -> x.getEmailAdress().equalsIgnoreCase(mail))
+                .collect(Collectors.toList());
+        if (client.isEmpty()) {
+            clientRepository.saveAndFlush(user);
+        } else {
+            user = client.get(0);
+        }
 
-         // prepare order
+        // prepare order
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
         Order x = new Order(user, date, false, "open", slot, slot.getUntil());
         orderRepository.save(x);
 
-        for (int i = 0 ; i < products.length; i++){
+        for (int i = 0; i < products.length; i++) {
+            OrderDetail od;
             Product p = productRepository.getById(Long.parseLong(products[i]));
-            OrderDetail od = new OrderDetail(p, x, Long.parseLong(quantities[i]));
+
+            try {
+                Condiment c = condimentRepository.getById(Long.parseLong(condiments[i]));
+                od = new OrderDetail(p, x, Long.parseLong(quantities[i]), c);
+            } catch (NumberFormatException e) {
+                od = new OrderDetail(p, x, Long.parseLong(quantities[i]), null);
+
+            }
             orderDetailRepository.saveAndFlush(od);
         }
 
@@ -81,7 +92,9 @@ public class ClientController {
 
     @RequestMapping("Client/orderFries")
     public String navigateToFriesView(Model fries) {
-        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("frieten") && x.getProduct().getStatus()).collect(Collectors.toList());
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream()
+                .filter(x -> x.getProduct().getCategory().equalsIgnoreCase("frieten") && x.getProduct().getStatus())
+                .collect(Collectors.toList());
         List<Product> products = productRepository.findAll()
                 .stream().filter(x -> x.getCategory().equalsIgnoreCase("frieten") && x.getStatus())
                 .collect(Collectors.toList());
@@ -94,7 +107,9 @@ public class ClientController {
 
     @RequestMapping("Client/orderBeers")
     public String navigateToBeersView(Model beers) {
-        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("bier") && x.getProduct().getStatus()).collect(Collectors.toList());
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream()
+                .filter(x -> x.getProduct().getCategory().equalsIgnoreCase("bier") && x.getProduct().getStatus())
+                .collect(Collectors.toList());
         beers.addAttribute("condiments", condiments);
         beers.addAttribute("category", "Bier");
         beers.addAttribute("pageTitle", "Bier bestellen");
@@ -107,7 +122,10 @@ public class ClientController {
 
     @RequestMapping("Client/orderSauces")
     public String navigateToSaucesView(Model sauces) {
-        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("koude saus") || x.getProduct().getCategory().equalsIgnoreCase("warme saus") && x.getProduct().getStatus()).collect(Collectors.toList());
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream()
+                .filter(x -> x.getProduct().getCategory().equalsIgnoreCase("koude saus")
+                        || x.getProduct().getCategory().equalsIgnoreCase("warme saus") && x.getProduct().getStatus())
+                .collect(Collectors.toList());
         sauces.addAttribute("condiments", condiments);
         sauces.addAttribute("pageTitle", "Sauzen bestellen");
         sauces.addAttribute("category", "Koude Sauzen");
@@ -125,7 +143,11 @@ public class ClientController {
 
     @RequestMapping("Client/orderSnacks")
     public String navigateToSnacksView(Model snacks) {
-        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("snack") || x.getProduct().getCategory().equalsIgnoreCase("vegetarische snack") && x.getProduct().getStatus()).collect(Collectors.toList());
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream()
+                .filter(x -> x.getProduct().getCategory().equalsIgnoreCase("snack")
+                        || x.getProduct().getCategory().equalsIgnoreCase("vegetarische snack")
+                                && x.getProduct().getStatus())
+                .collect(Collectors.toList());
         snacks.addAttribute("condiments", condiments);
         List<Product> products = productRepository.findAll()
                 .stream().filter(x -> x.getCategory().equalsIgnoreCase("snack") && x.getStatus())
@@ -143,7 +165,9 @@ public class ClientController {
 
     @RequestMapping("Client/orderSoftDrinks")
     public String navigateToSoftDrinksView(Model soft) {
-        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream().filter(x -> x.getProduct().getCategory().equalsIgnoreCase("frisdrank") && x.getProduct().getStatus()).collect(Collectors.toList());
+        List<ProductCondiment> condiments = productCondimentRepository.findAll().stream()
+                .filter(x -> x.getProduct().getCategory().equalsIgnoreCase("frisdrank") && x.getProduct().getStatus())
+                .collect(Collectors.toList());
         soft.addAttribute("condiments", condiments);
         List<Product> products = productRepository.findAll()
                 .stream().filter(x -> x.getCategory().equalsIgnoreCase("frisdrank") && x.getStatus())
@@ -159,13 +183,14 @@ public class ClientController {
         long currentTimeSlotId = getCurrentTimeSlot();
         long max = 392;
         long limit = currentTimeSlotId + 8 < max ? currentTimeSlotId + 8 : max;
-        List<TimeSlot> timeSlots = timeSlotRepository.findAll().stream().filter(w -> w.getId() >= currentTimeSlotId && w.getId() <= limit).collect(Collectors.toList());
+        List<TimeSlot> timeSlots = timeSlotRepository.findAll().stream()
+                .filter(w -> w.getId() >= currentTimeSlotId && w.getId() <= limit).collect(Collectors.toList());
         cart.addAttribute("timeSlots", timeSlots);
         cart.addAttribute("pageTitle", "Uw bestelling bij frituur t' half kieke!");
         return "Client/ShoppingCartView";
     }
 
-    public long getCurrentTimeSlot(){
+    public long getCurrentTimeSlot() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime now = LocalDateTime.now();
         String current = dtf.format(now);
@@ -174,6 +199,7 @@ public class ClientController {
         DayOfWeek weekday = now.getDayOfWeek();
         return getTimeSlotId(weekday, hours, minutes);
     }
+
     public long getTimeSlotId(DayOfWeek weekday, int hours, int minutes) {
         long timeSlotId = (hours - 10) * 4;
         if (minutes == 15) {
@@ -183,7 +209,7 @@ public class ClientController {
         } else if (minutes == 45) {
             timeSlotId = timeSlotId + 3;
         }
-        if (timeSlotId < 0){
+        if (timeSlotId < 0) {
             // return first from current weekday...
             switch (weekday) {
                 case MONDAY:
@@ -199,10 +225,11 @@ public class ClientController {
                 case SATURDAY:
                     return 281;
                 case SUNDAY:
-                    return  337;
-                default: return timeSlotId;
+                    return 337;
+                default:
+                    return timeSlotId;
             }
-        }else {
+        } else {
             switch (weekday) {
                 case MONDAY:
                     return timeSlotId;
@@ -217,36 +244,26 @@ public class ClientController {
                 case SATURDAY:
                     return timeSlotId + 281;
                 case SUNDAY:
-                    return      timeSlotId + 337;
-                default: return timeSlotId;
+                    return timeSlotId + 337;
+                default:
+                    return timeSlotId;
             }
         }
 
-
-    }
-    public int roundMinutes(int minutes){
-        if (minutes >= 0 && minutes <= 7 )
-        {
-            return  0;
-        }
-        else if (minutes >= 8 && minutes <= 22 )
-        {
-            return  15;
-        }
-        else if (minutes >= 23 && minutes <= 37 )
-        {
-            return  30;
-        }
-        else if (minutes >= 38 && minutes <= 52 )
-        {
-            return  45;
-        }
-        else {
-            return  60;
-        }
     }
 
-
-
+    public int roundMinutes(int minutes) {
+        if (minutes >= 0 && minutes <= 7) {
+            return 0;
+        } else if (minutes >= 8 && minutes <= 22) {
+            return 15;
+        } else if (minutes >= 23 && minutes <= 37) {
+            return 30;
+        } else if (minutes >= 38 && minutes <= 52) {
+            return 45;
+        } else {
+            return 60;
+        }
+    }
 
 }

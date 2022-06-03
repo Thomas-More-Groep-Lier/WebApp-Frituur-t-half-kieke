@@ -19,12 +19,24 @@ public class OrderDetail {
     @JoinColumn(name = "orderId")
     private Order order;
 
+    @ManyToOne
+    @JoinColumn(name = "condimentId")
+    private Condiment condiment;
+
     public Product getProduct() {
         return product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Condiment getCondiment() {
+        return condiment;
+    }
+
+    public void setProduct(Condiment condiment) {
+        this.condiment = condiment;
     }
 
     public Order getOrder() {
@@ -40,18 +52,22 @@ public class OrderDetail {
     }
 
     //constructors
-    public OrderDetail(long id, Product product, Order order, long numberOfProducts) {
+    public OrderDetail(long id, Product product, Order order, long numberOfProducts, Condiment condiment) 
+    {
         this.id = id;
         this.order = order;
         this.product = product;
         this.numberOfProducts = numberOfProducts;
+        this.condiment = condiment;
     }
 
     //constructor without id
-    public OrderDetail(Product product, Order order, long numberOfProducts) {
+    public OrderDetail(Product product, Order order, long numberOfProducts, Condiment condiment) 
+    {
         this.order = order;
         this.product = product;
         this.numberOfProducts = numberOfProducts;
+        this.condiment = condiment;
     }
 
     //getters
