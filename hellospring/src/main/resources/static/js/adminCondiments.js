@@ -27,4 +27,28 @@
 }
     function clearId() {
     addNew();
+
+
 }
+    function validateAndSubmit(){
+        let price = document.getElementById('condimentPrice').value;
+        let condimentName = document.getElementById('condimentName').value;
+        let faultmessage = '';
+        console.log("validation script run");
+        console.log(price);
+        if(price =='') {
+            faultmessage = "prijs is een verplicht veld\n";
+        }
+        if(condimentName == ''){
+            faultmessage +='naam is een verplicht veld\n';
+        }
+        console.log(faultmessage);
+        if(faultmessage != ''){
+            alert(faultmessage);
+        }
+        else{
+            document.getElementById('new_edit_form').submit()
+        }
+
+
+    }
