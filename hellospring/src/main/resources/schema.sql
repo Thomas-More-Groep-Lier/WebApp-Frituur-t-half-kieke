@@ -105,6 +105,7 @@ CREATE TABLE OrderDetail
     OrderId          int NOT NULL,
     ProductId        int NOT NULL,
     NumberOfProducts int NOT NULL,
+    CondimentId      int NULL,
     PRIMARY KEY (id)
 );
 

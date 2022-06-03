@@ -38,6 +38,13 @@
                                             "<div class=\"col-2 text-end\"><p class=\"card-text\">" + od.getNumberOfProducts() + "</p></div>" +
                                         "</div>"
                         );
+                        if (od.getCondiment() != null){
+                            out.print(
+                                "<div class=\"row\">" +
+                                    "<div class=\"col-12 text-start\"><p class=\"card-text text-danger ml-2\">" + od.getCondiment().getDescription() + "</p></div>" +
+                                "</div>"
+                            );
+                        }
                     }
                 }
                 if (!o.getStatus().equalsIgnoreCase("picked")) {
