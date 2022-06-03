@@ -158,3 +158,29 @@ function deleteCondiment(id){
     function clearId() {
     addNew();
 }
+function validateAndSubmit(){
+    let price = document.getElementById('productPrice').value;
+    let category = document.getElementById('productCategory').value;
+    let productname = document.getElementById('productName').value;
+    let faultmessage = '';
+    console.log("validation script run");
+    console.log(price, category);
+    if(price ==''){
+        faultmessage ="prijs is een verplicht veld\n";
+    }
+    if(category ==''|| category=='Categorie selecteren ...'){
+        faultmessage +='categorie is een verplicht veld\n';
+    }
+    if(productname == ''){
+        faultmessage +='product naam is een verplicht veld\n';
+    }
+console.log(faultmessage);
+    if(faultmessage != ''){
+        alert(faultmessage);
+    }
+    else{
+        document.getElementById('new_edit_form').submit()
+    }
+
+
+}

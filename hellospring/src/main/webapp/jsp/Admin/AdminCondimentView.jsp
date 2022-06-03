@@ -23,7 +23,7 @@
               <div class="col-5">
                 <label for="condimentName" class="form-label">Condiment naam</label>
                 <input type="text" id="condimentName" name="condimentName" class="form-control"
-                       aria-describedby="condimentNameHelpBlock">
+                       aria-describedby="condimentNameHelpBlock" maxlength="30">
                 <div id="condimentNameHelpBlock" class="form-text d-none">
                   Een goede condimentnaam bevat alleen letters en cijfers, geen speciale karakters...
                 </div>
@@ -38,12 +38,12 @@
               </div>
               <div class="col-2 d-flex align-items-end justify-content-end">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <button type="submit" class="btn btn-success" id="btnAdd"><i class="bi bi-plus"></i>
+                <button type="button" class="btn btn-success" id="btnAdd" onclick="validateAndSubmit()"><i class="bi bi-plus"></i>
                   Nieuw toevoegen
                 </button>
                 <button type="button" class="btn btn-secondary d-none me-2" title="velden leegmaken"
                         id="btnClear" onclick="clearId()"><i class="bi bi-x-lg"></i></button>
-                <button type="submit" class="btn btn-primary d-none" id="btnEdit"><i
+                <button type="button" class="btn btn-primary d-none" id="btnEdit" onclick="validateAndSubmit()"><i
                         class="bi bi-pencil-fill"></i> Aanpassen
                 </button>
               </div>
