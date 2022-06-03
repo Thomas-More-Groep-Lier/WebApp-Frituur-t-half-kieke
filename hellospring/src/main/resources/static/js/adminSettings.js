@@ -1,5 +1,13 @@
 function submitTimeOff() {
-    document.getElementById('vakantiePlanning').submit();
+
+    if(vacationDatesAreValid()){
+        document.getElementById('vakantiePlanning').submit();
+    }
+    else{
+        alert('Start datum moet voor einddatum liggen')
+    }
+       // document.getElementById('vakantiePlanning').submit();
+
 }
 
 function updateOpeningHours() {
@@ -139,4 +147,20 @@ function roundMinutes(selected){
     else {
         return  (Number(hours) + 1 + ':00');
     }
+}
+
+function  vacationDatesAreValid(){
+let startDate = document.getElementById('from').value;
+let endDate = document.getElementById('untill').value;
+console.log(startDate , endDate);
+    if(startDate =='' || endDate ==''){
+        alert('geen start en/of einddatum geselecteerd voor de vakantie');
+    }
+if (endDate < startDate){
+    return false;
+}
+else{
+    return true;
+}
+
 }

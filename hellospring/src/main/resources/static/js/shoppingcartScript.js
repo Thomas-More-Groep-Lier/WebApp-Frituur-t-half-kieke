@@ -105,7 +105,14 @@ function submitForm() {
     let email = document.getElementById('email').value;
     let tel = document.getElementById('tel').value;
     let voorwaarden = document.getElementById('voorwaarden').checked;
-    var fouten = "";
+    let fouten = "";
+
+    /*console.log("timeslot:" +timeslot);
+    console.log("voornaam:" +firstname);
+    console.log("achternaam:" +lastname);
+    console.log("email:" +email);*/
+    console.log("telnr:" +tel);
+    console.log("voorwaarden goedgekeurd:" +voorwaarden);
 
     if (firstname === "" || lastname === "" || email === "" || !voorwaarden || timeslot === "" || tel === "" || parsedArr === null) {
         if (parsedArr === null)
@@ -129,22 +136,26 @@ function submitForm() {
         if (!voorwaarden)
             fouten += "Gelieve akkoord te gaan met de algemene voorwaarden ... \n";
 
-    } else {
+    }
+     else {
         if (firstname.length < 2 && containsSpecialChars(firstname))
             fouten += "Een voornaam bestaat uit minimaal 2 (alfanumerieke) karakters.\n";
 
         if (lastname.length < 5 && containsSpecialChars(lastname))
             fouten += "Een achternaam bestaat uit minimaal 5 (alfanumerieke) karakters.\n";
 
-        if (email.length < 8 && !validateEmail(email)) {
+        if (email.length < 8 ) {
             fouten += "Een email adres bestaat uit minimaal 8 (alfanumerieke) karakters.\n";
         }
-        if (tel.length < 9 && !validatePhone(tel)) {
-            fouten += "Een telefoonnummer adres bestaat uit minimaal 9 (alfanumerieke) karakters.\n";
+
+        else{
+            fouten += validateEmail(email);
+            fouten += validatePhone(tel);
         }
     }
     if (fouten === "") {
-        document.getElementById('final').submit();
+        console.log('geen fouten gevonden');
+        //document.getElementById('final').submit();
     } else {
         alert(fouten);
     }
@@ -180,13 +191,79 @@ function containsSpecialChars(str) {
 }
 
 function validateEmail(inputText) {
-    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return !!inputText.value.match(mailformat);
+    //controleer samenstelling email adres (aangepaste versie van https://www.w3resource.com/javascript/form/email-validation.php)
+    //zoeken naar @ symbool en mail adres in gebruiker en domein verdelen op basis van @ symbool
+        let heeftAtSymbool = inputText.indexOf("@");
+        let mailpartGebruiker, mailpartDomein;
+        let faultmessage = '';
+        if (heeftAtSymbool == -1) { faultmessage +="een email adres moet een @ bevatten\n";  }
+        else {
+            mailpartGebruiker = inputText.slice(0, heeftAtSymbool);
+            mailpartDomein = inputText.slice(heeftAtSymbool + 1);
+            //controle van gebruikerdeel
+            //nakijken of minstens 1 teken lang
+            if (mailpartGebruiker.length < 1) {
+                faultmessage+="de gebruikersnaam van het email adres moet minstens 1 teken zijn\n";
+            }
+            //nakijken of niet begint met punt of koppelteken
+            if (mailpartGebruiker.indexOf(".") == 0 || mailpartGebruiker.indexOf("-") == 0)
+            { faultmessage +="de gebruikersnaam van een email adres mag niet beginnen met een . of - teken\n" }
+            //nakijken of enkel letters, nummers, underscores punten of koppeltekens bevat
+            let bevatFouteTekens = mailpartGebruiker.search(/[^a-z^A-Z^0-9^.^-^_^-]/);
+
+            if (bevatFouteTekens != -1) {
+                faultmessage +="gebruikersnaam van email adres mag enkel letters,cijfers, punten, koppeltekens of underscores bevatten\n";
+            }
+
+            //controle van domeindeel
+            if (mailpartDomein.length < 3) {
+                faultmessage += "de domeinnaam van het email adres moet minstens uit 3 teken bestaan.\n";
+            }
+            //nakijken of start met letter of nummer
+            let begintMetLetterOfNummer = mailpartDomein.slice(0,1);
+            console.log(begintMetLetterOfNummer);
+            if (begintMetLetterOfNummer.search(/[a-zA-Z0-9]/)) {
+                faultmessage += "de domeinnaam van het email adres moet beginnen met een letter of cijfer.\n";
+            }
+            //nakijken of punt aanwezig is voor domein af te scheiden van extensie
+            if (mailpartDomein.indexOf(".") == -1) {
+                faultmessage += "domeinnaam moet een . bevatten om domein van extentie te scheiden\n";
+            }
+            //nakijken of het enkel letters,nummers,punten en koppeltekens bevat
+            bevatFouteTekens = mailpartDomein.search(/[^a-z^A-Z^0-9^.^-^-]/);
+
+            if (bevatFouteTekens != -1) {
+                faultmessage += "domeinnaam van email adres mag enkel letters,cijfers, punten, of koppeltekens bevatten\n";
+            }
+            return faultmessage;
+
+        }
+
+  /*  const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    console.log(mailformat);
+    console.log(inputText);
+    console.log(!!inputText.value.match(mailformat));
+    return !!inputText.value.match(mailformat);*/
 }
 
 function validatePhone(inputText) {
-    const phoneformat = /^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})$/;
-    return !!inputText.value.match(phoneformat);
+    let faultmessage ='';
+    const phoneformat = /^[0-9]+$/;
+        //^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})$/;
+
+    if(!(inputText.match(phoneformat))){
+        faultmessage += "telefoonnummer mag enkel cijfers bevatten\n";
+    }
+    if(inputText.length <9 || inputText.length>10){
+        faultmessage += "telefoonnummer moet 9 of 10 cijfers lang zijn.\n";
+    }
+    console.log('tel foutboodschap: '+ faultmessage);
+    return faultmessage;
+
+    /*const phoneformat = /^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})$/;
+    console.log(phoneformat);
+    console.log(inputText);*/
+    //return !!inputText.value.match(phoneformat);
 }
 
 function saveInLocaleStorage(value) {
