@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="/orderFries">
+    <a class="navbar-brand" href="/">
         <img src="/images/u101.png" alt="logo" class="float-start m-1" style="width: 85px;"/>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

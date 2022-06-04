@@ -1,7 +1,7 @@
     function confirmDelete(id){
     const ok = confirm("Weet je zeker dat je dit artikel wenst te verwijderen?")
     if (ok) {
-    window.location.href = `/Admin/Product/DeleteCondiment?id=${id}`;
+    window.location.href = `/Admin/Products/Condiments/Delete?id=${id}`;
 }
 }
     function addNew(id) {

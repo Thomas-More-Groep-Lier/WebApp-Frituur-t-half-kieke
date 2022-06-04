@@ -1,4 +1,4 @@
-    function confirmDelete(id){
+function confirmDelete(id){
     const ok = confirm("Weet je zeker dat je dit artikel wenst te verwijderen?")
     if (ok) {
     window.location.href = `/Admin/Product/Delete?id=${id}`;
@@ -6,7 +6,7 @@
 }
 
 function deleteCondiment(id){
-        window.location.href = `/Admin/Product/DeleteCondiment?id=${id}`;
+        window.location.href = `/Admin/Products/DeleteCondiment?id=${id}`;
 }
     function changeDisplay() {
     let select = document.getElementById('category');
@@ -163,8 +163,6 @@ function validateAndSubmit(){
     let category = document.getElementById('productCategory').value;
     let productname = document.getElementById('productName').value;
     let faultmessage = '';
-    console.log("validation script run");
-    console.log(price, category);
     if(price ==''){
         faultmessage ="prijs is een verplicht veld\n";
     }
@@ -174,7 +172,6 @@ function validateAndSubmit(){
     if(productname == ''){
         faultmessage +='product naam is een verplicht veld\n';
     }
-console.log(faultmessage);
     if(faultmessage != ''){
         alert(faultmessage);
     }

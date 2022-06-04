@@ -183,7 +183,7 @@ public class AdminController {
         return navigateToAdminProductView(products);
     }
 
-    @RequestMapping(value =  "Admin/Product/DeleteCondiment", method = RequestMethod.GET)
+    @RequestMapping(value =  "Admin/Products/Condiments/Delete", method = RequestMethod.GET)
     public String deleteProductCondiment(Model products, @PathParam("id") String id) {
 
         List<ProductCondiment> pc = productCondimentRepository.findAll().stream().filter(c -> c.getCondiment().getId() == Long.parseLong(id)).collect(Collectors.toList());
@@ -260,11 +260,15 @@ public class AdminController {
 
         if (condimenten != null && condimenten.length > 0) {
             for (Long x : condimenten) {
-                ProductCondiment productCondiment = new ProductCondiment();
-                productCondiment.setProduct(product);
                 Condiment condiment = condimentRepository.getById(x);
-                productCondiment.setCondiment(condiment);
-                productCondimentRepository.saveAndFlush(productCondiment);
+
+                List<ProductCondiment> productCondiment = productCondimentRepository.findAll().stream().filter(prc -> prc.getProduct().getId() == product.getId() && prc.getCondiment().getId() == condiment.getId() ).collect(Collectors.toList());
+                if (productCondiment.size() == 0){
+                    ProductCondiment newProductCondiment = new ProductCondiment();
+                    newProductCondiment.setProduct(product);
+                    newProductCondiment.setCondiment(condiment);
+                    productCondimentRepository.saveAndFlush(newProductCondiment);
+                }
             }
         }
 
@@ -285,14 +289,22 @@ public class AdminController {
         return "Admin/AdminCondimentView";
     }
 
-    @RequestMapping(value = "Admin/Products/Condiments/Delete", method = RequestMethod.GET)
-    public String deleteCondiment(Model condiment, @PathParam("id") String id) {
-        condiment.addAttribute("pageTitle", "Condimenten");
-        Condiment condi = condimentRepository.getById(Long.parseLong(id));
-        condimentRepository.delete(condi);
+    @RequestMapping(value = "Admin/Products/DeleteCondiment", method = RequestMethod.GET)
+    public String deleteCondiment(Model products, @PathParam("id") String id) {
+        ProductCondiment productCondiment = productCondimentRepository.getById(Long.parseLong(id));
+
+        if (productCondiment != null){
+            productCondimentRepository.delete(productCondiment);
+        }
+
+        List<Product> allProducts = productRepository.findAll();
+        products.addAttribute("pageTitle", "Producten");
+        products.addAttribute("allProducts", allProducts);
         List<Condiment> allcondiments = condimentRepository.findAll();
-        condiment.addAttribute("allcondiments", allcondiments);
-        return navigateToAdminCondimentsView(condiment);
+        products.addAttribute("allCondiments", allcondiments);
+        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
+        products.addAttribute("allProductCondiments", allProductCondiments);
+        return navigateToAdminProductView(products);
     }
 
     @PostMapping(path = "/Admin/Products/Condiments")

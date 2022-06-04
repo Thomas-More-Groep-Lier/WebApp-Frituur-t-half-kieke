@@ -108,13 +108,6 @@ function submitForm() {
     let voorwaarden = document.getElementById('voorwaarden').checked;
     let fouten = "";
 
-    /*console.log("timeslot:" +timeslot);
-    console.log("voornaam:" +firstname);
-    console.log("achternaam:" +lastname);
-    console.log("email:" +email);*/
-    console.log("telnr:" +tel);
-    console.log("voorwaarden goedgekeurd:" +voorwaarden);
-
     if (firstname === "" || lastname === "" || email === "" || !voorwaarden || timeslot === "" || tel === "" || parsedArr === null) {
         if (parsedArr === null)
             fouten += "Wil je niets eten? Dan kan je ook niets bestellen ... \n";
@@ -155,8 +148,7 @@ function submitForm() {
         }
     }
     if (fouten === "") {
-        console.log('geen fouten gevonden');
-        //document.getElementById('final').submit();
+        document.getElementById('final').submit();
     } else {
         alert(fouten);
     }
