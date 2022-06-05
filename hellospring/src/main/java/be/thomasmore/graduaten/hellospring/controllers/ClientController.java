@@ -182,7 +182,7 @@ public class ClientController {
     public String navigateToShoppingCartView(Model cart) {
         long currentTimeSlotId = getCurrentTimeSlot();
         long max = 392;
-        long limit = currentTimeSlotId + 8 < max ? currentTimeSlotId + 8 : max;
+        long limit = Math.min(currentTimeSlotId + 8, max);
         List<TimeSlot> timeSlots = timeSlotRepository.findAll().stream()
                 .filter(w -> w.getId() >= currentTimeSlotId && w.getId() <= limit).collect(Collectors.toList());
         cart.addAttribute("timeSlots", timeSlots);
@@ -201,7 +201,7 @@ public class ClientController {
     }
 
     public long getTimeSlotId(DayOfWeek weekday, int hours, int minutes) {
-        long timeSlotId = (hours - 10) * 4;
+        long timeSlotId = (hours - 10) * 4L;
         if (minutes == 15) {
             timeSlotId = timeSlotId + 1;
         } else if (minutes == 30) {

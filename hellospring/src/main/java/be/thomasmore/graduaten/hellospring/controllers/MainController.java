@@ -18,11 +18,6 @@ import java.util.stream.Collectors;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -66,7 +61,7 @@ public class MainController {
         return timeSlot.getIsActive();
     }
     public long getTimeSlotId(DayOfWeek weekday, int hours, int minutes) {
-        long timeSlotId = (hours - 10) * 4;
+        long timeSlotId = (hours - 10) * 4L;
         if (minutes == 15) {
             timeSlotId = timeSlotId + 1;
         } else if (minutes == 30) {
