@@ -17,27 +17,10 @@ public class ProductCondiment {
     @JoinColumn(name = "condimentId")
     private Condiment condiment;
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Condiment getCondiment() {
-        return condiment;
-    }
-
-    public void setCondiment(Condiment condiment) {
-        this.condiment = condiment;
-    }
-
+    //constructors
     public ProductCondiment() {
 
     }
-
-    //constructors
     public ProductCondiment(long id, Product product, Condiment condiment) {
         this.id = id;
         this.condiment = condiment;
@@ -54,11 +37,23 @@ public class ProductCondiment {
     public long getId() {
         return id;
     }
+    public Product getProduct() {
+        return product;
+    }
+    public Condiment getCondiment() {
+        return condiment;
+    }
+
 
     //Setters
-    //If setter for Id is never used in the application remove setter
     public void setId(long newId) {
-        this.id = newId;
+        id = newId;
+    }
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    public void setCondiment(Condiment condiment) {
+        this.condiment = condiment;
     }
 
 }

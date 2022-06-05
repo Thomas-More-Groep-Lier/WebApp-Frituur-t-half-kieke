@@ -65,7 +65,7 @@ public class ClientController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
-        Order x = new Order(user, date, false, "open", slot, slot.getUntil());
+        Order x = new Order(user, date, "open", slot, slot.getUntil());
         orderRepository.save(x);
 
         for (int i = 0; i < products.length; i++) {

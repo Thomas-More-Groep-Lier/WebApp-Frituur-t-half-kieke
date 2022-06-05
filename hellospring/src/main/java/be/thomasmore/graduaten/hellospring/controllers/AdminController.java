@@ -119,10 +119,10 @@ public class AdminController {
 
     @RequestMapping("Admin/Products")
     public String navigateToAdminProductView(Model products) {
-        List<Product> allProducts = productRepository.findAll();
+        List<Product> allProducts = productRepository.findAll().stream().filter(p -> p.getIsDeleted() == false).collect(Collectors.toList());
         products.addAttribute("pageTitle", "Producten");
         products.addAttribute("allProducts", allProducts);
-        List<Condiment> allcondiments = condimentRepository.findAll();
+        List<Condiment> allcondiments = condimentRepository.findAll().stream().filter(c -> c.getIsDeleted() == false).collect(Collectors.toList());
         products.addAttribute("allCondiments", allcondiments);
         List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
         products.addAttribute("allProductCondiments", allProductCondiments);
@@ -151,30 +151,42 @@ public class AdminController {
     @RequestMapping(value = "Admin/Product/Delete", method = RequestMethod.GET)
     public String deleteProduct(Model products, @PathParam("id") String id) {
 
+        Product product = productRepository.getById(Long.parseLong(id));
+
+
         List<ProductCondiment> pc = productCondimentRepository.findAll().stream().filter(p -> p.getProduct().getId() == Long.parseLong(id)).collect(Collectors.toList());
-            if (pc.size() > 0) {
-                productCondimentRepository.deleteAll(pc);
-            }
+        if (pc.size() > 0) {
+            productCondimentRepository.deleteAll(pc);
+        }
+        List<OrderDetail> od = orderDetailRepository.findAll().stream().filter(x -> x.getProduct().getId() == Long.parseLong(id)).collect(Collectors.toList());
+        if (od.size() > 0) {
+            product.setIsDeleted(true);
+            productRepository.saveAndFlush(product);
+        } else {
+            productRepository.delete(product);
+        }
 
         products.addAttribute("pageTitle", "Producten");
-        Product product = productRepository.getById(Long.parseLong(id));
-        productRepository.delete(product);
         return navigateToAdminProductView(products);
     }
 
     @RequestMapping(value = "Admin/Products/Condiments/Delete", method = RequestMethod.GET)
     public String deleteProductCondiment(Model products, @PathParam("id") String id) {
+        Condiment productCondiment = condimentRepository.getById(Long.parseLong(id));
 
         List<ProductCondiment> pc = productCondimentRepository.findAll().stream().filter(c -> c.getCondiment().getId() == Long.parseLong(id)).collect(Collectors.toList());
-
-            if (pc.size() > 0) {
-                productCondimentRepository.deleteAll(pc);
-            }
-
+        if (pc.size() > 0) {
+            productCondimentRepository.deleteAll(pc);
+        }
+        List<OrderDetail> od = orderDetailRepository.findAll().stream().filter(x -> x.getCondiment().getId() == Long.parseLong(id)).collect(Collectors.toList());
+        if (od.size() > 0) {
+            productCondiment.setIsDeleted(true);
+            condimentRepository.saveAndFlush(productCondiment);
+        } else {
+            condimentRepository.delete(productCondiment);
+        }
 
         products.addAttribute("pageTitle", "Producten");
-        Condiment productCondiment = condimentRepository.getById(Long.parseLong(id));
-        condimentRepository.delete(productCondiment);
         return navigateToAdminProductView(products);
 
     }
@@ -225,7 +237,7 @@ public class AdminController {
             productRepository.save(product);
 
         } else {
-            product = new Product(name, price, productCategory, true);
+            product = new Product(name, price, productCategory);
             productRepository.saveAndFlush(product);
         }
 
@@ -257,8 +269,7 @@ public class AdminController {
     @RequestMapping(value = "Admin/Products/DeleteCondiment", method = RequestMethod.GET)
     public String deleteCondiment(Model products, @PathParam("id") String id) {
         ProductCondiment productCondiment = productCondimentRepository.getById(Long.parseLong(id));
-
-            productCondimentRepository.delete(productCondiment);
+        productCondimentRepository.delete(productCondiment);
         return navigateToAdminProductView(products);
     }
 
@@ -349,14 +360,13 @@ public class AdminController {
             // delete existing records for this day ...
             int finalDay = day;
             List<OpeningHours> open = openinghoursRepository.findAll().stream().filter(x -> x.getDayOfTheWeek() == finalDay).collect(Collectors.toList());
-            if (open.size() > 0){
+            if (open.size() > 0) {
                 openinghoursRepository.deleteAll(open);
             }
         }
 
 
-
-        if (!fromHours.equals(untilHours)){
+        if (!fromHours.equals(untilHours)) {
             if (!fromMinutes.isBlank() && !untilMinutes.isBlank() && !dayOfTheWeek.isBlank()) {
                 from = fromHours + ":" + fromMinutes + ":00";
                 until = untilHours + ":" + untilMinutes + ":00";
@@ -371,7 +381,7 @@ public class AdminController {
                 timeSlotUpdater(day, 1, fromTimeSlot, untilTimeSlot);
             }
         }
-        if (!fromHoursSecond.equals(untilHoursSecond)){
+        if (!fromHoursSecond.equals(untilHoursSecond)) {
             if (!fromMinutesSecond.isBlank() && !untilMinutesSecond.isBlank() && !dayOfTheWeek.isBlank()) {
                 from = fromHoursSecond + ":" + fromMinutesSecond + ":00";
                 until = untilHoursSecond + ":" + untilMinutesSecond + ":00";
@@ -392,7 +402,7 @@ public class AdminController {
     @RequestMapping("Admin/Settings")
     public String navigateToAdminSettingsView(Model settings) {
         List<Vacation> allVacation = vacationRepository.findAll();
-        List <OpeningHours> openingHoursList = openinghoursRepository.findAllByOrderByDayOfTheWeekAsc();
+        List<OpeningHours> openingHoursList = openinghoursRepository.findAllByOrderByDayOfTheWeekAsc();
         settings.addAttribute("pageTitle", "Orders");
         settings.addAttribute("shopStatus", isInVacation());
         settings.addAttribute("logo", "/images/u101.png");
@@ -429,7 +439,6 @@ public class AdminController {
         return navigateToAdminSettingsView(settings);
 
     }
-
 
 
     public long nrOfOpenOrders() {

@@ -15,35 +15,31 @@ public class TimeSlot {
     private Boolean isActive;
     private int maxNumberOfOrders;
     private int ordersPlaced;
-    private Boolean spotAvailable;
     private int dayOfTheWeek;
     private String fromTime;
     private String until;
 
+    //constructors
     public TimeSlot() {
 
     }
-
-    //constructors
-    public TimeSlot(long id, Boolean isActive, Boolean spotAvailable, int maxNumberOfOrders, int ordersPlaced, int dayOfTheWeek, String from, String until) {
+    public TimeSlot(long id, Boolean isActive, int maxNumberOfOrders, int ordersPlaced, int dayOfTheWeek, String from, String until) {
         this.id = id;
         this.isActive = isActive;
-        this.spotAvailable = spotAvailable;
         this.maxNumberOfOrders = maxNumberOfOrders;
         this.ordersPlaced = ordersPlaced;
         this.dayOfTheWeek = dayOfTheWeek;
-        this.fromTime = from;
+        fromTime = from;
         this.until = until;
     }
 
     //constructor without id
-    public TimeSlot(Boolean isActive, Boolean spotAvailable, int maxNumberOfOrders, int ordersPlaced, int dayOfTheWeek, String from, String until) {
+    public TimeSlot(Boolean isActive, int maxNumberOfOrders, int ordersPlaced, int dayOfTheWeek, String from, String until) {
         this.isActive = isActive;
-        this.spotAvailable = spotAvailable;
         this.maxNumberOfOrders = maxNumberOfOrders;
         this.ordersPlaced = ordersPlaced;
         this.dayOfTheWeek = dayOfTheWeek;
-        this.fromTime = from;
+        fromTime = from;
         this.until = until;
     }
 
@@ -51,61 +47,44 @@ public class TimeSlot {
     public long getId() {
         return id;
     }
-
-    //Setters
-    //If setter for Id is never used in the application remove setter
-    public void setId(long newId) {
-        this.id = newId;
-    }
-
     public Boolean getIsActive() {
         return isActive;
     }
-
-    public void setIsActive(Boolean newIsActive) {
-        this.isActive = newIsActive;
-    }
-
     public Boolean getSpotAvailable() {
         return ordersPlaced <= maxNumberOfOrders;
     }
-
     public int getMaxNumberOfOrders() {
         return maxNumberOfOrders;
     }
-
-    public void setMaxNumberOfOrders(int newMaxNumberOfOrders) {
-        this.maxNumberOfOrders = newMaxNumberOfOrders;
-    }
-
     public int getOrdersPlaced() {
         return ordersPlaced;
     }
-
-    public void setOrdersPlaced(int newOrdersPlaced) {
-        this.ordersPlaced = newOrdersPlaced;
-    }
-
     public int getDayOfTheWeek() {
         return dayOfTheWeek;
     }
-
-    public void setDayOfTheWeek(int NewDayOfTheWeek) {
-        this.dayOfTheWeek = NewDayOfTheWeek;
-    } 
-
     public String getFrom() {
         return fromTime;
-    }
-
-    public void setFrom(String newFrom) {
-        this.fromTime = newFrom;
     }
     public String getUntil() {
         return until;
     }
 
-    public void setUntil(String newUntil) {
-        this.until = newUntil;
+    //Setters
+    public void setId(long newId) {
+        id = newId;
     }
+    public void setIsActive(Boolean newIsActive) {
+        isActive = newIsActive;
+    }
+    public void setMaxNumberOfOrders(int newMaxNumberOfOrders) {
+        maxNumberOfOrders = newMaxNumberOfOrders;
+    }
+    public void setOrdersPlaced(int newOrdersPlaced) {
+        ordersPlaced = newOrdersPlaced;
+    }
+    public void setFrom(String newFrom) {
+        fromTime = newFrom;
+    }
+
+
 }

@@ -14,56 +14,54 @@ public class Condiment {
     private long id;
     private String description;
     private float price;
+    private boolean isDeleted;
 
-    public Condiment() {
+      //constructors
+      public Condiment() {
 
-    }
-
-    //constructors
+      }
     public Condiment(long id, String description, float price) {
         this.id = id;
         this.description = description;
         this.price = price;
-
+        isDeleted = false;
     }
 
     //constructor without Id
     public Condiment(String description, float price) {
         this.description = description;
         this.price = price;
+        isDeleted = false;
     }
 
     //getters
     public long getId() {
         return id;
     }
+    public String getDescription() {
+        return description;
+    }
+    public float getPrice() {
+        return price;
+    }
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
 
 
     //Setters
     //If setter for Id is never used in the application remove setter
     public void setId(long newId) {
-        this.id = newId;
+        id = newId;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
     public void setDescription(String newDescription) {
-        this.description = newDescription;
+        description = newDescription;
     }
-
-    public float getPrice() {
-        return price;
-    }
-
     public void setPrice(float newPrice) {
-        this.price = newPrice;
+        price = newPrice;
     }
-
-    public long getSold(long numberOfProducts){return numberOfProducts;}
-    public long getRevenue(long numberOfProducts){return (long) (price * numberOfProducts);}
-
-
+    public void setIsDeleted(boolean newIsDeleted) {
+        isDeleted = newIsDeleted;
+    }
 
 }

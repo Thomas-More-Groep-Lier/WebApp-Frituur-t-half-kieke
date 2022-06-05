@@ -16,74 +16,69 @@ public class Product {
     private float price;
     private String category;
     private Boolean status;
+    private Boolean isDeleted;
 
+    //constructors
     public Product() {
 
     }
-
-    //constructors
-    public Product(long id, String description, float price, String category, boolean status) {
+    public Product(long id, String description, float price, String category) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.category = category;
-        this.status = status;
+        status = true;
+        isDeleted = false;
     }
 
     //constructor without Id
-    public Product(String description, float price, String category, boolean status) {
+    public Product(String description, float price, String category) {
         this.description = description;
         this.price = price;
         this.category = category;
-        this.status = status;
+        status = true;
+        isDeleted = false;
     }
 
     //getters
     public long getId() {
         return id;
     }
-
-
-    //Setters
-    //If setter for Id is never used in the application remove setter
-    public void setId(long newId) {
-        this.id = newId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String newDescription) {
-        this.description = newDescription;
-    }
-
     public String getCategory() {
         return category;
     }
-
-    public void setCategory(String newCategory) {
-        this.category = newCategory;
+    public String getDescription() {
+        return description;
     }
-
     public boolean getStatus(){
         return status;
-    }
-
-    public void setStatus(boolean newStatus){
-        this.status = newStatus;
     }
     public float getPrice() {
         return price;
     }
-
-    public void setPrice(float newPrice) {
-        this.price = newPrice;
+    public boolean getIsDeleted() {
+        return isDeleted;
     }
 
-    public long getSold(long numberOfProducts){return numberOfProducts;}
-    public long getRevenue(long numberOfProducts){return (long) (price * numberOfProducts);}
-
-
+    //Setters
+    //If setter for Id is never used in the application remove setter
+    public void setId(long newId) {
+        id = newId;
+    }
+    public void setDescription(String newDescription) {
+        description = newDescription;
+    }
+    public void setCategory(String newCategory) {
+        category = newCategory;
+    }
+    public void setStatus(boolean newStatus){
+        status = newStatus;
+    }
+    public void setPrice(float newPrice) {
+        price = newPrice;
+    }
+    public void setIsDeleted(boolean newIsDeleted) {
+        isDeleted = newIsDeleted;
+    }
 
 }

@@ -17,11 +17,10 @@ public class Client {
     private String phoneNumber;
     private String emailAdress;
 
+    //constructors
     public Client() {
 
     }
-
-    //constructors
     public Client(long id, String firstName, String lastName, String phoneNumber, String emailAdress) {
         this.id = id;
         this.firstName = firstName;
@@ -42,42 +41,20 @@ public class Client {
     public long getId() {
         return id;
     }
-
-    //Setters
-    //If setter for Id is never used in the application remove setter
-    public void setId(long newId) {
-        this.id = newId;
-    }
-
     public String getFirstName() {
         return firstName;
     }
-
-    public void setFirstName(String newName) {
-        this.firstName = newName;
+    public String getEmailAdress() {
+        return emailAdress;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String newName) {
-        this.lastName = newName;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String newPhoneNumber) {
-        this.phoneNumber = newPhoneNumber;
+
+    //Setters
+    public void setId(long newId) {
+        id = newId;
     }
 
-    public String getEmailAdress() {
-        return emailAdress;
-    }
-
-    public void setEmailAdress(String newEmailAdress) {
-        this.emailAdress = newEmailAdress;
-    }
 }

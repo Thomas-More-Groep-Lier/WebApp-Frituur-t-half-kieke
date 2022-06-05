@@ -132,7 +132,7 @@
                                                 "<a title=\"edit\" onclick=\"addNew(" + product.getId() + ")\" class=\"text-dark\"><i class=\"bi bi-pencil-fill \"></i></a>"
                                 );
 
-                                if (product.getStatus() == true) {
+                                if (product.getStatus()) {
                                     out.print(
                                             "<a title=\"pause\" href=\"/Admin/Product/Pause?id=" + product.getId() + "\" class=\"text-warning\"><i class=\"bi bi-pause-fill mx-4\"></i></a>"
                                     );
