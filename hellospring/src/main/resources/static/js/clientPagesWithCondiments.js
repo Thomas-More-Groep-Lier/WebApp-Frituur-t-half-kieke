@@ -4,16 +4,13 @@ var newQuantity = 0;
 var str = localStorage.getItem("array");
 var parsedArr = JSON.parse(str);
 
-console.log(condimenten);
 
 function fillInput() {
     if (parsedArr !== null && parsedArr.length > 0) {
-        console.log(parsedArr, selectedProducts);
         if (parsedArr.length < selectedProducts.length) {
             console.log("localeStorage blocking detected! Copy data from selected products array... ")
             parsedArr = selectedProducts;
         }
-        console.log(parsedArr);
         parsedArr = parsedArr.filter(p => p.quantity !== 0);
         for (let i = 0; i < parsedArr.length; i++) {
             let totalQuantity = 0;

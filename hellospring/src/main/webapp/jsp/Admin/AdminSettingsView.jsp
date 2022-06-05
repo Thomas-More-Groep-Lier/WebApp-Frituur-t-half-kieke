@@ -1,7 +1,9 @@
 <%@ page import="be.thomasmore.graduaten.hellospring.entities.Vacation" %>
 <%@ page import="java.util.List" %>
+<%@ page import="be.thomasmore.graduaten.hellospring.entities.OpeningHours" %>
 <%
     List<Vacation> planned = (List<Vacation>) request.getAttribute("plannedVacation");
+    List<OpeningHours> openingHoursList = (List<OpeningHours>) request.getAttribute("openingHoursList");
 
 %>
 <jsp:include page="../partials/head.jsp"/>
@@ -85,7 +87,7 @@
                     <div class="row">
                         <div class="col">
                             <h6>Uw geplande vankantie ...</h6>
-                             <table class="table">
+                            <table class="table">
                                 <tr>
                                     <th scope="col">Van</th>
                                     <th scope="col">Tot</th>
@@ -120,134 +122,182 @@
                 </div>
             </div>
             <div class="row border border-1 rounded p-3">
-                <div class="col">
-                    <form id="openingHours" method="post" action="/Admin/Settings/Openinghours">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <div class="row mb-3">
-                            <div class="col-4"></div>
-                            <div class="col-4"><h6>Van</h6></div>
-                            <div class="col-4"><h6>Tot</h6></div>
-                        </div>
-                        <div class="row mb-3" id="monday">
-                            <div class="col-4"><h6>Maandag</h6></div>
-                            <div class="col-4">
-                                <input type="time" name="mondayFrom" id="mondayFrom" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('mon')">
-                                <input type="time" name="mondayFrom2" id="mondayFrom2" class="form-control d-none" step="900" min="10:00"
-                                       max="24:00" value="">
+                <div class="row">
+                    <div class="col">
+                        <form id="openingHours" method="post" action="/Admin/Settings/Openinghours">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <div class="row mb-3">
+                                <div class="col-4">Dag van de week</div>
+                                <div class="col-8">
+                                    <select name="dayOfTheWeek" onchange="changeDay()" id="dayOfTheWeek" class="form-control">
+                                    <option id="dayOfTheWeek_0" value="0">Maandag</option>
+                                    <option id="dayOfTheWeek_1" value="1">Dinsdag</option>
+                                    <option id="dayOfTheWeek_2" value="2">Woensdag</option>
+                                    <option id="dayOfTheWeek_3" value="3">Donderdag</option>
+                                    <option id="dayOfTheWeek_4" value="4">Vrijdag</option>
+                                    <option id="dayOfTheWeek_5" value="5">Zaterdag</option>
+                                    <option id="dayOfTheWeek_6" value="6">Zondag</option>
+                                </select>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <input type="time" name="mondayUntil" id="mondayUntil" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('mon')">
-                                <input type="time" name="mondayUntil2" id="mondayUntil2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
+                            <div class="row mb-3">
+                                <div class="col border border-1 m-2 p-2 text-center">
+                                    <div class="row mb-3"><b>1ste openingsmoment</b></div>
+                                    <div class="row mb-3">
+                                        <div class="col text-start"><b>van</b></div>
+                                        <div class="col text-start"><b>tot</b></div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <select name="fromHours" onchange="changeHours(this)" id="fromHours" class="form-control">
+                                                <%
+                                                    for (int x = 10; x <= 23; x++) {
+                                                        out.print(
+                                                                "<option id=\"" + x + "\" value=\"" + x + "\">" + x + "</option>"
+                                                        );
+                                                    }
+                                                %>
+                                            </select>
+                                        </div>
+                                        <div class="col-1"><b>:</b></div>
+                                        <div class="col">
+                                            <select name="fromMinutes" onchange="changeMinutes(this)" id="fromMinutes" class="form-control">
+                                                <option id="minute_0" value="00">00</option>
+                                                <option id="minute_15" value="15">15</option>
+                                                <option id="minute_30" value="30">30</option>
+                                                <option id="minute_45" value="45">45</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select name="untilHours" onchange="changeHours(this)" id="untilHours" class="form-control" disabled>
+                                                <%
+                                                    for (int x = 10; x <= 23; x++) {
+                                                        out.print(
+                                                                "<option id=\"" + x + "\" value=\"" + x + "\">" + x + "</option>"
+                                                        );
+                                                    }
+                                                %>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-1"><b>:</b></div>
+                                        <div class="col">
+                                            <select name="untilMinutes" onchange="changeMinutes(this)" id="untilMinutes" class="form-control" disabled>
+                                                <option id="untilminute_0" value="00">00</option>
+                                                <option id="untilminute_15" value="15">15</option>
+                                                <option id="untilminute_30" value="30">30</option>
+                                                <option id="untilminute_45" value="45">45</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col border border-1 m-2 p-2 text-center">
+                                    <div class="row mb-3"><b>2de openingsmoment</b></div>
+                                    <div class="row mb-3">
+                                        <div class="col text-start"><b>van</b></div>
+                                        <div class="col text-start"><b>tot</b></div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <select name="fromHoursSecond" onchange="changeHours(this)" id="fromHoursSecond" class="form-control" disabled>
+                                                <%
+                                                    for (int x = 10; x <= 23; x++) {
+                                                        out.print(
+                                                                "<option id=\"" + x + "_Second\" value=\"" + x + "\">" + x + "</option>"
+                                                        );
+                                                    }
+                                                %>
+                                            </select>
+                                        </div>
+                                        <div class="col-1"><b>:</b></div>
+                                        <div class="col">
+                                            <select name="fromMinutesSecond" onchange="changeMinutes(this)" id="fromMinutesSecond"
+                                                    class="form-control" disabled>
+                                                <option id="minute_0_Second" value="00">00</option>
+                                                <option id="minute_15_Second" value="15">15</option>
+                                                <option id="minute_30_Second" value="30">30</option>
+                                                <option id="minute_45_Second" value="45">45</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select name="untilHoursSecond" onchange="changeHours(this)" id="untilHoursSecond" class="form-control" disabled>
+                                                <%
+                                                    for (int x = 10; x <= 23; x++) {
+                                                        out.print(
+                                                                "<option id=\"" + x + "_Second\" value=\"" + x + "\">" + x + "</option>"
+                                                        );
+                                                    }
+                                                %>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-1"><b>:</b></div>
+                                        <div class="col">
+                                            <select name="untilMinutesSecond" onchange="changeMinutes(this)" id="untilMinutesSecond"
+                                                    class="form-control" disabled>
+                                                <option id="untilminute_0_Second" value="00">00</option>
+                                                <option id="untilminute_15_Second" value="15">15</option>
+                                                <option id="untilminute_30_Second" value="30">30</option>
+                                                <option id="untilminute_45_Second" value="45">45</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%
+                                    if (openingHoursList != null) {
+                                        for (OpeningHours openingHours : openingHoursList) {
+                                            String weekday;
+                                            switch (openingHours.getDayOfTheWeek()) {
+                                                case 0:
+                                                    weekday = "Maandag";
+                                                    break;
+                                                case 1:
+                                                    weekday = "Dinsdag";
+                                                    break;
+                                                case 2:
+                                                    weekday = "Woensdag";
+                                                    break;
+                                                case 3:
+                                                    weekday = "Donderdag";
+                                                    break;
+                                                case 4:
+                                                    weekday = "Vrijdag";
+                                                    break;
+                                                case 5:
+                                                    weekday = "Zaterdag";
+                                                    break;
+                                                case 6:
+                                                    weekday = "Zondag";
+                                                    break;
+                                                default:
+                                                    return;
+                                            }
+                                            out.print(
+                                                    "<div class=\"row\">\n" +
+                                                            "<div class=\"col-3\">" + weekday + "</div>\n" +
+                                                            "<div class=\"col-3\">" + openingHours.getFrom() + "</div>\n" +
+                                                            "<div class=\"col-3\">" + openingHours.getUntil() + "</div>\n" +
+                                                            "<div class=\"col-3\"><a title=\"delete\" href=\"/Admin/Settings/Openinghours/Delete?id=" + openingHours.getId() + "\" class=\"text-danger\">" +
+                                                            "<i class=\"bi bi-trash3 \"></i>" +
+                                                            "</a></div>\n" +
+                                                            "</div>"
+                                            );
+                                        }
+                                    }
+                                %>
+
                             </div>
-                        </div>
-                        <div class="row mb-3" id="tuesday">
-                            <div class="col-4"><h6>Dinsdag</h6></div>
-                            <div class="col-4">
-                                <input type="time" name="tuesdayFrom" id="tuesdayFrom" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('tue')">
-                                <input type="time" name="tuesdayFrom2" id="tuesdayFrom2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                            <div class="col-4">
-                                <input type="time" name="tuesdayUntil" id="tuesdayUntil" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('tue')">
-                                <input type="time" name="tuesdayUntil2" id="tuesdayUntil2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                        </div>
-                        <div class="row mb-3" id="wednesday">
-                            <div class="col-4"><h6>Woensdag</h6></div>
-                            <div class="col-4">
-                                <input type="time" name="wednesdayFrom" id="wednesdayFrom" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('wed')">
-                                <input type="time" name="wednesdayFrom2" id="wednesdayFrom2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                            <div class="col-4">
-                                <input type="time" name="wednesdayUntil" id="wednesdayUntil" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('wed')">
-                                <input type="time" name="wednesdayUntil2" id="wednesdayUntil2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                        </div>
-                        <div class="row mb-3" id="thursday">
-                            <div class="col-4"><h6>Donderdag</h6></div>
-                            <div class="col-4">
-                                <input type="time" name="thursdayFrom" id="thursdayFrom" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('thu')">
-                                <input type="time" name="thursdayFrom2" id="thursdayFrom2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                            <div class="col-4">
-                                <input type="time" name="thursdayUntil" id="thursdayUntil" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('thu')">
-                                <input type="time" name="thursdayUntil2" id="thursdayUntil2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                        </div>
-                        <div class="row mb-3" id="friday">
-                            <div class="col-4"><h6>Vrijdag</h6></div>
-                            <div class="col-4">
-                                <input type="time" name="fridayFrom" id="fridayFrom" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('fri')">
-                                <input type="time" name="fridayFrom2" id="fridayFrom2" class="form-control d-none" step="900" min="10:00"
-                                       max="24:00" value="">
-                            </div>
-                            <div class="col-4">
-                                <input type="time" name="fridayUntil" id="fridayUntil" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('fri')">
-                                <input type="time" name="fridayUntil2"  id="fridayUntil2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                        </div>
-                        <div class="row mb-3" id="saturday">
-                            <div class="col-4"><h6>Zaterdag</h6></div>
-                            <div class="col-4">
-                                <input type="time" name="saturdayFrom" id="saturdayFrom" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('sat')">
-                                <input type="time" name="saturdayFrom2" id="saturdayFrom2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                            <div class="col-4">
-                                <input type="time" name="saturdayUntil" id="saturdayUntil" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('sat')">
-                                <input type="time" name="saturdayUntil2" id="saturdayUntil2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                        </div>
-                        <div class="row mb-3" id="sunday">
-                            <div class="col-4"><h6>Zondag</h6></div>
-                            <div class="col-4">
-                                <input type="time" name="sundayFrom" id="sundayFrom" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('sun')">
-                                <input type="time" name="sundayFrom2" id="sundayFrom2" class="form-control d-none" step="900" min="10:00"
-                                       max="24:00" value="">
-                            </div>
-                            <div class="col-4">
-                                <input type="time" name="sundayUntil" id="sundayUntil" class="form-control" step="900" min="10:00"
-                                       max="24:00" value="" onchange="interactivOpeningHoursForm('sun')">
-                                <input type="time" name="sundayUntil2" id="sundayUntil2" class="form-control d-none" step="900"
-                                       min="10:00" max="24:00" value="">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col d-flex align-items-end justify-content-end">
-                                <button type="button" class="btn btn-primary" onclick="updateOpeningHours()"><i
-                                        class="bi bi-pencil-fill"></i> AANPASSEN
+                            <div class="row mb-3 d-flex justify-conten-end">
+                                <button type="button" class="btn btn-primary fs-small" onclick="updateOpeningHours()"><i
+                                        class="bi bi-plus"></i> TOEVOEGEN
                                 </button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<jsp:include page="../partials/footer.jsp"/>
-<script src="/js/adminSettings.js" type="text/JavaScript"></script>
+            <jsp:include page="../partials/footer.jsp"/>
+            <script src="/js/adminSettings.js" type="text/JavaScript"></script>
 
 </body>
 </html>

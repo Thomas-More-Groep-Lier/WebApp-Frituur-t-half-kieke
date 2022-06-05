@@ -42,7 +42,7 @@
     </ul>
 </div>
 <script>
-    const url = window.location.href;
+    const url = location.protocol + '//' + location.host + location.pathname
     let nav = document.getElementById(url.substring(url.lastIndexOf("/") + 1).toLowerCase().replace('#', ''));
     if (nav !== null && nav !== undefined) {
         nav.classList.add('active');

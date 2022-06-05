@@ -9,9 +9,22 @@ drop table if exists `Vacation`;
 drop table if exists `Order`;
 drop table if exists `Condiment`;
 drop table if exists `ProductCondiment`;
+drop table if exists `OpeningHours`;
+
 
 
 -- Create tables
+-- OpeningHours
+CREATE TABLE `OpeningHours`
+(
+    `Id`        int         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `FromTime`  varchar(30) NOT NULL,
+    `UntilTime` varchar(30) NOT NULL,
+    `DayOfTheWeek` int NOT NULL,
+    PRIMARY KEY (Id)
+);
+
+
 --Vacation 
 CREATE TABLE Vacation
 (

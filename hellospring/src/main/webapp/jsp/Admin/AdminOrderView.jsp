@@ -41,7 +41,7 @@
                         if (od.getCondiment() != null){
                             out.print(
                                 "<div class=\"row\">" +
-                                    "<div class=\"col-12 text-start\"><p class=\"card-text text-danger ml-2\">" + od.getCondiment().getDescription() + "</p></div>" +
+                                    "<div class=\"col-12 text-start\"><p class=\"card-text text-danger ms-2\">" + od.getCondiment().getDescription() + "</p></div>" +
                                 "</div>"
                             );
                         }
