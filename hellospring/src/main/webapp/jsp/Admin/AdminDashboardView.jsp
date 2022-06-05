@@ -1,12 +1,10 @@
 
-<%@ page import="java.text.DecimalFormat" %>
 <%@ page import="be.thomasmore.graduaten.hellospring.entities.Product" %>
 <%@ page import="java.util.Map" %>
 
 <%@ page import="java.util.ArrayList" %>
 <%
     ArrayList<Map.Entry<Product, Long>> g = (ArrayList) request.getAttribute("list");
-    DecimalFormat df = new DecimalFormat("0.00");
 %>
 
 

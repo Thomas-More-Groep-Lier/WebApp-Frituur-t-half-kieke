@@ -56,10 +56,10 @@ public class AdminController {
 
     @RequestMapping("Admin/Dashboard")
     public String navigateToIndex(Model dashboard) {
-        Map<Product, Long> bestsellers = orderDetailRepository.findAll().stream().collect(Collectors.groupingBy(e -> e.getProduct(), Collectors.summingLong(s -> s.getNumberOfProducts())));
+        Map<Product, Long> bestsellers = orderDetailRepository.findAll().stream().collect(Collectors.groupingBy(OrderDetail::getProduct, Collectors.summingLong(OrderDetail::getNumberOfProducts)));
         bestsellers.forEach((k, v) -> System.out.println(k + "=" + v));
         System.out.println("After Sorting by value");
-        List<Map.Entry<Product, Long>> list = new ArrayList<Map.Entry<Product, Long>>(bestsellers.entrySet());
+        List<Map.Entry<Product, Long>> list = new ArrayList<>(bestsellers.entrySet());
         list.sort(Map.Entry.comparingByValue());
         Collections.reverse(list);
         dashboard.addAttribute("list", list);
@@ -119,10 +119,10 @@ public class AdminController {
 
     @RequestMapping("Admin/Products")
     public String navigateToAdminProductView(Model products) {
-        List<Product> allProducts = productRepository.findAll();
+        List<Product> allProducts = productRepository.findAll().stream().filter(p -> p.getIsDeleted() == false).collect(Collectors.toList());
         products.addAttribute("pageTitle", "Producten");
         products.addAttribute("allProducts", allProducts);
-        List<Condiment> allcondiments = condimentRepository.findAll();
+        List<Condiment> allcondiments = condimentRepository.findAll().stream().filter(c -> c.getIsDeleted() == false).collect(Collectors.toList());
         products.addAttribute("allCondiments", allcondiments);
         List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
         products.addAttribute("allProductCondiments", allProductCondiments);
@@ -135,12 +135,6 @@ public class AdminController {
         Product product = productRepository.getById(Long.parseLong(id));
         product.setStatus(false);
         productRepository.save(product);
-        List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("allProducts", allProducts);
-        List<Condiment> allcondiments = condimentRepository.findAll();
-        products.addAttribute("allCondiments", allcondiments);
-        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
-        products.addAttribute("allProductCondiments", allProductCondiments);
         return navigateToAdminProductView(products);
 
     }
@@ -151,59 +145,48 @@ public class AdminController {
         Product product = productRepository.getById(Long.parseLong(id));
         product.setStatus(true);
         productRepository.save(product);
-        List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("allProducts", allProducts);
-        List<Condiment> allcondiments = condimentRepository.findAll();
-        products.addAttribute("allCondiments", allcondiments);
-        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
-        products.addAttribute("allProductCondiments", allProductCondiments);
         return navigateToAdminProductView(products);
     }
 
     @RequestMapping(value = "Admin/Product/Delete", method = RequestMethod.GET)
     public String deleteProduct(Model products, @PathParam("id") String id) {
 
-        List<ProductCondiment> pc = productCondimentRepository.findAll().stream().filter(p -> p.getProduct().getId() == Long.parseLong(id)).collect(Collectors.toList());
+        Product product = productRepository.getById(Long.parseLong(id));
 
-        if (pc != null) {
-            if (pc.size() > 0) {
-                pc.forEach(x -> productCondimentRepository.delete(x));
-            }
+
+        List<ProductCondiment> pc = productCondimentRepository.findAll().stream().filter(p -> p.getProduct().getId() == Long.parseLong(id)).collect(Collectors.toList());
+        if (pc.size() > 0) {
+            productCondimentRepository.deleteAll(pc);
+        }
+        List<OrderDetail> od = orderDetailRepository.findAll().stream().filter(x -> x.getProduct().getId() == Long.parseLong(id)).collect(Collectors.toList());
+        if (od.size() > 0) {
+            product.setIsDeleted(true);
+            productRepository.saveAndFlush(product);
+        } else {
+            productRepository.delete(product);
         }
 
         products.addAttribute("pageTitle", "Producten");
-        Product product = productRepository.getById(Long.parseLong(id));
-        productRepository.delete(product);
-        List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("allProducts", allProducts);
-        List<Condiment> allcondiments = condimentRepository.findAll();
-        products.addAttribute("allCondiments", allcondiments);
-        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
-        products.addAttribute("allProductCondiments", allProductCondiments);
         return navigateToAdminProductView(products);
     }
 
     @RequestMapping(value = "Admin/Products/Condiments/Delete", method = RequestMethod.GET)
     public String deleteProductCondiment(Model products, @PathParam("id") String id) {
+        Condiment productCondiment = condimentRepository.getById(Long.parseLong(id));
 
         List<ProductCondiment> pc = productCondimentRepository.findAll().stream().filter(c -> c.getCondiment().getId() == Long.parseLong(id)).collect(Collectors.toList());
-
-        if (pc != null) {
-            if (pc.size() > 0) {
-                pc.forEach(x -> productCondimentRepository.delete(x));
-            }
+        if (pc.size() > 0) {
+            productCondimentRepository.deleteAll(pc);
+        }
+        List<OrderDetail> od = orderDetailRepository.findAll().stream().filter(x -> x.getCondiment().getId() == Long.parseLong(id)).collect(Collectors.toList());
+        if (od.size() > 0) {
+            productCondiment.setIsDeleted(true);
+            condimentRepository.saveAndFlush(productCondiment);
+        } else {
+            condimentRepository.delete(productCondiment);
         }
 
-
         products.addAttribute("pageTitle", "Producten");
-        Condiment productCondiment = condimentRepository.getById(Long.parseLong(id));
-        condimentRepository.delete(productCondiment);
-        List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("allProducts", allProducts);
-        List<Condiment> allcondiments = condimentRepository.findAll();
-        products.addAttribute("allCondiments", allcondiments);
-        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
-        products.addAttribute("allProductCondiments", allProductCondiments);
         return navigateToAdminProductView(products);
 
     }
@@ -254,7 +237,7 @@ public class AdminController {
             productRepository.save(product);
 
         } else {
-            product = new Product(name, price, productCategory, true);
+            product = new Product(name, price, productCategory);
             productRepository.saveAndFlush(product);
         }
 
@@ -272,12 +255,6 @@ public class AdminController {
             }
         }
 
-        List<Condiment> allcondiments = condimentRepository.findAll();
-        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
-        products.addAttribute("allProductCondiments", allProductCondiments);
-        products.addAttribute("allCondiments", allcondiments);
-        List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("allProducts", allProducts);
         return navigateToAdminProductView(products);
     }
 
@@ -292,18 +269,7 @@ public class AdminController {
     @RequestMapping(value = "Admin/Products/DeleteCondiment", method = RequestMethod.GET)
     public String deleteCondiment(Model products, @PathParam("id") String id) {
         ProductCondiment productCondiment = productCondimentRepository.getById(Long.parseLong(id));
-
-        if (productCondiment != null) {
-            productCondimentRepository.delete(productCondiment);
-        }
-
-        List<Product> allProducts = productRepository.findAll();
-        products.addAttribute("pageTitle", "Producten");
-        products.addAttribute("allProducts", allProducts);
-        List<Condiment> allcondiments = condimentRepository.findAll();
-        products.addAttribute("allCondiments", allcondiments);
-        List<ProductCondiment> allProductCondiments = productCondimentRepository.findAll();
-        products.addAttribute("allProductCondiments", allProductCondiments);
+        productCondimentRepository.delete(productCondiment);
         return navigateToAdminProductView(products);
     }
 
@@ -325,9 +291,6 @@ public class AdminController {
             condi = new Condiment(name, price);
             condimentRepository.saveAndFlush(condi);
         }
-
-        List<Condiment> allcondiments = condimentRepository.findAll();
-        condiment.addAttribute("allcondiments", allcondiments);
         return navigateToAdminCondimentsView(condiment);
     }
 
@@ -352,14 +315,6 @@ public class AdminController {
         List<TimeSlot> all = timeSlotRepository.findAll();
         all.forEach(t -> t.setMaxNumberOfOrders(defaultNrOfOrders));
         timeSlotRepository.saveAllAndFlush(all);
-        timeSlots.addAttribute("pageTitle", "Time slots");
-        timeSlots.addAttribute("timeSlotMan", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 0).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotDin", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 1).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotWoe", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 2).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotDon", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 3).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotVri", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 4).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotZat", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 5).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotZon", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 6).collect(Collectors.toList()));
         return navigateToAdminTimeSlotsView(timeSlots);
     }
 
@@ -374,14 +329,6 @@ public class AdminController {
         slot.setMaxNumberOfOrders(maxNumberOfOrders);
         slot.setIsActive(isActive);
         timeSlotRepository.saveAndFlush(slot);
-        timeSlots.addAttribute("pageTitle", "Time slots");
-        timeSlots.addAttribute("timeSlotMan", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 0).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotDin", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 1).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotWoe", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 2).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotDon", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 3).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotVri", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 4).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotZat", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 5).collect(Collectors.toList()));
-        timeSlots.addAttribute("timeSlotZon", timeSlotRepository.findAll().stream().filter(t -> t.getDayOfTheWeek() == 6).collect(Collectors.toList()));
         return navigateToAdminTimeSlotsView(timeSlots);
     }
 
@@ -413,17 +360,13 @@ public class AdminController {
             // delete existing records for this day ...
             int finalDay = day;
             List<OpeningHours> open = openinghoursRepository.findAll().stream().filter(x -> x.getDayOfTheWeek() == finalDay).collect(Collectors.toList());
-            if (open.size() > 0){
-                for(int x = 0; x < open.size(); x++){
-                    OpeningHours op = open.get(x);
-                    openinghoursRepository.delete(op);
-                }
+            if (open.size() > 0) {
+                openinghoursRepository.deleteAll(open);
             }
         }
 
 
-
-        if (!fromHours.equals(untilHours)){
+        if (!fromHours.equals(untilHours)) {
             if (!fromMinutes.isBlank() && !untilMinutes.isBlank() && !dayOfTheWeek.isBlank()) {
                 from = fromHours + ":" + fromMinutes + ":00";
                 until = untilHours + ":" + untilMinutes + ":00";
@@ -438,7 +381,7 @@ public class AdminController {
                 timeSlotUpdater(day, 1, fromTimeSlot, untilTimeSlot);
             }
         }
-        if (!fromHoursSecond.equals(untilHoursSecond)){
+        if (!fromHoursSecond.equals(untilHoursSecond)) {
             if (!fromMinutesSecond.isBlank() && !untilMinutesSecond.isBlank() && !dayOfTheWeek.isBlank()) {
                 from = fromHoursSecond + ":" + fromMinutesSecond + ":00";
                 until = untilHoursSecond + ":" + untilMinutesSecond + ":00";
@@ -459,12 +402,14 @@ public class AdminController {
     @RequestMapping("Admin/Settings")
     public String navigateToAdminSettingsView(Model settings) {
         List<Vacation> allVacation = vacationRepository.findAll();
-        List <OpeningHours> openingHoursList = openinghoursRepository.findAllByOrderByDayOfTheWeekAsc();
+        List<OpeningHours> openingHoursList = openinghoursRepository.findAllByOrderByDayOfTheWeekAsc();
         settings.addAttribute("pageTitle", "Orders");
         settings.addAttribute("shopStatus", isInVacation());
         settings.addAttribute("logo", "/images/u101.png");
         settings.addAttribute("plannedVacation", allVacation);
         settings.addAttribute("openingHoursList", openingHoursList);
+        inVacation = isInVacation();
+        settings.addAttribute("shopStatus", inVacation);
         return "Admin/AdminSettingsView";
     }
 
@@ -475,13 +420,6 @@ public class AdminController {
                                     @RequestParam(value = "_csrf") String token) {
         Vacation Vacation = new Vacation(from, untill);
         vacationRepository.saveAndFlush(Vacation);
-        List<Vacation> allVacation = vacationRepository.findAll();
-        inVacation = isInVacation();
-
-        settings.addAttribute("pageTitle", "Instellingen");
-        settings.addAttribute("shopStatus", inVacation);
-        settings.addAttribute("logo", "/images/u101.png");
-        settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
 
     }
@@ -490,12 +428,6 @@ public class AdminController {
     public String deleteVacation(Model settings, @PathParam("id") String id) {
         Vacation vac = vacationRepository.getById(Long.parseLong(id));
         vacationRepository.delete(vac);
-        List<Vacation> allVacation = vacationRepository.findAll();
-        inVacation = isInVacation();
-        settings.addAttribute("pageTitle", "Instellingen");
-        settings.addAttribute("shopStatus", inVacation);
-        settings.addAttribute("logo", "/images/u101.png");
-        settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
 
     }
@@ -504,14 +436,9 @@ public class AdminController {
     public String deleteOpeninghours(Model settings, @PathParam("id") String id) {
         OpeningHours op = openinghoursRepository.getById(Long.parseLong(id));
         openinghoursRepository.delete(op);
-        List<Vacation> allVacation = vacationRepository.findAll();
-        settings.addAttribute("pageTitle", "Instellingen");
-        settings.addAttribute("logo", "/images/u101.png");
-        settings.addAttribute("plannedVacation", allVacation);
         return navigateToAdminSettingsView(settings);
 
     }
-
 
 
     public long nrOfOpenOrders() {
@@ -620,7 +547,7 @@ public class AdminController {
     }
 
     public long timeSlotId(int day, int hours, int minutes) {
-        long timeSlotId = (hours - 10) * 4;
+        long timeSlotId = (hours - 10) * 4L;
         if (minutes == 15) {
             timeSlotId = timeSlotId + 1;
         } else if (minutes == 30) {

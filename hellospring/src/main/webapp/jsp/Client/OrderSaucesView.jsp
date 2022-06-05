@@ -59,7 +59,6 @@
                                                 "<button onclick=\"prepareModal('" + product.getId() + "','" + product.getDescription() + "','" + product.getPrice() + "')\"  type=\"button\" class=\"btnMinus\" role=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" aria-pressed=\"true\" style=\"color: red; background-color: pink; border: 2px solid red;\"><i class=\"bi bi-dash-lg\"></i></button>" +
                                                         "<input type=\"text\" id=\"" + product.getId() + "\" min=\"0\" max=\"25\" value=\"0\" class=\"quantityInput\" style=\"width: 40px; text-align: center;\" disabled/>" +
                                                         "<button onclick=\"prepareModal('" + product.getId() + "','" + product.getDescription() + "','" + product.getPrice() + "')\" type=\"button\" class=\"btnPlus\" role=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" aria-pressed=\"true\" style=\"color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;\"><i class=\"bi bi-plus-lg\"></i></button>"
-                                                //   "<div class=\"d-none\" id=\"info_"+ product.getId() +"\"></div>"
                                         );
                                     } else {
                                         out.print(
@@ -103,7 +102,6 @@
                                                 "<button onclick=\"prepareModal('" + product.getId() + "','" + product.getDescription() + "','" + product.getPrice() + "')\"  type=\"button\" class=\"btnMinus\" role=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" aria-pressed=\"true\" style=\"color: red; background-color: pink; border: 2px solid red;\"><i class=\"bi bi-dash-lg\"></i></button>" +
                                                         "<input type=\"text\" id=\"" + product.getId() + "\" min=\"0\" max=\"25\" value=\"0\" class=\"quantityInput\" style=\"width: 40px; text-align: center;\" disabled/>" +
                                                         "<button onclick=\"prepareModal('" + product.getId() + "','" + product.getDescription() + "','" + product.getPrice() + "')\" type=\"button\" class=\"btnPlus\" role=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" aria-pressed=\"true\" style=\"color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;\"><i class=\"bi bi-plus-lg\"></i></button>"
-                                                //   "<div class=\"d-none\" id=\"info_"+ product.getId() +"\"></div>"
                                         );
                                     } else {
                                         out.print(

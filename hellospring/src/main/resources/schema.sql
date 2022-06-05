@@ -11,16 +11,14 @@ drop table if exists `Condiment`;
 drop table if exists `ProductCondiment`;
 drop table if exists `OpeningHours`;
 
-
-
 -- Create tables
 -- OpeningHours
 CREATE TABLE `OpeningHours`
 (
-    `Id`        int         NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `FromTime`  varchar(30) NOT NULL,
-    `UntilTime` varchar(30) NOT NULL,
-    `DayOfTheWeek` int NOT NULL,
+    `Id`           int         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `FromTime`     varchar(30) NOT NULL,
+    `UntilTime`    varchar(30) NOT NULL,
+    `DayOfTheWeek` int         NOT NULL,
     PRIMARY KEY (Id)
 );
 
@@ -59,6 +57,7 @@ CREATE TABLE Product
     Price       float(2)    NOT NULL,
     Category    varchar(20) NOT NULL,
     Status      bit         NOT NULL,
+    IsDeleted   bit         NOT NULL,
     PRIMARY KEY (Id)
 );
 --Condiment
@@ -67,13 +66,14 @@ CREATE TABLE Condiment
     Id          int         NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Description varchar(30) NOT NULL,
     Price       float(2)    NOT NULL,
+    IsDeleted   bit         NOT NULL,
     PRIMARY KEY (Id)
 );
 --TimeSlot
 CREATE TABLE TimeSlot
 (
     Id                int        NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    IsActive          boolean    NULL,
+    IsActive          boolean NULL,
     SpotAvailable     boolean    NOT NULL,
     MaxNumberOfOrders int        NOT NULL,
     OrdersPlaced      int        NOT NULL,
@@ -90,7 +90,6 @@ CREATE TABLE `ORDERTABLE`
     TimeSlotId          int         NOT NULL,
     OrderDate           varchar(10) NOT NULL,
     WantedRetrievalTime varchar(10) NOT NULL,
-    OrderToBig          bit         NOT NULL,
     Status              varchar(10) NOT NULL,
     PRIMARY KEY (Id)
 );
@@ -107,8 +106,8 @@ CREATE TABLE ClientOrder
 CREATE TABLE ProductCondiment
 (
     Id          int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    ProductId   int NOT NULL,
-    CondimentId int NOT NULL,
+    ProductId   int NULL,
+    CondimentId int NULL,
     PRIMARY KEY (Id)
 );
 -- Order <-> Product => OrderDetail
@@ -116,7 +115,7 @@ CREATE TABLE OrderDetail
 (
     Id               int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     OrderId          int NOT NULL,
-    ProductId        int NOT NULL,
+    ProductId        int NULL,
     NumberOfProducts int NOT NULL,
     CondimentId      int NULL,
     PRIMARY KEY (id)

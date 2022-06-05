@@ -33,13 +33,13 @@ public class Vacation {
     //Setters
     //If setter for Id is never used in the application remove setter
     public void setId(long newId){
-        this.id = newId;
+        id = newId;
     }
     public void setFromDate(String newFromDate){
-        this.fromDate = newFromDate;
+        fromDate = newFromDate;
     }
     public void setUntilDate(String newUntilDate){
-        this.untilDate = newUntilDate;
+        untilDate = newUntilDate;
     }
 
     //constructors

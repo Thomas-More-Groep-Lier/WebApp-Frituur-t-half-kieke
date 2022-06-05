@@ -23,35 +23,10 @@ public class OrderDetail {
     @JoinColumn(name = "condimentId")
     private Condiment condiment;
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Condiment getCondiment() {
-        return condiment;
-    }
-
-    public void setProduct(Condiment condiment) {
-        this.condiment = condiment;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
+    //constructors
     public OrderDetail() {
 
     }
-
-    //constructors
     public OrderDetail(long id, Product product, Order order, long numberOfProducts, Condiment condiment) 
     {
         this.id = id;
@@ -74,19 +49,32 @@ public class OrderDetail {
     public long getId() {
         return id;
     }
+    public Product getProduct() {
+        return product;
+    }
+    public Condiment getCondiment() {
+        return condiment;
+    }
+    public Order getOrder() {
+        return order;
+    }
+
+
+
 
     //Setters
     //If setter for Id is never used in the application remove setter
     public void setId(long newId) {
-        this.id = newId;
+        id = newId;
     }
-
     public long getNumberOfProducts() {
         return numberOfProducts;
     }
-
-    public void setNumberOfProducts(long newNumberOfProducts) {
-        this.numberOfProducts = newNumberOfProducts;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    public void setProduct(Condiment condiment) {
+        this.condiment = condiment;
     }
 
 }

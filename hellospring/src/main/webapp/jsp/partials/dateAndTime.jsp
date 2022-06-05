@@ -2,7 +2,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
     Date date = new Date();
-    SimpleDateFormat format = new SimpleDateFormat("EEEE, dd MMMM YYYY");
+    SimpleDateFormat format = new SimpleDateFormat("EEEE, dd MMMM yyyy");
     SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
 %>
 <div class="row">

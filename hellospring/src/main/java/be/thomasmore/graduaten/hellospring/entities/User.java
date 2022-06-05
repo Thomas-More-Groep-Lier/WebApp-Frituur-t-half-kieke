@@ -34,24 +34,6 @@ public class User {
     //Setters
     //If setter for Id is never used in the application remove setter
     public void setId(long newId) {
-        this.id = newId;
+        id = newId;
     }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String newUserName) {
-        this.userName = newUserName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String newPassword) {
-        this.password = newPassword;
-    }
-
-
 }

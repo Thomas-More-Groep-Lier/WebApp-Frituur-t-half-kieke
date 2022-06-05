@@ -58,7 +58,7 @@ function testBigger(select) {
         //     break;
         case "untilHours":
             if (untilHours < fromHours || fromHoursSecond < untilHours) {
-                return  "foute ingave bij sluitingsuur 1ste openingsmoment... \n";;
+                return  "foute ingave bij sluitingsuur 1ste openingsmoment... \n";
             }
             return "";
             break;
@@ -74,7 +74,7 @@ function testBigger(select) {
         //     }
         //     break;
         default:
-            ;
+
     }
 }
 
