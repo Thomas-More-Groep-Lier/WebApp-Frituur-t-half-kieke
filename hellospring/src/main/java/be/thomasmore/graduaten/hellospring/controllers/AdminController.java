@@ -99,10 +99,10 @@ public class AdminController {
 
     @PostMapping(path = "/Admin/Orders")
     public String updateOrder(Model orders,
-                              @RequestBody @RequestParam(value = "orderId") long orderId,
-                              @RequestParam(value = "orderStatus") String orderStatus,
-                              @RequestParam(value = "category") String category,
-                              @RequestParam(value = "_csrf") String token) {
+                              @RequestBody @RequestParam("orderId") long orderId,
+                              @RequestParam("orderStatus") String orderStatus,
+                              @RequestParam("category") String category,
+                              @RequestParam("_csrf") String token) {
         Order order = orderRepository.getById(orderId);
         order.setStatus(orderStatus);
         orderRepository.saveAndFlush(order);
@@ -195,11 +195,11 @@ public class AdminController {
     @PostMapping(path = "/Admin/Products")
     public String updateProduct(Model products,
                                 @RequestBody @RequestParam(value = "productId", required = false) String id,
-                                @RequestParam(value = "productName") String name,
-                                @RequestParam(value = "productCategory") String productCategory,
-                                @RequestParam(value = "productPrice") float price,
-                                @RequestParam(value = "condimenten") Long[] condimenten,
-                                @RequestParam(value = "_csrf") String token) {
+                                @RequestParam("productName") String name,
+                                @RequestParam("productCategory") String productCategory,
+                                @RequestParam("productPrice") float price,
+                                @RequestParam("condimenten") Long[] condimenten,
+                                @RequestParam("_csrf") String token) {
         products.addAttribute("pageTitle", "Producten");
         switch (productCategory) {
             case "1":
@@ -276,9 +276,9 @@ public class AdminController {
     @PostMapping(path = "/Admin/Products/Condiments")
     public String updateCondiment(Model condiment,
                                   @RequestBody @RequestParam(value = "condimentId", required = false) String id,
-                                  @RequestParam(value = "condimentName") String name,
-                                  @RequestParam(value = "condimentPrice") float price,
-                                  @RequestParam(value = "_csrf") String token) {
+                                  @RequestParam("condimentName") String name,
+                                  @RequestParam("condimentPrice") float price,
+                                  @RequestParam("_csrf") String token) {
         condiment.addAttribute("pageTitle", "Condimenten");
 
         Condiment condi;
@@ -310,8 +310,8 @@ public class AdminController {
 
     @PostMapping(path = "Admin/TimeSlots/Default")
     public String addDefaultNrOfOrders(Model timeSlots,
-                                       @RequestBody @RequestParam(value = "defaultNrOfOrders") int defaultNrOfOrders,
-                                       @RequestParam(value = "_csrf") String token) {
+                                       @RequestBody @RequestParam("defaultNrOfOrders") int defaultNrOfOrders,
+                                       @RequestParam("_csrf") String token) {
         List<TimeSlot> all = timeSlotRepository.findAll();
         all.forEach(t -> t.setMaxNumberOfOrders(defaultNrOfOrders));
         timeSlotRepository.saveAllAndFlush(all);
@@ -321,10 +321,10 @@ public class AdminController {
     @PostMapping(path = "Admin/TimeSlots/Change")
     public String changeATimeSlot(Model timeSlots,
                                   @RequestBody
-                                  @RequestParam(value = "timeSlotId") long timeSlotId,
-                                  @RequestParam(value = "isActive") boolean isActive,
-                                  @RequestParam(value = "nrOfOrders") int maxNumberOfOrders,
-                                  @RequestParam(value = "_csrf") String token) {
+                                  @RequestParam("timeSlotId") long timeSlotId,
+                                  @RequestParam("isActive") boolean isActive,
+                                  @RequestParam("nrOfOrders") int maxNumberOfOrders,
+                                  @RequestParam("_csrf") String token) {
         TimeSlot slot = timeSlotRepository.getById(timeSlotId);
         slot.setMaxNumberOfOrders(maxNumberOfOrders);
         slot.setIsActive(isActive);
@@ -335,16 +335,18 @@ public class AdminController {
     @PostMapping(path = "Admin/Settings/Openinghours")
     public String changeOpeningshours(Model settings,
                                       @RequestBody
-                                      @RequestParam(value = "fromHours") String fromHours,
-                                      @RequestParam(value = "fromMinutes") String fromMinutes,
-                                      @RequestParam(value = "untilHours") String untilHours,
-                                      @RequestParam(value = "untilMinutes") String untilMinutes,
-                                      @RequestParam(value = "fromHoursSecond") String fromHoursSecond,
-                                      @RequestParam(value = "fromMinutesSecond") String fromMinutesSecond,
-                                      @RequestParam(value = "untilHoursSecond") String untilHoursSecond,
-                                      @RequestParam(value = "untilMinutesSecond") String untilMinutesSecond,
-                                      @RequestParam(value = "dayOfTheWeek") String dayOfTheWeek,
-                                      @RequestParam(value = "_csrf") String token) {
+                                      @RequestParam(required = false, value = "fromHours") String fromHours,
+                                      @RequestParam(required = false, value = "closed") String closed,
+                                      @RequestParam(required = false, value = "fromMinutes") String fromMinutes,
+                                      @RequestParam(required = false, value = "untilHours") String untilHours,
+                                      @RequestParam(required = false, value = "untilMinutes") String untilMinutes,
+                                      @RequestParam(required = false, value = "fromHoursSecond") String fromHoursSecond,
+                                      @RequestParam(required = false, value = "fromMinutesSecond") String fromMinutesSecond,
+                                      @RequestParam(required = false, value = "untilHoursSecond") String untilHoursSecond,
+                                      @RequestParam(required = false, value = "untilMinutesSecond") String untilMinutesSecond,
+                                      @RequestParam(required = false, value = "dayOfTheWeek") String dayOfTheWeek,
+                                      @RequestParam(required = false, value = "_csrf") String token) {
+
         int fromhours;
         int fromminutes;
         int untilhours;
@@ -355,45 +357,85 @@ public class AdminController {
         String until;
         OpeningHours openingHours;
         int day = 0;
-        if (!dayOfTheWeek.isBlank()) {
-            day = Integer.parseInt(dayOfTheWeek);
-            // delete existing records for this day ...
-            int finalDay = day;
-            List<OpeningHours> open = openinghoursRepository.findAll().stream().filter(x -> x.getDayOfTheWeek() == finalDay).collect(Collectors.toList());
-            if (open.size() > 0) {
-                openinghoursRepository.deleteAll(open);
-            }
-        }
 
-
-        if (!fromHours.equals(untilHours)) {
-            if (!fromMinutes.isBlank() && !untilMinutes.isBlank() && !dayOfTheWeek.isBlank()) {
-                from = fromHours + ":" + fromMinutes + ":00";
-                until = untilHours + ":" + untilMinutes + ":00";
-                openingHours = new OpeningHours(Integer.parseInt(dayOfTheWeek), from, until);
-                openinghoursRepository.saveAndFlush(openingHours);
-                fromhours = Integer.parseInt(fromHours);
-                fromminutes = Integer.parseInt(fromMinutes);
-                untilhours = Integer.parseInt(untilHours);
-                untilminutes = Integer.parseInt(untilMinutes);
-                fromTimeSlot = timeSlotId(day, fromhours, fromminutes);
-                untilTimeSlot = timeSlotId(day, untilhours, untilminutes);
-                timeSlotUpdater(day, 1, fromTimeSlot, untilTimeSlot);
+        if (closed != null) {
+            long start = 0;
+            long end = 0;
+            switch (dayOfTheWeek) {
+                case "0":
+                    start = 56;
+                    end = 0;
+                    break;
+                case "1":
+                    start = 112;
+                    end = 56;
+                    break;
+                case "2":
+                    start = 168;
+                    end = 112;
+                    break;
+                case "3":
+                    start = 224;
+                    end = 168;
+                    break;
+                case "4":
+                    start = 280;
+                    end = 224;
+                    break;
+                case "5":
+                    start = 336;
+                    end = 280;
+                    break;
+                case "6":
+                    start = 392;
+                    end = 336;
+                    break;
+                default:
             }
-        }
-        if (!fromHoursSecond.equals(untilHoursSecond)) {
-            if (!fromMinutesSecond.isBlank() && !untilMinutesSecond.isBlank() && !dayOfTheWeek.isBlank()) {
-                from = fromHoursSecond + ":" + fromMinutesSecond + ":00";
-                until = untilHoursSecond + ":" + untilMinutesSecond + ":00";
-                openingHours = new OpeningHours(Integer.parseInt(dayOfTheWeek), from, until);
-                openinghoursRepository.saveAndFlush(openingHours);
-                fromhours = Integer.parseInt(fromHoursSecond);
-                fromminutes = Integer.parseInt(fromMinutesSecond);
-                untilhours = Integer.parseInt(untilHoursSecond);
-                untilminutes = Integer.parseInt(untilMinutesSecond);
-                fromTimeSlot = timeSlotId(day, fromhours, fromminutes);
-                untilTimeSlot = timeSlotId(day, untilhours, untilminutes);
-                timeSlotUpdater(day, 2, fromTimeSlot, untilTimeSlot);
+            for (long x = start; x > end; x--) {
+                TimeSlot slot = timeSlotRepository.getById(x);
+                slot.setIsActive(false);
+                timeSlotRepository.saveAndFlush(slot);
+            }
+        } else {
+            if (!dayOfTheWeek.isBlank()) {
+                day = Integer.parseInt(dayOfTheWeek);
+                // delete existing records for this day ...
+                int finalDay = day;
+                List<OpeningHours> open = openinghoursRepository.findAll().stream().filter(x -> x.getDayOfTheWeek() == finalDay).collect(Collectors.toList());
+                if (open.size() > 0) {
+                    openinghoursRepository.deleteAll(open);
+                }
+            }
+            if (!fromHours.equals(untilHours)) {
+                if (!fromMinutes.isBlank() && !untilMinutes.isBlank() && !dayOfTheWeek.isBlank()) {
+                    from = fromHours + ":" + fromMinutes + ":00";
+                    until = untilHours + ":" + untilMinutes + ":00";
+                    openingHours = new OpeningHours(Integer.parseInt(dayOfTheWeek), from, until);
+                    openinghoursRepository.saveAndFlush(openingHours);
+                    fromhours = Integer.parseInt(fromHours);
+                    fromminutes = Integer.parseInt(fromMinutes);
+                    untilhours = Integer.parseInt(untilHours);
+                    untilminutes = Integer.parseInt(untilMinutes);
+                    fromTimeSlot = timeSlotId(day, fromhours, fromminutes);
+                    untilTimeSlot = timeSlotId(day, untilhours, untilminutes);
+                    timeSlotUpdater(day, 1, fromTimeSlot, untilTimeSlot);
+                }
+            }
+            if (!fromHoursSecond.equals(untilHoursSecond)) {
+                if (!fromMinutesSecond.isBlank() && !untilMinutesSecond.isBlank() && !dayOfTheWeek.isBlank()) {
+                    from = fromHoursSecond + ":" + fromMinutesSecond + ":00";
+                    until = untilHoursSecond + ":" + untilMinutesSecond + ":00";
+                    openingHours = new OpeningHours(Integer.parseInt(dayOfTheWeek), from, until);
+                    openinghoursRepository.saveAndFlush(openingHours);
+                    fromhours = Integer.parseInt(fromHoursSecond);
+                    fromminutes = Integer.parseInt(fromMinutesSecond);
+                    untilhours = Integer.parseInt(untilHoursSecond);
+                    untilminutes = Integer.parseInt(untilMinutesSecond);
+                    fromTimeSlot = timeSlotId(day, fromhours, fromminutes);
+                    untilTimeSlot = timeSlotId(day, untilhours, untilminutes);
+                    timeSlotUpdater(day, 2, fromTimeSlot, untilTimeSlot);
+                }
             }
         }
         return navigateToAdminSettingsView(settings);
@@ -415,9 +457,9 @@ public class AdminController {
 
     @PostMapping(path = "Admin/Settings/AddVacation")
     public String addVacationPeriod(Model settings,
-                                    @RequestBody @RequestParam(value = "from") String from,
-                                    @RequestParam(value = "untill") String untill,
-                                    @RequestParam(value = "_csrf") String token) {
+                                    @RequestBody @RequestParam("from") String from,
+                                    @RequestParam("untill") String untill,
+                                    @RequestParam("_csrf") String token) {
         Vacation Vacation = new Vacation(from, untill);
         vacationRepository.saveAndFlush(Vacation);
         return navigateToAdminSettingsView(settings);

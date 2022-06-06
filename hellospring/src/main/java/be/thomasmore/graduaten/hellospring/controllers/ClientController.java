@@ -39,15 +39,15 @@ public class ClientController {
 
     @PostMapping(path = "Client/clientOrder")
     public String clientEndpoint(Model order,
-            @RequestBody @RequestParam(value = "firstName") String first,
-            @RequestParam(value = "lastName") String last,
-            @RequestParam(value = "email") String mail,
-            @RequestParam(value = "tel") String phone,
-            @RequestParam(value = "products[]") String[] products,
-            @RequestParam(value = "quantity[]") String[] quantities,
-            @RequestParam(value = "condiments[]") String[] condiments,
-            @RequestParam(value = "timeSlot") long timeSlot,
-            @RequestParam(value = "_csrf") String token) {
+                                 @RequestBody @RequestParam("firstName") String first,
+                                 @RequestParam("lastName") String last,
+                                 @RequestParam("email") String mail,
+                                 @RequestParam("tel") String phone,
+                                 @RequestParam("products[]") String[] products,
+                                 @RequestParam("quantity[]") String[] quantities,
+                                 @RequestParam("condiments[]") String[] condiments,
+                                 @RequestParam("timeSlot") long timeSlot,
+                                 @RequestParam("_csrf") String token) {
         TimeSlot slot = timeSlotRepository.getById(timeSlot);
         slot.setOrdersPlaced(slot.getOrdersPlaced() + 1);
         timeSlotRepository.saveAndFlush(slot);
