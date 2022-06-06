@@ -1,6 +1,13 @@
 # WebApp-Frituur-t-half-kieke
 Web application made in java
 
+De url naar de applicatie
+https://thalfkieke.azurewebsites.net/
+
+De url naar de Github repository
+https://github.com/Thomas-More-Groep-Lier/WebApp-Frituur-t-half-kieke
+
+Prototype:
 https://76s0ll.axshare.com
 
 Class Diagram:
