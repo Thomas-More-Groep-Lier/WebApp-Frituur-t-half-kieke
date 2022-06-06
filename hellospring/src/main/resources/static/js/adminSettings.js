@@ -3,6 +3,24 @@ var from;
 var nextHoursForm;
 var nextMinutesForm;
 
+function isClosed() {
+    const isChecked = document.getElementById('flexCheckDefault').checked;
+    if (isChecked) {
+        document.getElementById('fromHours').setAttribute("disabled", "disabled");
+        document.getElementById('fromMinutes').setAttribute("disabled", "disabled");
+    } else {
+        const disabled = document.getElementById('fromHours').attributes.getNamedItem("disabled");
+        if (disabled != null) {
+            document.getElementById('fromHours').removeAttribute("disabled");
+        }
+        const disabledMinutes = document.getElementById('fromMinutes').attributes.getNamedItem("disabled");
+        if (disabledMinutes != null) {
+            document.getElementById('fromMinutes').removeAttribute("disabled");
+        }
+
+    }
+}
+
 function changeDay() {
     day = document.getElementById('dayOfTheWeek').value;
 }
@@ -51,28 +69,18 @@ function testBigger(select) {
     const fromHoursSecond = document.getElementById('fromHoursSecond').value;
     const untilHoursSecond = document.getElementById('untilHoursSecond').value;
     switch (select) {
-        // case "fromHours":
-        //     if (fromHours > untilHours) {
-        //         return "foute ingave bij openingsuur 1ste openingsmoment... \n";
-        //     }
-        //     break;
         case "untilHours":
             if (untilHours < fromHours || fromHoursSecond < untilHours) {
-                return  "foute ingave bij sluitingsuur 1ste openingsmoment... \n";
+                return "foute ingave bij sluitingsuur 1ste openingsmoment... \n";
             }
             return "";
             break;
         case "fromHoursSecond":
             if (fromHoursSecond < untilHours || fromHoursSecond > untilHoursSecond) {
-                return  "foute ingave bij openingsuur 2de openingsmoment... \n";
+                return "foute ingave bij openingsuur 2de openingsmoment... \n";
             }
             return "";
             break;
-        // case "untilHoursSecond":
-        //     if (untilHoursSecond < fromHoursSecond || untilHoursSecond < untilHours || untilHoursSecond < fromHours) {
-        //         return  "foute ingave bij sluitingssuur 2de openingsmoment... \n";
-        //     }
-        //     break;
         default:
 
     }
@@ -101,7 +109,7 @@ function disableOptions(e, select, idAddition) {
         if (idAddition != null) {
             select.namedItem(x + idAddition).setAttribute("disabled", "disabled");
             if (e.id == "untilHours") {
-                if (select.namedItem(Number(e.value) + idAddition).getAttribute("disabled") != null){
+                if (select.namedItem(Number(e.value) + idAddition).getAttribute("disabled") != null) {
                     select.namedItem(Number(e.value) + idAddition).attributes.removeNamedItem("disabled")
                 }
                 select.namedItem(Number(e.value) + idAddition).setAttribute("selected", "selected");
@@ -118,13 +126,13 @@ function disableOptions(e, select, idAddition) {
 
 function updateOpeningHours() {
 
-    let formIds = ["untilHours","fromHoursSecond"]
+    let formIds = ["untilHours", "fromHoursSecond"]
     let fouten = "";
 
-    for(let x = 0; x < formIds.length; x++){
+    for (let x = 0; x < formIds.length; x++) {
         fouten += testBigger(formIds[x]);
     }
-    if (fouten === ""){
+    if (fouten === "") {
         document.getElementById('fromHours').disabled = false;
         document.getElementById('fromMinutes').disabled = false;
         document.getElementById('untilHours').disabled = false;
@@ -134,8 +142,7 @@ function updateOpeningHours() {
         document.getElementById('untilHoursSecond').disabled = false;
         document.getElementById('untilMinutesSecond').disabled = false;
         document.getElementById('openingHours').submit();
-    }
-    else {
+    } else {
         alert(fouten);
     }
 

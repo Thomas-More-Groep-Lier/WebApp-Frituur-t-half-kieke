@@ -27,7 +27,7 @@ function fillInput() {
                     ' </b>' + condimentName + '</div>' +
                     '<div class="col-4">' +
                     '<button type="button" class="btnMinus" onclick="return x(\'' + parsedArr[i].guid + '\', \'min\')" style="color: red; background-color: pink; border: 2px solid red;"><i class="bi bi-dash-lg"></i></button>' +
-                    '<input type="number" id="' + parsedArr[i].guid + '" name="quantity[]" min="0" max="100" value="' + parsedArr[i].quantity + '" class="quantityInput" style="width: 40px; text-align: center;"/>' +
+                    '<input type="number" id="' + parsedArr[i].guid + '" name="quantity[]" min="0" max="100" value="' + parsedArr[i].quantity + '" class="quantityInput" style="width: 40px; text-align: center;" disabled/>' +
                     '<button type="button" class="btnPlus" onclick="return x(\'' + parsedArr[i].guid + '\', \'plus\')" style="color: darkgreen; background-color: palegreen; border: 2px solid darkgreen;"><i class="bi bi-plus-lg"></i></button>' +
                     '</div>' +
                     '<div class="d-none" id="price_' + parsedArr[i].id + '">' + parsedArr[i].price + '</div>' +
@@ -100,6 +100,11 @@ function keepProductListUpdate(product) {
 }
 
 function submitForm() {
+    let quantityInputs = document.getElementsByClassName('quantityInput');
+    for(let x = 0; x < quantityInputs.length; x++){
+        quantityInputs[x].removeAttribute("disabled");
+    }
+
     let timeslot = document.getElementById('inTimeSlot').value;
     let firstname = document.getElementById('firstName').value;
     let lastname = document.getElementById('lastName').value;
@@ -189,7 +194,7 @@ function validateEmail(inputText) {
         let heeftAtSymbool = inputText.indexOf("@");
         let mailpartGebruiker, mailpartDomein;
         let faultmessage = '';
-        if (heeftAtSymbool == -1) { faultmessage +="een email adres moet een @ bevatten\n";  }
+        if (heeftAtSymbool === -1) { faultmessage +="een email adres moet een @ bevatten\n";  }
         else {
             mailpartGebruiker = inputText.slice(0, heeftAtSymbool);
             mailpartDomein = inputText.slice(heeftAtSymbool + 1);
@@ -204,7 +209,7 @@ function validateEmail(inputText) {
             //nakijken of enkel letters, nummers, underscores punten of koppeltekens bevat
             let bevatFouteTekens = mailpartGebruiker.search(/[^a-z^A-Z^0-9^.^-^_^-]/);
 
-            if (bevatFouteTekens != -1) {
+            if (bevatFouteTekens !== -1) {
                 faultmessage +="gebruikersnaam van email adres mag enkel letters,cijfers, punten, koppeltekens of underscores bevatten\n";
             }
 
@@ -219,13 +224,13 @@ function validateEmail(inputText) {
                 faultmessage += "de domeinnaam van het email adres moet beginnen met een letter of cijfer.\n";
             }
             //nakijken of punt aanwezig is voor domein af te scheiden van extensie
-            if (mailpartDomein.indexOf(".") == -1) {
+            if (mailpartDomein.indexOf(".") === -1) {
                 faultmessage += "domeinnaam moet een . bevatten om domein van extentie te scheiden\n";
             }
             //nakijken of het enkel letters,nummers,punten en koppeltekens bevat
             bevatFouteTekens = mailpartDomein.search(/[^a-z^A-Z^0-9^.^-^-]/);
 
-            if (bevatFouteTekens != -1) {
+            if (bevatFouteTekens !== -1) {
                 faultmessage += "domeinnaam van email adres mag enkel letters,cijfers, punten, of koppeltekens bevatten\n";
             }
             return faultmessage;

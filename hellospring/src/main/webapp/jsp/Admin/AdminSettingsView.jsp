@@ -128,7 +128,7 @@
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <div class="row mb-3">
                                 <div class="col-4">Dag van de week</div>
-                                <div class="col-8">
+                                <div class="col-7">
                                     <select name="dayOfTheWeek" onchange="changeDay()" id="dayOfTheWeek" class="form-control">
                                     <option id="dayOfTheWeek_0" value="0">Maandag</option>
                                     <option id="dayOfTheWeek_1" value="1">Dinsdag</option>
@@ -138,6 +138,14 @@
                                     <option id="dayOfTheWeek_5" value="5">Zaterdag</option>
                                     <option id="dayOfTheWeek_6" value="6">Zondag</option>
                                 </select>
+                                </div>
+                                <div class="col-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="closed" type="checkbox" value="1" id="flexCheckDefault" onchange="isClosed()">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            sluitingsdag
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">

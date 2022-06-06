@@ -52,13 +52,12 @@
     var parsedArr = JSON.parse(str);
     var totalprice = 0;
     fillInput();
+
     function fillInput() {
         parsedArr = parsedArr.filter(p => p.quantity !== 0);
         if (parsedArr.length > 0) {
             for (let i = 0; i < parsedArr.length; i++) {
-                let temp = parsedArr[i].price.replace(/\u20ac/g, "").trim();
-                let price = Number(temp.replace(/,/g, '.'));
-                totalprice = totalprice + (price * Number(parsedArr[i].quantity));
+                totalprice = totalprice + Number(parsedArr[i].price);
             }
         }
         document.getElementById('price').innerText = Number(totalprice).toFixed(2);
