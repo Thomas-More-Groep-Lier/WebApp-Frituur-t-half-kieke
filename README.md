@@ -1,10 +1,10 @@
 # WebApp-Frituur-t-half-kieke
 Web application made in java
 
-De url naar de applicatie
-!https://thalfkieke.azurewebsites.net/
+Url naar de applicatie 
+https://thalfkieke.azurewebsites.net/
 
-De url naar de Github repository
+Url naar de Github repository
 https://github.com/Thomas-More-Groep-Lier/WebApp-Frituur-t-half-kieke
 
 Prototype:
