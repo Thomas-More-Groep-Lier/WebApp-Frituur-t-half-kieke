@@ -112,13 +112,13 @@ function deleteCondiment(id){
 }
     function addNew(id) {
     if (id !== undefined && id !== null) {
-    let price = document.getElementById(`productPrice_` + id).innerText.replace("€", "");
+    let price = document.getElementById(`productPrice_` + id).innerText.replace(/,/g, ".").trim();
     let select = document.getElementById('category');
     document.getElementById('productId').value = id;
     document.getElementById('btnAdd').classList.add('d-none');
     document.getElementById('btnEdit').classList.remove('d-none');
     document.getElementById('btnClear').classList.remove('d-none');
-    document.getElementById('productPrice').value = Number(price.replace(/,/g, '.'));
+    document.getElementById('productPrice').value = Number(price);
     document.getElementById('productName').value = document.getElementById(`productName_` + id).innerText;
     let classList = document.getElementById(id).classList;
     let category = "";

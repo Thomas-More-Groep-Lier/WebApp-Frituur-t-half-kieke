@@ -6,13 +6,13 @@
 }
     function addNew(id) {
     if (id !== undefined && id !== null) {
-    let price = document.getElementById(`condimentPrice_` + id).innerText.replace("€", "");
+    let price = document.getElementById(`condimentPrice_` + id).innerText.replace(/,/g, ".").trim();
     let select = document.getElementById('category');
     document.getElementById('condimentId').value = id;
     document.getElementById('btnAdd').classList.add('d-none');
     document.getElementById('btnEdit').classList.remove('d-none');
     document.getElementById('btnClear').classList.remove('d-none');
-    document.getElementById('condimentPrice').value = Number(price.replace(/,/g, '.'));
+    document.getElementById('condimentPrice').value = Number(price);
     document.getElementById('condimentName').value = document.getElementById(`condimentName_` + id).innerText;
     document.getElementById('condimentCategory').value = select.options[select.selectedIndex].value;
 } else {
@@ -34,15 +34,13 @@
         let price = document.getElementById('condimentPrice').value;
         let condimentName = document.getElementById('condimentName').value;
         let faultmessage = '';
-        console.log("validation script run");
-        console.log(price);
         if(price =='') {
             faultmessage = "prijs is een verplicht veld\n";
         }
         if(condimentName == ''){
             faultmessage +='naam is een verplicht veld\n';
         }
-        console.log(faultmessage);
+       // console.log(faultmessage);
         if(faultmessage != ''){
             alert(faultmessage);
         }

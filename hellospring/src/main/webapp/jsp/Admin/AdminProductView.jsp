@@ -116,7 +116,7 @@
                                 out.print(
                                         "<tr class=" + product.getCategory().replace(" ", "") + " id=\"" + product.getId() + "\">" +
                                                 "<td id=\"productName_" + product.getId() + "\">" + product.getDescription() + "</td>" +
-                                                "<td id=\"productPrice_" + product.getId() + "\"> &euro; " + String.format("%.2f", product.getPrice()) + "</td>" +
+                                                "<td> &euro; <span id=\"productPrice_" + product.getId() + "\">" + String.format("%.2f", product.getPrice()) + "</span></td>" +
                                                 "<td id=\"productCondimenten_" + product.getId() + "\" class=\" text-center\">" );
 
                                 for (ProductCondiment productCondiment : productCondiments){
