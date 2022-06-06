@@ -21,7 +21,7 @@
     function changeActive(){
     const checkbox = document.getElementById('activeOrDeactivated');
     isActive = checkbox.checked;
-    console.log(isActive);
+ //   console.log(isActive);
 }
 
     function changeMax(){
@@ -31,11 +31,11 @@
     if (maxNrOfOrders === "0"){
     isActive = false;
     checkbox.checked = false;
-    console.log(checkbox, checkbox.checked);
+ //   console.log(checkbox, checkbox.checked);
 } else {
     isActive = true;
     checkbox.checked = true;
-    console.log(checkbox, checkbox.checked);
+//    console.log(checkbox, checkbox.checked);
 }
 }
 

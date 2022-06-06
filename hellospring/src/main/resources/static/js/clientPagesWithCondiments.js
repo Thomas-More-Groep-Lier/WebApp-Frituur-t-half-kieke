@@ -8,7 +8,7 @@ var parsedArr = JSON.parse(str);
 function fillInput() {
     if (parsedArr !== null && parsedArr.length > 0) {
         if (parsedArr.length < selectedProducts.length) {
-            console.log("localeStorage blocking detected! Copy data from selected products array... ")
+//            console.log("localeStorage blocking detected! Copy data from selected products array... ")
             parsedArr = selectedProducts;
         }
         parsedArr = parsedArr.filter(p => p.quantity !== 0);
@@ -76,7 +76,7 @@ function updateNr(e, id) {
 }
 
 function saveProduct(id, newQuantity, productPrice) {
-    console.log(id, newQuantity, productPrice);
+  //  console.log(id, newQuantity, productPrice);
     let quantity = null;
     let price = null;
     let totalprice = null;
@@ -119,11 +119,11 @@ function saveProduct(id, newQuantity, productPrice) {
     let index = keepProductListUpdate(product);
     if (index === -1 || index === undefined) {
         selectedProducts.push(product);
-        console.log("product added!");
+   //     console.log("product added!");
     } else {
         selectedProducts[index].price = product.price;
         selectedProducts[index].quantity = product.quantity;
-        console.log("product updated!");
+    //    console.log("product updated!");
     }
     saveInLocaleStorage(selectedProducts);
 }

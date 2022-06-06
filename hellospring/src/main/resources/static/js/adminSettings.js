@@ -88,7 +88,7 @@ function testBigger(select) {
 
 function enableOptions(select, idAddition) {
     for (let x = 23; x >= 10; x--) {
-        console.log(select.namedItem(x));
+     //   console.log(select.namedItem(x));
         if (idAddition != null) {
             const disabled = select.namedItem(x + idAddition).attributes.getNamedItem("disabled");
             if (disabled != null) {
@@ -151,7 +151,7 @@ function updateOpeningHours() {
 function vacationDatesAreValid() {
     let startDate = document.getElementById('from').value;
     let endDate = document.getElementById('untill').value;
-    console.log(startDate, endDate);
+ //   console.log(startDate, endDate);
     if (startDate == '' || endDate == '') {
         alert('geen start en/of einddatum geselecteerd voor de vakantie');
     }

@@ -31,8 +31,8 @@
               <div class="col-1 d-flex align-items-end justify-content-end">
                 <span class="text-end fs-3">&euro; </span>
               </div>
-              <div class="col-2">
-                <label for="condimentPrice" class="form-label">Condiment prijs</label>
+              <div class="col-2" title="Momenteel wordt de prijs van een condiment niet verrekend. ">
+                <label for="condimentPrice" class="form-label text-muted">Condiment prijs</label>
                 <input type="number" id="condimentPrice" name="condimentPrice" class="form-control" value="0" step="0.01" min="0"
                        max="1000">
               </div>
@@ -66,7 +66,7 @@
                 out.print(
                         "<tr class=\"\">" +
                                 "<td id=\"condimentName_" + condiment.getId() + "\">" + condiment.getDescription() + "</td>" +
-                                "<td id=\"condimentPrice_" + condiment.getId() + "\"> &euro;" + String.format("%.2f", condiment.getPrice()) + "</td>" +
+                                "<td> &euro; <span id=\"condimentPrice_" + condiment.getId() + "\">" + String.format("%.2f", condiment.getPrice()) + "</span></td>" +
                                 "<td class=\"text-center\">" +
                                 "<a title=\"edit\" onclick=\"addNew(" + condiment.getId() + ")\" class=\"text-dark\"><i class=\"bi bi-pencil-fill \"></i></a>"
                 );

@@ -40,7 +40,7 @@ function fillInput() {
 }
 
 function x(g, type) {
-    console.log(g, type);
+  //  console.log(g, type);
     let t = parsedArr.filter(x => x.guid === g);
     let product = t[0];
     let guid = product.guid;
@@ -77,11 +77,11 @@ function saveProduct(product, newQuantity, newPrice) {
     let index = keepProductListUpdate(product);
     if (index === -1 || index === undefined) {
         selectedProducts.push(product);
-        console.log("product added!");
+    //    console.log("product added!");
     } else {
         selectedProducts[index].price = product.price;
         selectedProducts[index].quantity = product.quantity;
-        console.log("product updated!");
+      //  console.log("product updated!");
     }
     saveInLocaleStorage(selectedProducts);
 }
@@ -219,7 +219,7 @@ function validateEmail(inputText) {
             }
             //nakijken of start met letter of nummer
             let begintMetLetterOfNummer = mailpartDomein.slice(0,1);
-            console.log(begintMetLetterOfNummer);
+       //     console.log(begintMetLetterOfNummer);
             if (begintMetLetterOfNummer.search(/[a-zA-Z0-9]/)) {
                 faultmessage += "de domeinnaam van het email adres moet beginnen met een letter of cijfer.\n";
             }
@@ -255,7 +255,7 @@ function validatePhone(inputText) {
     if(inputText.length <9 || inputText.length>10){
         faultmessage += "telefoonnummer moet 9 of 10 cijfers lang zijn.\n";
     }
-    console.log('tel foutboodschap: '+ faultmessage);
+ //   console.log('tel foutboodschap: '+ faultmessage);
     return faultmessage;
 
     /*const phoneformat = /^(((\+|00)32[ ]?(?:\(0\)[ ]?)?)|0){1}(4(60|[789]\d)\/?(\s?\d{2}\.?){2}(\s?\d{2})|(\d\/?\s?\d{3}|\d{2}\/?\s?\d{2})(\.?\s?\d{2}){2})$/;
